@@ -108,12 +108,12 @@ def login():
     return render_template( 'accounts/login.html', form=form, msg=msg )
 
 # App main route + generic routing
-@app.route('/', defaults={'path': 'index.html'})
-@app.route('/<path>')
-def index(path):
+@app.route('/index1', defaults={'path': 'index.html'})
+@app.route('/index1/<path>')
+def index1(path):
 
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
+    # if not current_user.is_authenticated:
+    #     return redirect(url_for('login'))
 
     try:
 
@@ -128,6 +128,10 @@ def index(path):
     
     except:
         return render_template('page-500.html'), 500
+
+@app.route('/')
+def index():
+    return render_template('scholar_tracker.html')
 
 # Return sitemap
 @app.route('/sitemap.xml')
