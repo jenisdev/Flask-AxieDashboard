@@ -109,7 +109,7 @@ def login():
 
     return render_template( 'accounts/login.html', form=form, msg=msg )
 
-# App main route + generic routing
+""" # App main route + generic routing
 @app.route('/', defaults={'path': 'index.html'})
 @app.route('/<path>')
 def index1(path):
@@ -129,13 +129,13 @@ def index1(path):
     
     except:
         return render_template('page-500.html'), 500
-
+"""
 # Return sitemap
 @app.route('/sitemap.xml')
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
-@app.route('/tracker')
+@app.route('/')
 def tracker():
     user_info = MainTable.query.all()
     print(user_info)
