@@ -155,9 +155,9 @@ def tracker():
         MainTable.TotalSLP.label('total'), \
         MainTable.UnclaimedSLP.label('unclaimed'), \
         MainTable.ClaimedSLP.label('claimed'), \
-        func.sum(TimeRecords.Total).label('today')
-        ) \
-        .join(TimeRecords, TimeRecords.Name==MainTable.Name) \
+        MainTable.ManagerShare.label('manager'), \
+        MainTable.ScholarShare.label('scholar'), \
+        )\
         .all()
     print("Total SLP AVG: ", slpdata[0].avg_total)
     return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)

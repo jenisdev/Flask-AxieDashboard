@@ -137,8 +137,8 @@
                                     <td>{{row.total}}<br><small></small></td>
                                     <td class="fs-6">...</td>
                                     <td class="fs-6">...</td>
-                                    <td>... (...%)<br><small></small></td>
-                                    <td>... (...%)<br><small></small></td>
+                                    <td>{{row.manager}} ({{"{:.2f}".format(row.manager/row.total*100)}}%)<br><small></small></td>
+                                    <td>{{row.scholar}} ({{"{:.2f}".format(row.scholar/row.total*100)}}%)<br><small></small></td>
                                     <td>
                                         <button type="button" class="btn btn-success btn-sm">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
