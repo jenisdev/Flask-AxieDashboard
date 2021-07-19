@@ -30,3 +30,38 @@ class User(UserMixin, db.Model):
         db.session.commit( )
 
         return self 
+
+class MainTable(db.Model):
+    __tablename__ = 'mainTable'
+    Name                    = db.Column(db.Text(),  unique = True)
+    RoninAddress            = db.Column(db.Text(),  unique = True)
+    DiscordID               = db.Column(db.Integer(),  unique = True, primary_key=True)
+    TotalSLP                = db.Column(db.Integer(),  unique = True)
+    ClaimedSLP              = db.Column(db.Integer(),  unique = True)
+    UnclaimedSLP            = db.Column(db.Integer(),  unique = True)
+    UnclaimedDailyAverage   = db.Column(db.Integer(),  unique = True)
+    GuildRank               = db.Column(db.Text(),  unique = True)
+    ScholarShare            = db.Column(db.Integer(),  unique = True)
+    ManagerShare            = db.Column(db.Integer(),  unique = True)
+    LastClaim               = db.Column(db.String(20),  unique = True)
+    NextClaim               = db.Column(db.String(20),  unique = True)
+    MMR                     = db.Column(db.Integer(),  unique = True)
+    ArenaRank               = db.Column(db.Integer(),  unique = True)
+    Matches                 = db.Column(db.Integer(),  unique = True)
+    WinRate                 = db.Column(db.Text(),  unique = True)
+    Wins                    = db.Column(db.Integer(),  unique = True)
+    Draws                   = db.Column(db.Integer(),  unique = True)
+    Losses                  = db.Column(db.Integer(),  unique = True)
+
+    def __init__(self):
+        pass
+
+class TimeRecords(db.Model):
+    __tablename__ = 'timeRecords'
+    DateTime                = db.Column(db.Text())
+    Name                    = db.Column(db.Text(),  unique = True)
+    Ronin                   = db.Column(db.Text(),  unique = True, primary_key=True)
+    Total                   = db.Column(db.Integer())
+
+    def __init__(self):
+        pass

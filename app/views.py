@@ -4,7 +4,8 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Python modules
-import os, logging 
+import os, logging
+from traceback import print_tb 
 
 # Flask modules
 from flask               import render_template, request, url_for, redirect, send_from_directory
@@ -14,8 +15,9 @@ from jinja2              import TemplateNotFound
 
 # App modules
 from app        import app, lm, db, bc
-from app.models import User
+from app.models import User, MainTable, TimeRecords
 from app.forms  import LoginForm, RegisterForm
+from sqlalchemy.sql import func
 
 # provide login manager with load_user callback
 @lm.user_loader
@@ -114,7 +116,6 @@ def index1(path):
 
     # if not current_user.is_authenticated:
     #     return redirect(url_for('login'))
-    print("============")
     try:
 
         if not path.endswith( '.html' ):
@@ -129,11 +130,35 @@ def index1(path):
     except:
         return render_template('page-500.html'), 500
 
-@app.route('/tracker')
-def tracker():
-    return render_template('scholar-tracker.html')
-
 # Return sitemap
 @app.route('/sitemap.xml')
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
+
+@app.route('/tracker')
+def tracker():
+    user_info = MainTable.query.all()
+    print(user_info)
+    slpdata = db.session.query( \
+        func.avg(MainTable.TotalSLP).label('avg_total'), \
+        func.sum(MainTable.TotalSLP).label('sum_total'), \
+        # func.count(MainTable.Name).label('total_count'), \
+        func.sum(MainTable.UnclaimedSLP).label('sum_unclaimed'), \
+        func.sum(MainTable.ClaimedSLP).label('sum_claimed'), \
+        func.sum(MainTable.ManagerShare).label('sum_manager'), \
+        func.sum(MainTable.ScholarShare).label('sum_scholar'), \
+        ).all()
+
+    tabledata = db.session.query( \
+        MainTable.Name, \
+        MainTable.RoninAddress, \
+        MainTable.TotalSLP.label('total'), \
+        MainTable.UnclaimedSLP.label('unclaimed'), \
+        MainTable.ClaimedSLP.label('claimed'), \
+        func.sum(TimeRecords.Total).label('today')
+        ) \
+        .join(TimeRecords, TimeRecords.Name==MainTable.Name) \
+        .all()
+    print("Total SLP AVG: ", slpdata[0].avg_total)
+    return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
+
