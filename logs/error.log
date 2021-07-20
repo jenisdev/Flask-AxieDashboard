@@ -1,0 +1,12 @@
+[Tue Jul 20 15:20:33.370772 2021] [wsgi:error] [pid 21360:tid 140497362929408] [remote 107.172.242.62:28064] mod_wsgi (pid=21360): Target WSGI script '/var/www/axie-dashboard/run.py' cannot be loaded as Python module.
+[Tue Jul 20 15:20:33.370893 2021] [wsgi:error] [pid 21360:tid 140497362929408] [remote 107.172.242.62:28064] mod_wsgi (pid=21360): Exception occurred processing WSGI script '/var/www/axie-dashboard/run.py'.
+[Tue Jul 20 15:20:33.376513 2021] [wsgi:error] [pid 21360:tid 140497362929408] [remote 107.172.242.62:28064] Traceback (most recent call last):
+[Tue Jul 20 15:20:33.376549 2021] [wsgi:error] [pid 21360:tid 140497362929408] [remote 107.172.242.62:28064]   File "/var/www/axie-dashboard/run.py", line 6, in <module>
+[Tue Jul 20 15:20:33.376554 2021] [wsgi:error] [pid 21360:tid 140497362929408] [remote 107.172.242.62:28064]     from app import app, db
+[Tue Jul 20 15:20:33.376569 2021] [wsgi:error] [pid 21360:tid 140497362929408] [remote 107.172.242.62:28064] ModuleNotFoundError: No module named 'app'
+[Tue Jul 20 15:20:34.307844 2021] [wsgi:error] [pid 21360:tid 140497354536704] [remote 107.172.242.62:18273] mod_wsgi (pid=21360): Target WSGI script '/var/www/axie-dashboard/run.py' cannot be loaded as Python module.
+[Tue Jul 20 15:20:34.307918 2021] [wsgi:error] [pid 21360:tid 140497354536704] [remote 107.172.242.62:18273] mod_wsgi (pid=21360): Exception occurred processing WSGI script '/var/www/axie-dashboard/run.py'.
+[Tue Jul 20 15:20:34.308006 2021] [wsgi:error] [pid 21360:tid 140497354536704] [remote 107.172.242.62:18273] Traceback (most recent call last):
+[Tue Jul 20 15:20:34.308033 2021] [wsgi:error] [pid 21360:tid 140497354536704] [remote 107.172.242.62:18273]   File "/var/www/axie-dashboard/run.py", line 6, in <module>
+[Tue Jul 20 15:20:34.308038 2021] [wsgi:error] [pid 21360:tid 140497354536704] [remote 107.172.242.62:18273]     from app import app, db
+[Tue Jul 20 15:20:34.308055 2021] [wsgi:error] [pid 21360:tid 140497354536704] [remote 107.172.242.62:18273] ModuleNotFoundError: No module named 'app'

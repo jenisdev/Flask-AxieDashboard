@@ -1,0 +1,2 @@
+107.172.242.62 - - [20/Jul/2021:15:20:33 +0000] "GET / HTTP/1.1" 500 800 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+107.172.242.62 - - [20/Jul/2021:15:20:34 +0000] "GET /favicon.ico HTTP/1.1" 500 800 "http://3.9.134.96/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
