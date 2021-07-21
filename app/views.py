@@ -145,7 +145,7 @@ def tracker():
         func.sum(Scholarship.ClaimedSLP).label('sum_claimed'), \
         func.sum(Scholarship.ManagerShare).label('sum_manager'), \
         func.sum(Scholarship.ScholarShare).label('sum_scholar'), \
-        ).all()
+        ).one_or_none()
 
     tabledata = db.session.query( \
         Scholarship.Name, \
@@ -157,8 +157,7 @@ def tracker():
         Scholarship.ScholarShare.label('scholar'), \
         )\
         .all()
-    if len(slpdata) == 0:
-        return render_template('index.html')
-    print("Total SLP AVG: ", slpdata[0].avg_total)
+
+    print("Total SLP AVG: ", slpdata.avg_total)
     return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
 
