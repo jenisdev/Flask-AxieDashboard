@@ -19,6 +19,8 @@ from app.models import User, Scholarship
 from app.forms  import LoginForm, RegisterForm
 from sqlalchemy.sql import func
 
+# Utils
+from .util import getRateForSLP
 from datetime import datetime
 
 def datatime_from_epoch(epoch_time):
@@ -203,6 +205,8 @@ def tracker():
         Scholarship.LastClaim.label('lastclaim'), \
         )\
         .all()
-    
-    return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
+    currentRateForSLP = getRateForSLP()
+    print("Current Rate: ", currentRateForSLP)
+
+    return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP)
 
