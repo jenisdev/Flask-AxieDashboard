@@ -14,6 +14,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Average</h5>
                             <h2 class="card-text">{{ slpdata[0].avg_total }} <small class="fs-6">SLP</small></h2>
+                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].avg_total | float)}} EUR</h6> -->
                         </div>
                     </div>
                 </div>
@@ -22,6 +23,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total SLP</h5>
                             <h2 class="card-text">{{ slpdata[0].sum_total }} <small class="fs-6">SLP</small></h2>
+                            <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_total | float)}} EUR</h6>
                         </div>
                     </div>
                 </div>
@@ -30,6 +32,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total unclaimed SLP</h5>
                             <h2 class="card-text">{{ slpdata[0].sum_unclaimed }} <small class="fs-6">SLP</small></h2>
+                            <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_unclaimed | float)}} EUR</h6>
                         </div>
                     </div>
                 </div>
@@ -38,6 +41,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total claimed SLP</h5>
                             <h2 class="card-text">{{ slpdata[0].sum_claimed }} <small class="fs-6">SLP</small></h2>
+                            <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_claimed | float)}} EUR</h6>
                         </div>
                     </div>
                 </div>
@@ -46,6 +50,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Manager SLP</h5>
                             <h2 class="card-text">{{ slpdata[0].sum_manager }} <small class="fs-6">SLP</small></h2>
+                            <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_manager | float)}} EUR</h6>
                         </div>
                     </div>
                 </div>
@@ -54,6 +59,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Scholar SLP</h5>
                             <h2 class="card-text">{{ slpdata[0].sum_scholar }} <small class="fs-6">SLP</small></h2>
+                            <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_scholar | float)}} EUR</h6>
                         </div>
                     </div>
                 </div>
