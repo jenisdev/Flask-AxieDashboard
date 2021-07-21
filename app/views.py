@@ -200,6 +200,6 @@ def tracker():
         Scholarship.LastClaim.label('lastclaim'), \
         )\
         .all()
-    
-    return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
+    return render_template('index.html')
+    # return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
 
