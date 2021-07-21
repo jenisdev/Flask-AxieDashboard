@@ -31,32 +31,35 @@ class User(UserMixin, db.Model):
 
         return self 
 
-class MainTable(db.Model):
-    __tablename__ = 'mainTable'
-    Name                    = db.Column(db.Text(),  unique = True)
-    RoninAddress            = db.Column(db.Text(),  unique = True)
-    DiscordID               = db.Column(db.Integer(),  unique = True, primary_key=True)
-    TotalSLP                = db.Column(db.Integer(),  unique = True)
-    ClaimedSLP              = db.Column(db.Integer(),  unique = True)
-    UnclaimedSLP            = db.Column(db.Integer(),  unique = True)
-    UnclaimedDailyAverage   = db.Column(db.Integer(),  unique = True)
-    GuildRank               = db.Column(db.Text(),  unique = True)
-    ScholarShare            = db.Column(db.Integer(),  unique = True)
-    ManagerShare            = db.Column(db.Integer(),  unique = True)
-    LastClaim               = db.Column(db.String(20),  unique = True)
-    NextClaim               = db.Column(db.String(20),  unique = True)
-    MMR                     = db.Column(db.Integer(),  unique = True)
-    ArenaRank               = db.Column(db.Integer(),  unique = True)
-    Matches                 = db.Column(db.Integer(),  unique = True)
-    WinRate                 = db.Column(db.Text(),  unique = True)
-    Wins                    = db.Column(db.Integer(),  unique = True)
-    Draws                   = db.Column(db.Integer(),  unique = True)
-    Losses                  = db.Column(db.Integer(),  unique = True)
+class Scholarship(db.Model):
+    __tablename__ = 'scholarship_tracker'
+    id                      = db.Column(db.Integer, primary_key=True)
+    ScholarshipID           = db.Column(db.Integer)
+    Name                    = db.Column(db.String(50),  unique = True)
+    RoninAddress            = db.Column(db.String(255),  unique = True)
+    DiscordID               = db.Column(db.String(18),  unique = True)
+    TotalSLP                = db.Column(db.Integer)
+    ClaimedSLP              = db.Column(db.Integer)
+    UnclaimedSLP            = db.Column(db.Integer)
+    UnclaimedDailyAverage   = db.Column(db.Integer)
+    GuildRank               = db.Column(db.String(255))
+    ScholarShare            = db.Column(db.Integer)
+    ManagerShare            = db.Column(db.Integer)
+    LastClaim               = db.Column(db.Integer)
+    NextClaim               = db.Column(db.Integer)
+    MMR                     = db.Column(db.Integer)
+    ArenaRank               = db.Column(db.Integer)
+    Matches                 = db.Column(db.Integer)
+    WinRate                 = db.Column(db.String(255))
+    Wins                    = db.Column(db.Integer)
+    Draws                   = db.Column(db.Integer)
+    Losses                  = db.Column(db.Integer)
+    ScholarDataBasecol      = db.Column(db.String(45))
 
     def __init__(self):
         pass
 
-class TimeRecords(db.Model):
+""" class TimeRecords(db.Model):
     __tablename__ = 'timeRecords'
     DateTime                = db.Column(db.Text())
     Name                    = db.Column(db.Text(),  unique = True)
@@ -64,4 +67,5 @@ class TimeRecords(db.Model):
     Total                   = db.Column(db.Integer())
 
     def __init__(self):
-        pass
+        pass 
+"""

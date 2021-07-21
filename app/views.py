@@ -15,7 +15,7 @@ from jinja2              import TemplateNotFound
 
 # App modules
 from app        import app, lm, db, bc
-from app.models import User, MainTable, TimeRecords
+from app.models import User, Scholarship
 from app.forms  import LoginForm, RegisterForm
 from sqlalchemy.sql import func
 
@@ -137,26 +137,26 @@ def sitemap():
 
 @app.route('/')
 def tracker():
-    user_info = MainTable.query.all()
+    user_info = Scholarship.query.all()
     print(user_info)
     slpdata = db.session.query( \
-        func.avg(MainTable.TotalSLP).label('avg_total'), \
-        func.sum(MainTable.TotalSLP).label('sum_total'), \
-        # func.count(MainTable.Name).label('total_count'), \
-        func.sum(MainTable.UnclaimedSLP).label('sum_unclaimed'), \
-        func.sum(MainTable.ClaimedSLP).label('sum_claimed'), \
-        func.sum(MainTable.ManagerShare).label('sum_manager'), \
-        func.sum(MainTable.ScholarShare).label('sum_scholar'), \
+        func.avg(Scholarship.TotalSLP).label('avg_total'), \
+        func.sum(Scholarship.TotalSLP).label('sum_total'), \
+        # func.count(Scholarship.Name).label('total_count'), \
+        func.sum(Scholarship.UnclaimedSLP).label('sum_unclaimed'), \
+        func.sum(Scholarship.ClaimedSLP).label('sum_claimed'), \
+        func.sum(Scholarship.ManagerShare).label('sum_manager'), \
+        func.sum(Scholarship.ScholarShare).label('sum_scholar'), \
         ).all()
 
     tabledata = db.session.query( \
-        MainTable.Name, \
-        MainTable.RoninAddress, \
-        MainTable.TotalSLP.label('total'), \
-        MainTable.UnclaimedSLP.label('unclaimed'), \
-        MainTable.ClaimedSLP.label('claimed'), \
-        MainTable.ManagerShare.label('manager'), \
-        MainTable.ScholarShare.label('scholar'), \
+        Scholarship.Name, \
+        Scholarship.RoninAddress, \
+        Scholarship.TotalSLP.label('total'), \
+        Scholarship.UnclaimedSLP.label('unclaimed'), \
+        Scholarship.ClaimedSLP.label('claimed'), \
+        Scholarship.ManagerShare.label('manager'), \
+        Scholarship.ScholarShare.label('scholar'), \
         )\
         .all()
     print("Total SLP AVG: ", slpdata[0].avg_total)
