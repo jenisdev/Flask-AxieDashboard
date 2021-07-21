@@ -137,8 +137,6 @@ def sitemap():
 
 @app.route('/')
 def tracker():
-    user_info = Scholarship.query.all()
-    print(user_info)
     slpdata = db.session.query( \
         func.avg(Scholarship.TotalSLP).label('avg_total'), \
         func.sum(Scholarship.TotalSLP).label('sum_total'), \
@@ -159,6 +157,8 @@ def tracker():
         Scholarship.ScholarShare.label('scholar'), \
         )\
         .all()
+    if len(slpdata) == 0:
+        return render_template('index.html')
     print("Total SLP AVG: ", slpdata[0].avg_total)
     return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
 
