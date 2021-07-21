@@ -201,5 +201,4 @@ def tracker():
         )\
         .all()
     return render_template('index.html')
-    # return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
 
