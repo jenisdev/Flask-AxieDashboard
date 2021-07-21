@@ -157,7 +157,10 @@ def tracker():
         Scholarship.ScholarShare.label('scholar'), \
         )\
         .all()
-    print("===================================================================================================================================================")
-    print("Total SLP AVG: ", slpdata.avg_total)
+
+    import sys, logging
+    logger = logging.getLogger(__name__)
+    logger.debug("------------------------: ")
+    logger.debug(slpdata)
     return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
 
