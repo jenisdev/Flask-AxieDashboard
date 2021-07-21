@@ -203,6 +203,7 @@ def tracker():
         Scholarship.ManagerShare.label('manager'), \
         Scholarship.ScholarShare.label('scholar'), \
         Scholarship.LastClaim.label('lastclaim'), \
+        Scholarship.NextClaim.label('nextclaim'), \
         )\
         .all()
     currentRateForSLP = getRateForSLP()
