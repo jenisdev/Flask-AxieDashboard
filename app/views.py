@@ -157,7 +157,7 @@ def tracker():
         Scholarship.ScholarShare.label('scholar'), \
         )\
         .all()
-
+    print("===================================================================================================================================================")
     print("Total SLP AVG: ", slpdata.avg_total)
     return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata)
 
