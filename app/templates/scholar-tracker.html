@@ -136,7 +136,7 @@
                                     <td>{{row.claimed}}<br><small></small></td>
                                     <td>{{row.total}}<br><small></small></td>
                                     <td class="fs-6">...</td>
-                                    <td class="fs-6">{{ row.lastclaim | humanize }}</td>
+                                    <td class="fs-6">{{ row.lastclaim | datetime_from_epoch }}</td>
                                     <td>{{"{:.2f}".format(row.manager/row.total*100)}} ({{row.manager}}%)<br><small></small></td>
                                     <td>{{"{:.2f}".format(row.scholar/row.total*100)}} ({{row.scholar}}%)<br><small></small></td>
                                     <td>

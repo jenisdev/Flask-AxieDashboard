@@ -21,6 +21,8 @@ from sqlalchemy.sql import func
 
 from datetime import datetime
 
+def datatime_from_epoch(epoch_time):
+    return datetime.fromtimestamp(epoch_time)
 
 def humanize_ts(timestamp=False):
     """
@@ -60,6 +62,7 @@ def humanize_ts(timestamp=False):
     return str(int(day_diff / 365)) + " years ago"
 
 app.jinja_env.filters['humanize'] = humanize_ts
+app.jinja_env.filters['datetime_from_epoch'] = datatime_from_epoch
 
 # provide login manager with load_user callback
 @lm.user_loader
