@@ -125,7 +125,7 @@ def register():
     return render_template( 'accounts/register.html', form=form, msg=msg, success=success )
 
 # Authenticate user
-@app.route('/login.html', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     
     # Declare the login form
@@ -156,13 +156,13 @@ def login():
 
     return render_template( 'accounts/login.html', form=form, msg=msg )
 
-""" # App main route + generic routing
-@app.route('/', defaults={'path': 'index.html'})
+# App main route + generic routing
+""" @app.route('/', defaults={'path': 'trackers/scholar-tracker.html'})
 @app.route('/<path>')
-def index1(path):
+def index(path):
 
-    # if not current_user.is_authenticated:
-    #     return redirect(url_for('login'))
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
     try:
 
         if not path.endswith( '.html' ):
@@ -183,7 +183,10 @@ def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
 @app.route('/')
-def tracker():
+def index():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+
     slpdata = db.session.query( \
         func.avg(Scholarship.TotalSLP).label('avg_total'), \
         func.sum(Scholarship.TotalSLP).label('sum_total'), \
@@ -209,5 +212,5 @@ def tracker():
     currentRateForSLP = getRateForSLP()
     print("Current Rate: ", currentRateForSLP)
 
-    return render_template('scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP)
+    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP)
 

@@ -1,164 +1,21 @@
-{% extends "layouts/scholar-tracker-base.html" %}
-{% block content %}
-<div class="container-fluid bg-light text-dark" style="z-index: 1;">
-    <div class="justify-content-md-center text-center row">
-        <div class="col-12">
-            <div class="row justify-content-md-center">
-                <div class="position-relative pt-2">
-                    <h1 class="text-center">Axie Infinity Scholar Tracker</h1>
-                </div>
-            </div>
-            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-xl-6 g-4 mb-4">
-                <div class="col">
-                    <div class="card h-100 shadow bg-info ">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Average</h5>
-                            <h2 class="card-text">{{ slpdata[0].avg_total }} <small class="fs-6">SLP</small></h2>
-                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].avg_total | float)}} EUR</h6> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 shadow bg-info ">
-                        <div class="card-body">
-                            <h5 class="card-title">Total SLP</h5>
-                            <h2 class="card-text">{{ slpdata[0].sum_total }} <small class="fs-6">SLP</small></h2>
-                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_total | float)}} EUR</h6> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 shadow bg-info ">
-                        <div class="card-body">
-                            <h5 class="card-title">Total unclaimed SLP</h5>
-                            <h2 class="card-text">{{ slpdata[0].sum_unclaimed }} <small class="fs-6">SLP</small></h2>
-                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_unclaimed | float)}} EUR</h6> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 shadow bg-info ">
-                        <div class="card-body">
-                            <h5 class="card-title">Total claimed SLP</h5>
-                            <h2 class="card-text">{{ slpdata[0].sum_claimed }} <small class="fs-6">SLP</small></h2>
-                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_claimed | float)}} EUR</h6> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 shadow bg-info ">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Manager SLP</h5>
-                            <h2 class="card-text">{{ slpdata[0].sum_manager }} <small class="fs-6">SLP</small></h2>
-                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_manager | float)}} EUR</h6> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 shadow bg-info ">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Scholar SLP</h5>
-                            <h2 class="card-text">{{ slpdata[0].sum_scholar }} <small class="fs-6">SLP</small></h2>
-                            <!-- <h6>≈{{"$%.2f" | format(0.232496 * slpdata[0].sum_scholar | float)}} EUR</h6> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="border shadow rounded-3 mb-4 bg-light text-dark border-dark">
-                    <form class="row my-2 px-2">
-                        <label class="form-label col-form-label col-2">
-                            <strong>
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
-                                </svg>
-                                Search
-                            </strong>
-                        </label>
-                        <div class="col-6">
-                            <input placeholder="Enter name" type="text" class="shadow  bg-light border-dark text-dark form-control" value="">
-                        </div>
-                        <div class="col-2">
-                            <div class="text-end">
-                                <a download="Axie Scho - July 18, 2021 at 1:09 PM.csv" target="_self" href="blob:https://www.axie-scho-tracker.xyz/1660d004-d3d1-44a4-abc2-c78be1f0b9ac">
-                                    <button type="button" class="btn btn-success">Export Excel</button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-info btn-block">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"></path>
-                                </svg> Settings
-                            </button>
-                        </div>
-                    </form>
-                    <div class="table-responsive">
-                        <table class="border-dark table table-light table-striped table-bordered table-hover">
-                            <thead class="border text-center align-middle border-dark table-info text-dark">
-                                <tr>
-                                    <th rowspan="2">#</th>
-                                    <th rowspan="2">Name</th>
-                                    <th colspan="6">SLP</th>
-                                    <th rowspan="2">Last Claim<br>(days)</th>
-                                    <th rowspan="2">Claim on</th>
-                                    <th colspan="2">Sharing<br>* M - Manager / S - Scholar</th>
-                                    <th rowspan="2">Actions</th>
-                                </tr>
-                                <tr>
-                                    <th>Today</th>
-                                    <th>Yesterday</th>
-                                    <th>Average</th>
-                                    <th>Unclaimed</th>
-                                    <th>Claimed</th>
-                                    <th>Total</th>
-                                    <th>M</th>
-                                    <th>S</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border ">
-                                {% for row in tabledata %}
-                                <tr class="text-center">
-                                    <td>{{ loop.index }}</td>
-                                    <td class="text-start">
-                                        <strong><a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:nin:{{row.RoninAddress[2:]}}/axie" target="_blank" rel="noreferrer">{{row.Name}}</a></strong>
-                                    </td>
-                                    <td>
-                                        <h5><span class="badge">N/A</span></h5>
-                                    </td>
-                                    <td>
-                                        <h5><span class="bg-danger badge">...</span></h5>
-                                    </td>
-                                    <td>
-                                        ...<br><small></small>
-                                    </td>
-                                    <td>{{row.unclaimed}}<br><small></small></td>
-                                    <td>{{row.claimed}}<br><small></small></td>
-                                    <td>{{row.total}}<br><small></small></td>
-                                    <td class="fs-6">...</td>
-                                    <td class="fs-6">...</td>
-                                    <td>{{row.manager}} ({{"{:.2f}".format(row.manager/row.total*100)}}%)<br><small></small></td>
-                                    <td>{{row.scholar}} ({{"{:.2f}".format(row.scholar/row.total*100)}}%)<br><small></small></td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-sm">
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path>
-                                            </svg>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm">
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path>
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock content %}
+from urllib.request import urlopen
+import json
+
+#Uses coingecko to get the current value in json and parse it.
+#Default currency is PHP which is what the scholars use, but you can change it to whatever you need.
+def value(currency="gbp"):
+    currency=currency.lower() #avoinds keyerror if given in caps
+
+    slp_token = "0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25" #Token for the crypto we're using. Don't change this.
+
+    url = f"https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses={slp_token}&vs_currencies={currency}"
+
+    with urlopen(url) as url:
+        statsData = json.loads(url.read().decode())
+        value = statsData[slp_token][currency]
+
+    return(value)
+
+
+if __name__ == "__main__":
+    print(value())
