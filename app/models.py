@@ -25,7 +25,7 @@ class User(UserMixin, db.Model):
         self.admin          = admin
         self.confirmed      = confirmed
         self.confirmed_on   = confirmed_on
-        self.registered_on  = datetime.now()
+        self.registered_on  = datetime.datetime.now()
 
     def __repr__(self):
         return str(self.id) + ' - ' + str(self.user)
