@@ -232,8 +232,6 @@ def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
 @app.route('/')
-@login_required
-
 def index():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
