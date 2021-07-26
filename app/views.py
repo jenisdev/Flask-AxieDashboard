@@ -233,7 +233,7 @@ def sitemap():
 
 @app.route('/')
 @login_required
-@check_confirmed
+
 def index():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
