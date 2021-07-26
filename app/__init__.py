@@ -31,7 +31,7 @@ lm.init_app(app)       # init the login manager
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if current_user.confirmed is True:
+        if current_user.is_authenticated:
             return f(*args, **kwargs)
         else:
             flash("You need to login first")
@@ -42,6 +42,7 @@ def login_required(f):
 def check_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
+        print("current user: ", current_user)
         if current_user.confirmed is False:
             flash('Please confirm your account!', 'warning')
             return redirect(url_for('unconfirmed'))
