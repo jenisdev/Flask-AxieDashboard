@@ -195,7 +195,9 @@ def login():
             
             if bc.check_password_hash(user.password, password):
                 login_user(user)
-                return redirect(url_for('index'))
+                if user.confirmed:
+                    return redirect(url_for('index'))
+                return redirect(url_for('unconfirmed'))
             else:
                 msg = "Wrong password. Please try again."
         else:
