@@ -8,17 +8,17 @@ import os, logging
 from traceback import print_tb 
 
 # Flask modules
-from flask               import render_template, request, url_for, redirect, send_from_directory
+from flask               import render_template, request, url_for, redirect, send_from_directory, flash
 from flask_login         import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import HTTPException, NotFound, abort
 from jinja2              import TemplateNotFound
 
 # App modules
-from app        import app, lm, db, bc
+from app        import app, lm, db, bc, send_email
 from app.models import User, Scholarship
 from app.forms  import LoginForm, RegisterForm
+from app.token import generate_confirmation_token, confirm_token
 from sqlalchemy.sql import func
-
 # Utils
 from .util import getRateForSLP
 from datetime import datetime
@@ -112,17 +112,43 @@ def register():
 
             pw_hash = bc.generate_password_hash(password)
 
-            user = User(username, email, pw_hash)
+            user = User(username, email, pw_hash, confirmed=False)
 
             user.save()
 
             msg     = 'User created, please <a href="' + url_for('login') + '">login</a>'     
             success = True
 
+            token = generate_confirmation_token(user.email)
+            confirm_url = url_for('confirm_email', token=token, _external=True)
+            html = render_template('confirm_email.html', confirm_url=confirm_url)
+            subject = "Please confirm your email"
+            send_email(user.email, subject, html)
+
+            flash('A confirmation email has been sent via email.', 'success')
+            return redirect(url_for('login'))
+
     else:
         msg = 'Input error'     
 
     return render_template( 'accounts/register.html', form=form, msg=msg, success=success )
+
+@app.route('/confirm/<token>')
+def confirm_email(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+    user = User.query.filter_by(email=email).first_or_404()
+    if user.confirmed:
+        flash('Account already confirmed. Please login.', 'success')
+    else:
+        user.confirmed = True
+        user.confirmed_on = datetime.datetime.now()
+        db.session.add(user)
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!', 'success')
+    return redirect(url_for('login'))
 
 # Authenticate user
 @app.route('/login', methods=['GET', 'POST'])
