@@ -173,7 +173,6 @@ def resend_confirmation():
 
 # Authenticate user
 @app.route('/login', methods=['GET', 'POST'])
-@check_confirmed
 def login():
     
     # Declare the login form
