@@ -137,8 +137,8 @@
                                     <td>{{row.total}}<br><small></small></td>
                                     <td class="fs-6">{{ row.lastclaim | datetime_from_epoch }}</td>
                                     <td class="fs-6">{{ row.nextclaim | datetime_from_epoch }}</td>
-                                    <td>{{"{:.2f}".format(row.manager/row.total*100)}} ({{row.manager}}%)<br><small></small></td>
-                                    <td>{{"{:.2f}".format(row.scholar/row.total*100)}} ({{row.scholar}}%)<br><small></small></td>
+                                    <td>{{"{:.2f}".format(row.manager/100 * row.total)}} ({{row.manager}}%)<br><small></small></td>
+                                    <td>{{"{:.2f}".format(row.scholar/100 * row.total)}} ({{row.scholar}}%)<br><small></small></td>
                                     <td>
                                         <button type="button" class="btn btn-success btn-sm">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
