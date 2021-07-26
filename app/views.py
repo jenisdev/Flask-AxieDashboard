@@ -75,7 +75,7 @@ def load_user(user_id):
 @app.route('/logout.html')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 # Register a new user
 @app.route('/register.html', methods=['GET', 'POST'])
