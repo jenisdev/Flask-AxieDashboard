@@ -24,6 +24,8 @@ from .util import getRateForSLP
 from datetime import datetime
 
 def datatime_from_epoch(epoch_time):
+    if epoch_time == None:
+        return "--"
     return datetime.fromtimestamp(epoch_time)
 
 def humanize_ts(timestamp=False):
