@@ -1,90 +1,47 @@
-{% extends "layouts/base-fullscreen.html" %}
-
-{% block title %} Register {% endblock %} 
-
-<!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
-
+{% extends "layouts/accounts-header.html" %}
 {% block content %}
-
-    <!-- Main content -->
-    <section>
-        <div class="container d-flex flex-column">
-            <div class="row align-items-center justify-content-center min-vh-100">
-                <div class="col-md-6 col-lg-5 col-xl-5 py-6 py-md-0">
-                    <div class="card shadow zindex-100 mb-0">
-                        <div class="card-body px-md-5 py-5">
-                            <div class="mb-5">
-                                <h6 class="h3">
-                                    <a target="_blank" rel="noopener noreferrer"
-                                       class="text-primary"
-                                       href="#">Scholarship Tracker</a> - Register
-                                </h6>
-                                <p class="text-muted mb-0">
-                                    {% if msg %}
-                                        {{ msg | safe }}
-                                    {% else %}
-                                        Add your credentials
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <span class="clearfix"></span>
-
-                            <!-- Hide the form on success--> 
-                            {% if not success %}
-                            <form method="post" action="" class="mt-4">
-
-                                {{ form.hidden_tag() }}
-
-                                <div class="form-group">
-                                    <label class="form-control-label">Username</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i data-feather="user"></i></span>
-                                        </div>
-                                        {{ form.username(class="form-control") }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-control-label">Email</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i data-feather="mail"></i></span>
-                                        </div>
-                                        {{ form.email(class="form-control") }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-0">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <label class="form-control-label">Password</label>
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i data-feather="key"></i></span>
-                                        </div>
-                                        {{ form.password(class="form-control", type="password") }}
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <button type="submit" name="register" class="btn btn-block btn-primary">Sign up</button></div>
-                            </form>
-                            {% endif %}
-
-                        </div>
-                        <div class="card-footer px-md-5"><small>Already registered?</small>
-                            <a href="{{ url_for('login') }}" class="small font-weight-bold">Login</a>
-                        </div>
+<main class="container px-xxl-5 px-xl-4 px-lg-3 px-md-2 px-sm-1">
+    <div class="login-model rounded-5 mt-4">
+        <div class="login-header text-grey-3 text-center fs-2-b ">
+            Register
+        </div>
+        <div class="mb-4 register-model">
+            {% if not success %}
+            <form method="POST" action="">
+                
+                {{ form.hidden_tag() }}
+                <div class="mb-4 mt-5">
+                    <label for="InputName" class="form-label fs-6 fs-md-4 text-white mb-3">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text field-symbol" id="basic-addon1"><i
+                                class="bi bi-person fs-5"></i></span>
+                        <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp">
                     </div>
                 </div>
-            </div>
+                <div class="mb-4 mt-3">
+                    <label for="InputEmail" class="form-label fs-6 fs-md-4 text-white mb-3">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text field-symbol" id="basic-addon2"><i
+                                class="bi bi-envelope fs-5"></i></span>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="InputPassword" class="form-label fs-6 fs-md-4 text-white mb-3 ">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text field-symbol" id="basic-addon2"><i
+                                class="bi bi-key fs-5"></i></span>
+                        <input type="password" name="password" class="form-control" id="password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-signup">Sign Up</button>
+            </form>
+            {% endif %}
         </div>
-    </section>
-
+        <div class=" pt-4 pt-sm-5 pt-md-4 text-cyan account-creation ">
+            Already registered?
+            <a href="{{ url_for('login') }}" class="small font-weight-bold"><span class="text-cyan">Login</span></a>
+        </div>
+    </div>
+</main>
 {% endblock content %}
-
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
