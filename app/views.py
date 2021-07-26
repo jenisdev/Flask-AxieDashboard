@@ -126,6 +126,7 @@ def register():
             send_email(user.email, subject, html)
 
             flash('A confirmation email has been sent via email.', 'success')
+            login_user(user)
             return redirect(url_for("unconfirmed"))
 
     else:
