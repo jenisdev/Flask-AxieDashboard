@@ -10,6 +10,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login      import LoginManager
 from flask_bcrypt     import Bcrypt
 from flask_mail       import Mail, Message
+from functools        import wraps
+from flask            import flash, redirect, url_for
+from flask_login      import current_user
 
 # Grabs the folder where the script runs.
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -23,6 +26,28 @@ bc = Bcrypt      (app) # flask-bcrypt
 
 lm = LoginManager(   ) # flask-loginmanager
 lm.init_app(app)       # init the login manager
+
+# Login Required Decorator
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if current_user.confirmed is True:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first")
+            return redirect(url_for('login'))
+
+    return wrap
+
+def check_confirmed(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        if current_user.confirmed is False:
+            flash('Please confirm your account!', 'warning')
+            return redirect(url_for('unconfirmed'))
+        return func(*args, **kwargs)
+
+    return decorated_function
 
 # Setup database
 @app.before_first_request

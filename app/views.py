@@ -14,7 +14,7 @@ from werkzeug.exceptions import HTTPException, NotFound, abort
 from jinja2              import TemplateNotFound
 
 # App modules
-from app        import app, lm, db, bc, send_email
+from app        import app, check_confirmed, lm, db, bc, send_email
 from app.models import User, Scholarship
 from app.forms  import LoginForm, RegisterForm
 from app.token import generate_confirmation_token, confirm_token
@@ -126,7 +126,7 @@ def register():
             send_email(user.email, subject, html)
 
             flash('A confirmation email has been sent via email.', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for("user.unconfirmed"))
 
     else:
         msg = 'Input error'     
@@ -134,6 +134,7 @@ def register():
     return render_template( 'accounts/register.html', form=form, msg=msg, success=success )
 
 @app.route('/confirm/<token>')
+@login_required
 def confirm_email(token):
     try:
         email = confirm_token(token)
@@ -149,6 +150,26 @@ def confirm_email(token):
         db.session.commit()
         flash('You have confirmed your account. Thanks!', 'success')
     return redirect(url_for('login'))
+
+@app.route('/unconfirmed')
+@login_required
+@check_confirmed
+def unconfirmed():
+    if current_user.confirmed:
+        return redirect('main.home')
+    flash('Please confirm your account!', 'warning')
+    return render_template('user/unconfirmed.html')
+
+@app.route('/resend')
+@login_required
+def resend_confirmation():
+    token = generate_confirmation_token(current_user.email)
+    confirm_url = url_for('confirm_email', token=token, _external=True)
+    html = render_template('confirm_email.html', confirm_url=confirm_url)
+    subject = "Please confirm your email"
+    send_email(current_user.email, subject, html)
+    flash('A new confirmation email has been sent.', 'success')
+    return redirect(url_for('unconfirmed'))
 
 # Authenticate user
 @app.route('/login', methods=['GET', 'POST'])
