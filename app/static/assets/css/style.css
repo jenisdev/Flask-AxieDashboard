@@ -16,6 +16,13 @@ img{
 header img {
   max-width: 80%;
 }
+
+.user-menu {
+  cursor: pointer;
+  margin-top: -40px;
+  color: #acb4e6;
+}
+
 @font-face {
     font-family: 'poppins';
     src: url('font/Poppins-Regular.ttf') format('truetype');

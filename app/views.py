@@ -74,13 +74,13 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Logout user
-@app.route('/logout.html')
+@app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
 # Register a new user
-@app.route('/register.html', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     
     # declare the Registration Form
