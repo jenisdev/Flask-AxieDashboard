@@ -92,8 +92,9 @@
                     class="table-search fs-5 mx-3 rounded-4 w-100">
             </div>
             <a href="#" class="btn-export flex-shrink-0 bg-orange-2 fs-5-b rounded-4 ">Export Excel</a>
-            <a href="#" class="btn-setting flex-shrink-0 rounded-4 fs-5-b ms-auto">
-                <img src="/static/assets/img/scholar-tracker/icon-setting.png" alt="setting-icon" /> Settings
+            <a href="#settingModalToggle" class="btn-setting flex-shrink-0 rounded-4 fs-5-b ms-auto" data-bs-toggle="modal" role="button">
+                <img src="/static/assets/img/scholar-tracker/icon-setting.png" alt="setting-icon" />
+                Settings
             </a>
         </div>
         <div class="main-table-body">
@@ -151,6 +152,102 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="settingModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Settings</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row mt-3">
+                              <div class="col-md-2">Sort</div>
+                              <div class="col-md-5">
+                                <select class="form-select" aria-label="Select a column">
+                                    <option value="1">Name</option>
+                                    <option value="2">Average</option>
+                                    <option value="3">Unclaimed</option>
+                                    <option value="4">Claimed</option>
+                                    <option value="5">Total</option>
+                                    <option value="6">Last Claim</option>
+                                    <option value="7">MMR</option>
+                                    <option value="8">Rank</option>
+                                </select>
+                              </div>
+                              <div class="col-md-5 ms-auto">
+                                <select class="form-select" aria-label="Select a column">
+                                    <option value="1">Ascending</option>
+                                    <option value="2">Descending</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">Currency</div>
+                                <div class="col-md-9">
+                                    <select class="form-select" aria-label="Select a column">
+                                        <option value="1">BTC</option>
+                                        <option value="2">ETH</option>
+                                        <option value="3">LTC</option>
+                                        <option value="4">BCH</option>
+                                        <option value="5">BNB</option>
+                                        <option value="6">EOS</option>
+                                        <option value="7">XRP</option>
+                                        <option value="8">XLM</option>
+                                        <option value="9">LINK</option>
+                                        <option value="10">DOT</option>
+                                        <option value="11">TFI</option>
+                                        <option value="12">USD</option>
+                                        <option value="13">AED</option>
+                                        <option value="14">ARS</option>
+                                        <option value="15">AUD</option>
+                                        <option value="16">BDT</option>
+                                        <option value="17">BHD</option>
+                                        <option value="18">BMD</option>
+                                        <option value="19">BRL</option>
+                                        <option value="20">CAD</option>
+                                        <option value="20">CAD</option>
+                                        <option value="21">PHP</option>
+                                        <option value="22">GBP</option>
+                                        <option value="23">USD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">Minimum Quota</div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" value="150">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                TABLE OPTIONS
+                            </div>
+                            <div class="row mt-1">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Show full date
+                            </div>
+                            <div class="row mt-1">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Show value
+                            </div>
+                            <div class="row mt-1">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Show ELO (MMR)
+                            </div>
+                            <div class="row mt-1">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                Show Rank
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Done</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="logo-bottom position-absolute top-100 start-50 translate-middle">
             <img src="/static/assets/img/scholar-tracker/logo-lfg-footer.png" alt="logo-bottom" />
