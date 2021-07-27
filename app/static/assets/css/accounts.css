@@ -1,6 +1,6 @@
 *{box-sizing: border-box;}
 body{
-  background: url(../img/scholar-tracker/bg-body.png) top center no-repeat,#3f456e;
+  background: url(../img/scholar-tracker/bg-body-1.png) top center no-repeat,#3f456e;
   font-family: poppins;
   height: 100vh;
 }
@@ -144,6 +144,15 @@ input[type="password"]{
   box-shadow: none;
   border: none;
 }
+
+.field-symbol {
+  border-radius: 12px;
+  border: 2px solid #2c304d;
+  border-right: 0;
+  background-color: rgba(136,142,190,.3);
+  color: #c2c6e5;
+}
+
 .btn-login, .btn-signup{
   width: 100%;
   background-color: #2a2f50;
