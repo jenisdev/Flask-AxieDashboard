@@ -1,9 +1,44 @@
 {% extends "layouts/scholar-tracker-base.html" %}
 {% block content %}
-
-<h1>Welcome!</h1>
-<br>
-<p>You have not confirmed your account. Please check your inbox (and your spam folder) - you should have received an email with a confirmation link.</p>
-<p>Didn't get the email? <a href="{{ url_for('resend_confirmation') }}">Resend</a>.</p>
-
+<style>
+    .unconfirm-area{
+        margin-top: 160px;
+    }
+    .message-title{
+        font-size: 45px;
+    }
+    .message-header{
+        color: #ffcb1b;
+    }
+    .message-intern{
+        color: #8991c0;
+    }
+    .message-footer{
+        margin-top: 26px;
+        margin-bottom: 62px;
+    }
+    .message-footer{
+        color: #8991c0;
+    }
+</style>
+<div class="unconfirm-area text-center">
+    <div class="message-title text-cyan">
+    Just one step before you join us!
+    </div>
+    <div class="message-header mt-4 mb-3 fs-4 fs-main-semi">
+    You have not confirmed your account yet!
+    </div>
+    <div class="message-intern fs-4">
+    Please check your email inbox (and your spam folder).</br>
+    Normally you have received an email from us already,</br>
+    which containing the confirmation link.</br>
+    Please visit the link, in order to comlplete the registration process.
+    </div>
+    <div class="message-footer fs-4">
+        Not received the email? 
+        <span class="text-cyan text-decoration-underline">
+            <a href="{{ url_for('resend_confirmation') }}">Resend</a>
+        </span>
+    </div>
+  </div>
 {% endblock %}
