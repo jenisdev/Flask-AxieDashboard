@@ -88,7 +88,7 @@
                     <i class="bi bi-search text-orange-2 me-3 fs-5"></i>
                     <span class="text-white fs-4">Search</span>
                 </div>
-                <input type="text" name="search" placeholder="Type your text"
+                <input type="text" name="search" id="search" placeholder="Type your text"
                     class="table-search fs-5 mx-3 rounded-4 w-100">
             </div>
             <a href="#" class="btn-export flex-shrink-0 bg-orange-2 fs-5-b rounded-4 ">Export Excel</a>
@@ -118,8 +118,8 @@
                         <th>Total</th>
                         <th class="border-left">Last Claim</th>
                         <th>Claim on</th>
-                        <th class="border-left">M</th>
-                        <th>M</th>
+                        <th class="border-left">M-manager</th>
+                        <th>S-scholar</th>
                         <th>ELO</th>
                         <th>Rank</th>
                         <th class="border-left" colspan="2">Actions</th>
@@ -376,6 +376,13 @@
             var order = Number($('#sort-order option:selected').val())
             sortTable(column, order)
         })        
+        
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tracker-table tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     })
 </script>
 {% endblock content %}
