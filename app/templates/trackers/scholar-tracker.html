@@ -132,9 +132,9 @@
                         <td><span><a class="link-primary"
                             href="https://marketplace.axieinfinity.com/profile/ronin:nin:{{row.RoninAddress[2:]}}/axie"
                             target="_blank" rel="noreferrer">{{row.Name}}</a></strong></span></td>
-                        <td>N/A</td>
-                        <td><span class="yesterday rounded-3">-</span></td>
-                        <td>-</td>
+                        <td><span class="crypto-value">{{row.today_total}}</span><br><span class="currency-value"></span></td>
+                        <td><span class="yesterday rounded-3 crypto-value">{{row.yesterday_total}}</span><br><span class="currency-value"></span></td>
+                        <td><span class="crypto-value">{{row.avg}}</span><br><span class="currency-value"></span></td>
                         <td><span class="crypto-value">{{row.unclaimed}}</span><br><span class="currency-value"></span> </td>
                         <td><span class="crypto-value">{{row.claimed}}</span><br><span class="currency-value"></span> </td>
                         <td><span class="crypto-value">{{row.total}}</span><br><span class="currency-value"></span> </td>
@@ -263,7 +263,7 @@
                             $('.currency-value').each(function (i, obj) {
                                 var crypto = Number($(obj).parent().find('.crypto-value').text())
                                 var value = rate * crypto
-                                $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
+                                $(obj).html("&#8776;"+currency_signs[currency]+"&nbsp;"+value.toFixed(2))
                             })
                         }
                         $('#current_rate').html(currency_signs[currency] + "&nbsp;" + rate.toFixed(2))
@@ -294,7 +294,8 @@
                         $('.currency-value').each(function (i, obj) {
                             var crypto = Number($(obj).parent().find('.crypto-value').text())
                             var value = rate * crypto
-                            $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
+                            // $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
+                            $(obj).html("&#8776;"+currency_signs[currency]+"&nbsp;"+value.toFixed(2))
                         })
                     }
                 })

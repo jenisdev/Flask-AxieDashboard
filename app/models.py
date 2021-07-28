@@ -68,13 +68,13 @@ class Scholarship(db.Model):
     def __init__(self):
         pass
 
-""" class TimeRecords(db.Model):
-    __tablename__ = 'timeRecords'
-    DateTime                = db.Column(db.Text())
-    Name                    = db.Column(db.Text(),  unique = True)
-    Ronin                   = db.Column(db.Text(),  unique = True, primary_key=True)
-    Total                   = db.Column(db.Integer())
+class ScholarshipDaily(db.Model):
+    __tablename__ = 'scholar_daily_totals'
+    id                      = db.Column(db.Integer, primary_key=True)
+    Name                    = db.Column(db.String(100),  unique = True)
+    RoninAddress            = db.Column(db.String(255),  unique = True)
+    Date                    = db.Column(db.Integer)
+    SLP                     = db.Column(db.Integer)
 
     def __init__(self):
         pass 
-"""
