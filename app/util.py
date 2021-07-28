@@ -60,3 +60,26 @@ def getRateForSLP(currency="gbp"):
 
     return(value)
 
+# Get All currencies.
+def getAllCurrencies():
+    coin_url = f"https://api.coingecko.com/api/v3/coins/list?include_platform=false"
+    coins = []
+    """ 
+    with urlopen(coin_url) as res:
+        data = json.loads(res.read().decode())
+        for item in data:
+            coins.append(item['symbol']) """
+
+    currency_url = f"https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
+    currencies = []
+    with urlopen(currency_url) as res:
+        currencies = json.loads(res.read().decode())
+    
+    res = currencies + coins
+    res.sort()
+
+    
+    for i in range(len(res)):
+        res[i] = res[i].upper()
+    return res
+

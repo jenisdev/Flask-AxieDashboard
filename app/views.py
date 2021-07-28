@@ -8,7 +8,7 @@ import os, logging
 from traceback import print_tb 
 
 # Flask modules
-from flask               import render_template, request, url_for, redirect, send_from_directory, flash
+from flask               import json, render_template, request, url_for, redirect, send_from_directory, flash
 from flask_login         import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import HTTPException, NotFound, abort
 from jinja2              import TemplateNotFound
@@ -20,7 +20,7 @@ from app.forms  import LoginForm, RegisterForm
 from app.token import generate_confirmation_token, confirm_token
 from sqlalchemy.sql import func
 # Utils
-from .util import getRateForSLP
+from .util import getAllCurrencies, getRateForSLP
 from datetime import datetime
 
 def datatime_from_epoch(epoch_time):
@@ -258,10 +258,17 @@ def index():
         Scholarship.ScholarShare.label('scholar'), \
         Scholarship.LastClaim.label('lastclaim'), \
         Scholarship.NextClaim.label('nextclaim'), \
+        Scholarship.MMR.label('mmr'), \
+        Scholarship.ArenaRank.label('rank')
         )\
         .all()
     currentRateForSLP = getRateForSLP()
-    print("Current Rate: ", currentRateForSLP)
+    allCurrencies = getAllCurrencies()
 
-    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP)
+    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, allCurrencies=allCurrencies)
 
+@app.route('/getRate', methods=['POST'])
+def getRate():
+    currency = request.form.get('currency')
+    rate = getRateForSLP(currency)
+    return json.dumps({"rate": rate})

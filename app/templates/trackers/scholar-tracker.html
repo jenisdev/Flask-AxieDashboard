@@ -98,7 +98,7 @@
             </a>
         </div>
         <div class="main-table-body">
-            <table class="table table-striped table-responsive text-center align-middle table-borderless fs-5-b">
+            <table class="table table-striped table-responsive text-center align-middle table-borderless fs-5-b" id="tracker-table">
                 <thead>
                     <tr class="text-orange-3 fs-semi align-middle">
                         <th colspan="2"></th>
@@ -120,6 +120,8 @@
                         <th>Claim on</th>
                         <th class="border-left">M</th>
                         <th>M</th>
+                        <th>ELO</th>
+                        <th>Rank</th>
                         <th class="border-left" colspan="2">Actions</th>
                     </tr>
                 </thead>
@@ -133,19 +135,22 @@
                         <td>N/A</td>
                         <td><span class="yesterday rounded-3">-</span></td>
                         <td>-</td>
-                        <td>{{row.unclaimed}}</td>
-                        <td>{{row.claimed}}</td>
-                        <td>{{row.total}}</td>
-                        <td>{{ row.lastclaim | datetime_from_epoch }}</br>
-                            <!-- <span class="text-cyan">18:35:25</span> -->
+                        <td><span class="crypto-value">{{row.unclaimed}}</span><br><span class="currency-value"></span> </td>
+                        <td><span class="crypto-value">{{row.claimed}}</span><br><span class="currency-value"></span> </td>
+                        <td><span class="crypto-value">{{row.total}}</span><br><span class="currency-value"></span> </td>
+                        <td>
+                            <span class="text-cyan full-date" style="display: none;">{{ row.lastclaim | datetime_from_epoch }}</span>
+                            <span class="text-cyan days">{{ row.lastclaim | humanize }}</span>
                         </td>
                         <td>{{ row.nextclaim | datetime_from_epoch }}</br>
                             <!-- <span class="text-cyan">18:35:25</span> -->
                         </td>
-                        <td>{{"{:.2f}".format(row.manager/100 * row.total)}}
-                            <span class="text-green-2">({{row.manager}}%)</span></td>
-                        <td>{{"{:.2f}".format(row.scholar/100 * row.total)}}
-                             <span class="text-green-2">({{row.scholar}}%)</span></td>
+                        <td><span class="crypto-value">{{"{:.2f}".format(row.manager/100 * row.total)}}</span>
+                            <span class="text-green-2">({{row.manager}}%)</span><br><span class="currency-value"></span></td>
+                        <td><span class="crypto-value">{{"{:.2f}".format(row.scholar/100 * row.total)}}</span>
+                             <span class="text-green-2">({{row.scholar}}%)</span><br><span class="currency-value"></span></td>
+                        <td>{{row.mmr}}</td>
+                        <td>{{row.rank}}</td>
                         <td><i class="bi bi-pencil-square btn-action bg-green-2"></i></td>
                         <td><i class="bi bi-trash btn-action bg-blue-2"></i></td>
                     </tr>
@@ -153,6 +158,7 @@
                 </tbody>
             </table>
         </div>
+        
         <!-- Modal -->
         <div class="modal fade" id="settingModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -166,85 +172,58 @@
                             <div class="row mt-3">
                               <div class="col-md-2">Sort</div>
                               <div class="col-md-5">
-                                <select class="form-select" aria-label="Select a column">
+                                <select class="form-select" name="sort-column" id="sort-column" aria-label="Select a column">
                                     <option value="1">Name</option>
-                                    <option value="2">Average</option>
-                                    <option value="3">Unclaimed</option>
-                                    <option value="4">Claimed</option>
-                                    <option value="5">Total</option>
-                                    <option value="6">Last Claim</option>
-                                    <option value="7">MMR</option>
-                                    <option value="8">Rank</option>
+                                    <option value="4">Average</option>
+                                    <option value="5">Unclaimed</option>
+                                    <option value="6">Claimed</option>
+                                    <option value="7">Total</option>
+                                    <option value="8">Last Claim</option>
+                                    <option value="13">MMR</option>
+                                    <option value="14">Rank</option>
                                 </select>
                               </div>
                               <div class="col-md-5 ms-auto">
-                                <select class="form-select" aria-label="Select a column">
-                                    <option value="1">Ascending</option>
-                                    <option value="2">Descending</option>
+                                <select class="form-select" name="sort-order" id="sort-order" aria-label="Select a column">
+                                    <option value="0">Ascending</option>
+                                    <option value="1">Descending</option>
                                 </select>
                               </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-3">Currency</div>
                                 <div class="col-md-9">
-                                    <select class="form-select" aria-label="Select a column">
-                                        <option value="1">BTC</option>
-                                        <option value="2">ETH</option>
-                                        <option value="3">LTC</option>
-                                        <option value="4">BCH</option>
-                                        <option value="5">BNB</option>
-                                        <option value="6">EOS</option>
-                                        <option value="7">XRP</option>
-                                        <option value="8">XLM</option>
-                                        <option value="9">LINK</option>
-                                        <option value="10">DOT</option>
-                                        <option value="11">TFI</option>
-                                        <option value="12">USD</option>
-                                        <option value="13">AED</option>
-                                        <option value="14">ARS</option>
-                                        <option value="15">AUD</option>
-                                        <option value="16">BDT</option>
-                                        <option value="17">BHD</option>
-                                        <option value="18">BMD</option>
-                                        <option value="19">BRL</option>
-                                        <option value="20">CAD</option>
-                                        <option value="20">CAD</option>
-                                        <option value="21">PHP</option>
-                                        <option value="22">GBP</option>
-                                        <option value="23">USD</option>
+                                    <select name="currency" id="currency" class="form-select" aria-label="Select a column">
+                                        {% for currency in allCurrencies %}
+                                        <option value="{{currency}}">{{currency}}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6">Minimum Quota</div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" value="150">
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                TABLE OPTIONS
+                                TABLE OPTIONS <input type="hidden" value="" id="crypto-rate">
                             </div>
                             <div class="row mt-1">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                <input class="form-check-input me-1" type="checkbox" name="full_date" aria-label="..."> 
                                 Show full date
                             </div>
                             <div class="row mt-1">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                <input class="form-check-input me-1" type="checkbox" name="show_value" aria-label="...">
                                 Show value
                             </div>
                             <div class="row mt-1">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                <input class="form-check-input me-1" type="checkbox" name="show_mmr" aria-label="...">
                                 Show ELO (MMR)
                             </div>
                             <div class="row mt-1">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                <input class="form-check-input me-1" type="checkbox" name="show_rank" aria-label="...">
                                 Show Rank
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Done</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+                        <!-- <button type="button" class="btn btn-primary" id="setting_done">Done</button> -->
                     </div>
                 </div>
             </div>
@@ -254,5 +233,137 @@
         </div>
     </div>
 </main>
+<script>
+    $(document).ready(() => {
+        $('td:nth-child(13), th:nth-child(13)').hide();
+        $('td:nth-child(14), th:nth-child(14)').hide();
 
+        $('input[name=full_date]').change(ev => {
+            if ($(ev.target).prop('checked')) {
+                $('.full-date').prop('style', 'display: block;')
+                $('.days').prop('style', 'display: none')
+            } else {
+                $('.days').prop('style', 'display: block;')
+                $('.full-date').prop('style', 'display: none')
+            }
+        })
+
+        $('#currency').change(ev => {
+            if ($('input[name=show_value]').prop('checked')) {
+                var currency = $('#currency option:selected').val().toLowerCase()
+                $.ajax({
+                    url: '/getRate',
+                    method: 'POST',
+                    data: {currency : currency},
+                    success: function (res) {
+                        var rate = JSON.parse(res).rate
+                        document.getElementById('crypto-rate').value = rate
+
+                        $('.currency-value').each(function (i, obj) {
+                            var crypto = Number($(obj).parent().find('.crypto-value').text())
+                            var value = rate * crypto
+                            $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
+                        })
+                    }
+                })
+            }
+        })
+
+        $('input[name=show_value]').change(ev => {
+            if ($(ev.target).prop('checked')) {
+                var currency = $('#currency option:selected').val().toLowerCase()
+                $.ajax({
+                    url: '/getRate',
+                    method: 'POST',
+                    data: {currency : currency},
+                    success: function (res) {
+                        var rate = JSON.parse(res).rate
+                        document.getElementById('crypto-rate').value = rate
+
+                        $('.currency-value').each(function (i, obj) {
+                            var crypto = Number($(obj).parent().find('.crypto-value').text())
+                            var value = rate * crypto
+                            $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
+                        })
+                    }
+                })
+            } else {
+                $('.currency-value').each(function (i, obj) {
+                    $(obj).text('')
+                })
+            }
+        })
+
+        $('input[name=show_mmr]').change(ev=> {
+            if ($(ev.target).prop('checked')) {
+                $('td:nth-child(13), th:nth-child(13)').show();
+            } else {
+                $('td:nth-child(13), th:nth-child(13)').hide();
+            }
+        })
+
+        $('input[name=show_rank]').change(ev=> {
+            if ($(ev.target).prop('checked')) {
+                $('td:nth-child(14), th:nth-child(14)').show();
+            } else {
+                $('td:nth-child(14), th:nth-child(14)').hide();
+            }
+        })
+        
+        function sortTable(column, order) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("tracker-table");
+            switching = true;
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // Start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /* Loop through all table rows (except the
+                first, which contains table headers): */
+                for (i = 2; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare,
+                    one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("td")[column];
+                    y = rows[i + 1].getElementsByTagName("td")[column];
+                    // Check if the two rows should switch place:
+                    if (!order) {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+
+        $('#sort-column').change(ev => {
+            var column = Number($('#sort-column option:selected').val())
+            var order = Number($('#sort-order option:selected').val())
+            sortTable(column, order)
+        })
+
+        $('#sort-order').change(ev => {
+            var column = Number($('#sort-column option:selected').val())
+            var order = Number($('#sort-order option:selected').val())
+            sortTable(column, order)
+        })        
+    })
+</script>
 {% endblock content %}

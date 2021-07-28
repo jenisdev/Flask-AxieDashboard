@@ -142,7 +142,7 @@ input[type="text"]:focus{
   margin-bottom: 0;
 }
 .main-table-body table td, .main-table-body table th {
-  padding: 20px 10px;
+  padding: 20px 5px;
   color: white ;
 }
 .main-table-body table tr td:first-child,
