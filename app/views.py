@@ -20,7 +20,7 @@ from app.forms  import LoginForm, RegisterForm
 from app.token import generate_confirmation_token, confirm_token
 from sqlalchemy.sql import func
 # Utils
-from .util import getAllCurrencies, getRateForSLP
+from .util import getAllCurrencies, getChangePercent, getRateForSLP
 from datetime import datetime
 
 def datatime_from_epoch(epoch_time):
@@ -263,9 +263,8 @@ def index():
         )\
         .all()
     currentRateForSLP = getRateForSLP()
-    allCurrencies = getAllCurrencies()
-
-    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, allCurrencies=allCurrencies)
+    percentage = getChangePercent()
+    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, percentage=percentage)
 
 @app.route('/getRate', methods=['POST'])
 def getRate():

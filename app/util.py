@@ -83,3 +83,12 @@ def getAllCurrencies():
         res[i] = res[i].upper()
     return res
 
+# Get market cap change percentage
+def getChangePercent():
+    url = f"https://api.coingecko.com/api/v3/coins/smooth-love-potion?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
+    
+    with urlopen(url) as res:
+        market_data = json.loads(res.read().decode())
+        percentage = market_data['market_data']['market_cap_change_percentage_24h']
+    return percentage
+
