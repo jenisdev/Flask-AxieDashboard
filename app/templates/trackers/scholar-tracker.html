@@ -164,15 +164,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Settings</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="/static/assets/img/scholar-tracker/icon-setting-modal.png">
+                        <h5 class="modal-title fs-4 fs-main-semi ms-2 text-white" id="staticBackdropLabel">Settings</h5>
+                        <button type="button" class="btn-close btn-close-white btn-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row mt-3">
-                              <div class="col-md-2">Sort</div>
+                              <div class="col-md-2 text-white">Sort</div>
                               <div class="col-md-5">
-                                <select class="form-select" name="sort-column" id="sort-column" aria-label="Select a column">
+                                <select class="form-select text-black fw-bold" name="sort-column" id="sort-column" aria-label="Select a column">
                                     <option value="1">Name</option>
                                     <option value="4">Average</option>
                                     <option value="5">Unclaimed</option>
@@ -184,16 +185,16 @@
                                 </select>
                               </div>
                               <div class="col-md-5 ms-auto">
-                                <select class="form-select" name="sort-order" id="sort-order" aria-label="Select a column">
+                                <select class="form-select fw-bold" name="sort-order" id="sort-order" aria-label="Select a column">
                                     <option value="0">Ascending</option>
                                     <option value="1">Descending</option>
                                 </select>
                               </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-md-3">Currency</div>
+                            <div class="row mt-3 justify-content-between last-select pb-4">
+                                <div class="col-md-3 text-white">Currency</div>
                                 <div class="col-md-9">
-                                    <select name="currency" id="currency" class="form-select" aria-label="Select a column">
+                                    <select name="currency" id="currency" class="form-select fw-bold" aria-label="Select a column">
                                         <option value="gbp">GBP</option>
                                         <option value="eur">EURO</option>
                                         <option value="usd">USD</option>
@@ -201,29 +202,29 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row mt-3 fs-main-semi mt-3 mt-xxl-5 text-white">
                                 TABLE OPTIONS <input type="hidden" value="" id="crypto-rate">
                             </div>
-                            <div class="row mt-1">
+                            <div class="row mt-2 mt-xxl-4 text-white">
                                 <input class="form-check-input me-1" type="checkbox" name="full_date" aria-label="..."> 
                                 Show full date
                             </div>
-                            <div class="row mt-1">
+                            <div class="row mt-2 mt-xxl-4 text-white">
                                 <input class="form-check-input me-1" type="checkbox" name="show_value" aria-label="...">
                                 Show value
                             </div>
-                            <div class="row mt-1">
+                            <div class="row mt-2 mt-xxl-4 text-white">
                                 <input class="form-check-input me-1" type="checkbox" name="show_mmr" aria-label="...">
                                 Show ELO (MMR)
                             </div>
-                            <div class="row mt-1">
+                            <div class="row mt-2 mt-xxl-4 text-white">
                                 <input class="form-check-input me-1" type="checkbox" name="show_rank" aria-label="...">
                                 Show Rank
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+                        <button type="button" class="btn fs-5-b text-grey-2 fs-main-semi" data-bs-dismiss="modal">Done</button>
                         <!-- <button type="button" class="btn btn-primary" id="setting_done">Done</button> -->
                     </div>
                 </div>

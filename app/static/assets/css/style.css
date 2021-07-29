@@ -16,13 +16,6 @@ img{
 header img {
   max-width: 80%;
 }
-
-.user-menu {
-  cursor: pointer;
-  margin-top: -40px;
-  color: #acb4e6;
-}
-
 @font-face {
     font-family: 'poppins';
     src: url('font/Poppins-Regular.ttf') format('truetype');
@@ -86,6 +79,7 @@ header img {
   background-size: 100% 100%;
   width: 275px;
   height: 180px;
+  box-shadow: 0 2px 24px black;
 }
 .text-orange-2 {
   color: #e3923a;
@@ -98,9 +92,10 @@ header img {
 }
 .main-table-header{
   padding: 24px 45px;
-  background-color: rgba(26, 33, 75, 0.4);
+  background-color: rgba(36, 43, 85, 0.6);
   border-top-left-radius: 27px;
   border-top-right-radius: 27px;
+  border-bottom: 2px solid black;
 }
 .table-search{
   background-color: #141522;
@@ -131,33 +126,52 @@ input[type="text"]:focus{
   padding:8px 32px;
 }
 .main-table{
-  background: url(../img/scholar-tracker/table-header.png) top center no-repeat;
+  /*background: url(../img/scholar-tracker/table-header.png) top center no-repeat;*/
   padding-bottom: 183px;
   margin-bottom: 130px;
   box-shadow: 0 19px 35px rgba(0,0,0,0.3);
 }
 .main-table-body table {
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border-top: 1px solid rgba(255,255,255,.6);
+  border-bottom: 1px solid rgba(255,255,255,.6);
+/*  position:relative;
+  z-index:10*/
   margin-bottom: 0;
 }
+/*.main-table-body table:before{
+  content:"";
+  display:block;
+  position:absolute;
+  z-index:-1;
+  top:-1px;
+  border:1px solid black;
+}*/
 .main-table-body table td, .main-table-body table th {
-  padding: 20px 5px;
+  padding: 20px 10px;
   color: white ;
+
 }
+.main-table-body table thead{
+
+  border-bottom: 1px solid rgba(0,0,0);
+  outline: 1px solid rgba(255,255,255,.6);
+}
+/*.main-table-body table tr:first-child{
+  border-top: 1px solid rgba(255,255,255,.6);
+}*/
 .main-table-body table tr td:first-child,
 .main-table-body table tr th:first-child {
   padding-left: 25px;
 }
 .main-table-body table tr td:last-child,
 .main-table-body table tr th:last-child {
-  padding-right: 25px;
+  padding-right: 45px;
 }
 .main-table-body table tr td:nth-child(3),
 .main-table-body table tr td:nth-child(9),
 .main-table-body table tr td:nth-child(11),
 .main-table-body table tr td:nth-child(13) {
-  border-left-width: 1px;
+  border-left: 1px solid rgba(255,255,255,.6);
 }
 .main-table-body .table-striped>tbody>tr:nth-of-type(odd) {
   background: rgba(36, 43, 85, 0.6);
@@ -172,11 +186,13 @@ input[type="text"]:focus{
   margin: 0 auto
 }
 .border-left {
-  border-left-width: 1px;
+  border-left: 1px solid rgba(255,255,255,.6);
 }
 .btn-action {
-  padding: 10px;
+  padding: 9px 13px;
   border-radius: 8px;
+
+  margin-right: -20px;
 }
 .text-green-2 {
   color: #4ccb8e;
@@ -201,6 +217,156 @@ input[type="text"]:focus{
 .cards.row>*{
   padding: 0;
 }
+.banner-mobile{
+  display: none;
+}
+.user-menu{
+  cursor: pointer;
+  margin-top: -40px;
+  color: #393f67;
+}
+.icon-select{
+  color: #acb4e6;
+}
+.icon-select:hover{
+  color: white;
+}
+.icon-users:hover{
+  color: #56bad4;
+}
+.icon-dropdown{
+  background:url(../img/scholar-tracker/navbar.png);
+  display: none;
+  width: 226px;
+  z-index: 10;
+  border-radius: 14px;
+  right: 10px;
+  box-shadow:3px 3px 2px 0px rgba(0,0,0,.5);
+}
+.icon-dropdown>div:nth-child(even) {
+  background-color:  #7684b2;
+
+}
+.icon-dropdown>div{
+  border-bottom: 1px solid white;
+  color: white;
+  text-decoration: none !important;
+}
+.icon-dropdown>div a{
+  color: white;
+}
+.icon-dropdown>div a:hover{
+  color: black;
+}
+
+.icon-dropdown>div:last-child{
+  border-bottom: 0;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.indi-icon{
+  /*transform: scale(1,2);*/
+}
+
+.modal-dialog{
+  max-width: 722px;
+}
+.modal-dialog input[type="checkbox"]{
+  background-color: #636995;
+
+}
+.modal-dialog input[type="checkbox"]:checked{
+  background-color: #57abcc;
+
+}
+.modal-content{
+  background: url(../img/scholar-tracker/bg-modal.png) center center no-repeat #3e446d;
+  border-radius: 30px;
+  box-shadow: 0 19px 35px black;
+  padding:20px 30px 55px;
+  /*max-width: 722px;*/
+  /*margin:auto;*/
+}
+.btn-cancel{
+  border-radius: 50%;
+  border: 1px solid red;
+  color: white;
+}
+/*.modal-header .close {
+  border-radius: 50%;
+  border: 1px solid white;
+  color: rgba(255,255,255,.6);
+  opacity: .2;
+}*/
+
+.modal-header {
+  border-bottom: 1px solid rgba(255,255,255,.6);
+  padding-bottom: 20px
+}
+.modal-footer button{
+  background-color: #2b3051;
+  padding: 12px 0;
+  width: 109px;
+  border-radius: 14px;
+
+}
+.modal-footer button:hover{
+  background-color: #57abcc;
+  color: black;
+}
+.modal-body{
+  padding-top: 20px;
+  padding-bottom:16px ;
+}
+.modal-footer {
+    border-top: 1px solid rgba(255,255,255,.6);
+}
+.form-select{
+  background-color: #7c82b1;
+  border:0;
+}
+.last-select{
+  border-bottom: 1px solid rgba(255,255,255, .6);
+  /*margin-bottom: 33px;*/
+}
+.pagination-select{
+  width: 100px;
+  height: 40px;
+  padding: 2px 16px;
+
+}
+.text-grey-3{
+  color: #abb0d5;
+}
+.page-item{
+  
+  margin-left: 10px;
+}
+.page-link{
+  margin-left: 10px;
+  border:none;
+  color: black;
+  background-color: #575e8d;
+}
+.page-link:hover{
+  background-color: #7f86ba;
+}
+.pagination>.active>a:active {
+  background-color: #7f86ba !important;
+}
+  
+.pagenation-expand{
+  background:none;
+}
+.pagenation-previous{
+  background:none;
+  color: #abb0d5;
+}
+.pagenation-next{
+  background:none;
+  color: #abb0d5;
+}
+
 footer {
   color: #8991c5;
 }
@@ -208,6 +374,10 @@ main {
   background: url(../img/scholar-tracker/bg-potion.png) center 42% no-repeat;
 }
 @media (max-width: 767px) {
+  header{
+    margin-bottom: 10px !important;
+  }
+  
   header img{
     max-width: 65%;
   }
@@ -247,6 +417,16 @@ main {
   }
 }
 @media (max-width: 1200px) {
+  .banner-mobile{
+
+    display: block;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .top-banner{
+    visibility: hidden;
+  }
   .mb-5.flex-wrap {
     justify-content: space-around !important;
   }
@@ -279,6 +459,10 @@ main {
   }
 }
 @media (max-width: 1600px) {
+   .btn-action {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
   header {
     margin-bottom: 50px;
   }
@@ -286,7 +470,12 @@ main {
     font-size: 1rem;
   }
 }
+/*@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 500px;}
+}*/
 @media (min-width: 1770px) {
+ 
   .col-xll-4{
     width: 33.3333%;
   }
