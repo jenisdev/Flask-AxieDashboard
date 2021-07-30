@@ -7,6 +7,8 @@
         </div>
         <div class="mb-4 register-model">
             {% if not success %}
+            <p>{{msg}}</p>
+            {% endif %}
             <form method="POST" action="">
                 
                 {{ form.hidden_tag() }}
@@ -36,7 +38,7 @@
                 </div>
                 <button type="submit" class="btn btn-signup">Sign Up</button>
             </form>
-            {% endif %}
+            
         </div>
         <div class=" pt-4 pt-sm-5 pt-md-4 text-cyan account-creation ">
             Already registered?
