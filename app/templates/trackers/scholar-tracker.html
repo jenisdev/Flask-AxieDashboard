@@ -5,9 +5,11 @@
         <div
             class="slp-exchange-area d-flex align-items-center justify-content-center rounded-5 py-3  py-lg-1 px-10 mt-4 flex-wrap">
             <p class="text-white fs-6 text-slp">Smooth Love Potion Price (SLP)</p>
-            <p class="price-letter fs-main-semi ps-3 pe-4" id="current_rate">&pound;&nbsp;{{"%.2f" | format(currentRateForSLP | float)}}</p>
+            <p class="price-letter fs-main-semi ps-3 pe-4" id="current_rate">&pound;&nbsp;{{"%.2f" |
+                format(currentRateForSLP | float)}}</p>
             <div class="price-percent py-2 px-4 rounded-4">
-                <i class="bi {{ 'bi-caret-up-fill' if percentage > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" | format(percentage | float)}}%
+                <i class="bi {{ 'bi-caret-up-fill' if percentage > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" |
+                format(percentage | float)}}%
             </div>
         </div>
         <div class="link-address text-center text-white fs-5 fs-main-semi mt-4">
@@ -25,7 +27,8 @@
                     {{ "%.2f" | format(slpdata.avg_total) }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="total_avg" data-value="{{slpdata.avg_total}}">&#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.avg_total | float)}} GBP</p>
+                <p class="fs-5-b text-white" id="total_avg" data-value="{{slpdata.avg_total}}">&#8776;&pound;{{"%.2f" |
+                    format(currentRateForSLP * slpdata.avg_total | float)}} GBP</p>
             </div>
             <div
                 class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
@@ -34,7 +37,8 @@
                     {{ slpdata.sum_total }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="total_sum" data-value="{{slpdata.sum_total}}">&#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_total | float)}} GBP</p>
+                <p class="fs-5-b text-white" id="total_sum" data-value="{{slpdata.sum_total}}">&#8776;&pound;{{"%.2f" |
+                    format(currentRateForSLP * slpdata.sum_total | float)}} GBP</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xll-2 justify-content-around d-flex">
@@ -45,7 +49,8 @@
                     {{ slpdata.sum_unclaimed }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="unclaimed_sum" data-value="{{slpdata.sum_unclaimed}}">&#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_unclaimed | float)}} GBP</p>
+                <p class="fs-5-b text-white" id="unclaimed_sum" data-value="{{slpdata.sum_unclaimed}}">
+                    &#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_unclaimed | float)}} GBP</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xll-2 justify-content-around d-flex">
@@ -56,7 +61,8 @@
                     {{ slpdata.sum_claimed }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="claimed_sum" data-value="{{slpdata.sum_claimed}}">&#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_claimed | float)}} GBP</p>
+                <p class="fs-5-b text-white" id="claimed_sum" data-value="{{slpdata.sum_claimed}}">
+                    &#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_claimed | float)}} GBP</p>
             </div>
         </div>
         <div
@@ -68,7 +74,8 @@
                     {{ slpdata.sum_manager }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="total_manager_share" data-value="{{slpdata.sum_manager}}">&#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_manager | float)}} GBP</p>
+                <p class="fs-5-b text-white" id="total_manager_share" data-value="{{slpdata.sum_manager}}">
+                    &#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_manager | float)}} GBP</p>
             </div>
             <div
                 class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
@@ -77,7 +84,8 @@
                     {{ slpdata.sum_scholar }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="total_scholar_share" data-value="{{slpdata.sum_scholar}}">&#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_scholar | float)}} GBP</p>
+                <p class="fs-5-b text-white" id="total_scholar_share" data-value="{{slpdata.sum_scholar}}">
+                    &#8776;&pound;{{"%.2f" | format(currentRateForSLP * slpdata.sum_scholar | float)}} GBP</p>
             </div>
         </div>
     </div>
@@ -92,13 +100,15 @@
                     class="table-search fs-5 mx-3 rounded-4 w-100">
             </div>
             <a href="#" class="btn-export flex-shrink-0 bg-orange-2 fs-5-b rounded-4 ">Export Excel</a>
-            <a href="#settingModalToggle" class="btn-setting flex-shrink-0 rounded-4 fs-5-b ms-auto" data-bs-toggle="modal" role="button">
+            <a href="#settingModalToggle" class="btn-setting flex-shrink-0 rounded-4 fs-5-b ms-auto"
+                data-bs-toggle="modal" role="button">
                 <img src="/static/assets/img/scholar-tracker/icon-setting.png" alt="setting-icon" />
                 Settings
             </a>
         </div>
         <div class="main-table-body">
-            <table class="table table-striped table-responsive text-center align-middle table-borderless fs-5-b" id="tracker-table">
+            <table class="table table-striped table-responsive text-center align-middle table-borderless fs-5-b"
+                id="tracker-table">
                 <thead>
                     <tr class="text-orange-3 fs-semi align-middle">
                         <th colspan="2"></th>
@@ -126,29 +136,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in tabledata %}
+                    {% for row in tabledata.items %}
                     <tr>
                         <td>{{ loop.index }}</td>
                         <td><span><a class="link-primary"
-                            href="https://marketplace.axieinfinity.com/profile/ronin:nin:{{row.RoninAddress[2:]}}/axie"
-                            target="_blank" rel="noreferrer">{{row.Name}}</a></strong></span></td>
-                        <td><span class="crypto-value">{{row.today_total}}</span><br><span class="currency-value"></span></td>
-                        <td><span class="yesterday rounded-3 crypto-value">{{row.yesterday_total}}</span><br><span class="currency-value"></span></td>
+                                    href="https://marketplace.axieinfinity.com/profile/ronin:nin:{{row.RoninAddress[2:]}}/axie"
+                                    target="_blank" rel="noreferrer">{{row.Name}}</a></strong></span></td>
+                        <td><span class="crypto-value">{{row.today_total}}</span><br><span
+                                class="currency-value"></span></td>
+                        <td><span class="yesterday rounded-3 crypto-value">{{row.yesterday_total}}</span><br><span
+                                class="currency-value"></span></td>
                         <td><span class="crypto-value">{{row.avg}}</span><br><span class="currency-value"></span></td>
-                        <td><span class="crypto-value">{{row.unclaimed}}</span><br><span class="currency-value"></span> </td>
-                        <td><span class="crypto-value">{{row.claimed}}</span><br><span class="currency-value"></span> </td>
-                        <td><span class="crypto-value">{{row.total}}</span><br><span class="currency-value"></span> </td>
+                        <td><span class="crypto-value">{{row.unclaimed}}</span><br><span class="currency-value"></span>
+                        </td>
+                        <td><span class="crypto-value">{{row.claimed}}</span><br><span class="currency-value"></span>
+                        </td>
+                        <td><span class="crypto-value">{{row.total}}</span><br><span class="currency-value"></span>
+                        </td>
                         <td>
-                            <span class="text-cyan full-date" style="display: none;">{{ row.lastclaim | datetime_from_epoch }}</span>
+                            <span class="text-cyan full-date" style="display: none;">{{ row.lastclaim |
+                                datetime_from_epoch }}</span>
                             <span class="text-cyan days">{{ row.lastclaim | humanize }}</span>
                         </td>
                         <td>{{ row.nextclaim | datetime_from_epoch }}</br>
                             <!-- <span class="text-cyan">18:35:25</span> -->
                         </td>
                         <td><span class="crypto-value">{{"{:.2f}".format(row.manager/100 * row.total)}}</span>
-                            <span class="text-green-2">({{row.manager}}%)</span><br><span class="currency-value"></span></td>
+                            <span class="text-green-2">({{row.manager}}%)</span><br><span class="currency-value"></span>
+                        </td>
                         <td><span class="crypto-value">{{"{:.2f}".format(row.scholar/100 * row.total)}}</span>
-                             <span class="text-green-2">({{row.scholar}}%)</span><br><span class="currency-value"></span></td>
+                            <span class="text-green-2">({{row.scholar}}%)</span><br><span class="currency-value"></span>
+                        </td>
                         <td>{{row.mmr}}</td>
                         <td>{{row.rank}}</td>
                         <td><i class="bi bi-pencil-square btn-action bg-green-2"></i></td>
@@ -158,43 +176,105 @@
                 </tbody>
             </table>
         </div>
-        
+
+        <div class="me-4">
+            <ul class="pagination">
+                {% if tabledata.has_prev %}
+                 <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=tabledata.prev_num) }}">Previous</a></li>
+                {% else %}
+                 <li class="page-item disabled"><span class="page-link">Previous</span>
+                {% endif %}
+                 </li>
+                  
+                {% for page in tabledata.iter_pages(left_edge=3, right_edge=3) %}
+                {% if page %}
+                 <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=page) }}">{{ page }}</a></li>
+                {% else %}
+                 <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li> 
+                {% endif %}
+                {% endfor %}
+                
+                {% if tabledata.has_next %}
+                 <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=tabledata.next_num) }}">Next</a></li>
+                {% else %}
+                 <li class="page-item disabled"><span class="page-link">Next</span>
+                {% endif %}
+                 </ul>
+        </div>
+        <!-- pagination bar -->
+        <div class="me-4">
+            <div class="d-flex justify-content-end pt-5">
+                <p class="fs-5-b text-grey-3 mt-2">Rows per page : &nbsp;</p>
+                <select class="form-select fs-5-b pagination-select" aria-label="Default select">
+                    <option selected>200</option>
+                    <option value="1">100</option>
+                    <option value="2">50</option>
+                    <option value="3">10</option>
+                </select>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link pagenation-previous" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link pagenation-expand" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">7</a></li>
+                        <li class="page-item ">
+                            <a class="page-link pagenation-next" href="#" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
         <!-- Modal -->
-        <div class="modal fade" id="settingModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="settingModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <img src="/static/assets/img/scholar-tracker/icon-setting-modal.png">
                         <h5 class="modal-title fs-4 fs-main-semi ms-2 text-white" id="staticBackdropLabel">Settings</h5>
-                        <button type="button" class="btn-close btn-close-white btn-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white btn-cancel" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row mt-3">
-                              <div class="col-md-2 text-white">Sort</div>
-                              <div class="col-md-5">
-                                <select class="form-select text-black fw-bold" name="sort-column" id="sort-column" aria-label="Select a column">
-                                    <option value="1">Name</option>
-                                    <option value="4">Average</option>
-                                    <option value="5">Unclaimed</option>
-                                    <option value="6">Claimed</option>
-                                    <option value="7">Total</option>
-                                    <option value="8">Last Claim</option>
-                                    <option value="13">MMR</option>
-                                    <option value="14">Rank</option>
-                                </select>
-                              </div>
-                              <div class="col-md-5 ms-auto">
-                                <select class="form-select fw-bold" name="sort-order" id="sort-order" aria-label="Select a column">
-                                    <option value="0">Ascending</option>
-                                    <option value="1">Descending</option>
-                                </select>
-                              </div>
+                                <div class="col-md-2 text-white">Sort</div>
+                                <div class="col-md-5">
+                                    <select class="form-select text-black fw-bold" name="sort-column" id="sort-column"
+                                        aria-label="Select a column">
+                                        <option value="1">Name</option>
+                                        <option value="4">Average</option>
+                                        <option value="5">Unclaimed</option>
+                                        <option value="6">Claimed</option>
+                                        <option value="7">Total</option>
+                                        <option value="8">Last Claim</option>
+                                        <option value="13">MMR</option>
+                                        <option value="14">Rank</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5 ms-auto">
+                                    <select class="form-select fw-bold" name="sort-order" id="sort-order"
+                                        aria-label="Select a column">
+                                        <option value="0">Ascending</option>
+                                        <option value="1">Descending</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row mt-3 justify-content-between last-select pb-4">
                                 <div class="col-md-3 text-white">Currency</div>
                                 <div class="col-md-9">
-                                    <select name="currency" id="currency" class="form-select fw-bold" aria-label="Select a column">
+                                    <select name="currency" id="currency" class="form-select fw-bold"
+                                        aria-label="Select a column">
                                         <option value="gbp">GBP</option>
                                         <option value="eur">EURO</option>
                                         <option value="usd">USD</option>
@@ -206,7 +286,7 @@
                                 TABLE OPTIONS <input type="hidden" value="" id="crypto-rate">
                             </div>
                             <div class="row mt-2 mt-xxl-4 text-white">
-                                <input class="form-check-input me-1" type="checkbox" name="full_date" aria-label="..."> 
+                                <input class="form-check-input me-1" type="checkbox" name="full_date" aria-label="...">
                                 Show full date
                             </div>
                             <div class="row mt-2 mt-xxl-4 text-white">
@@ -224,7 +304,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn fs-5-b text-grey-2 fs-main-semi" data-bs-dismiss="modal">Done</button>
+                        <button type="button" class="btn fs-5-b text-grey-2 fs-main-semi"
+                            data-bs-dismiss="modal">Done</button>
                         <!-- <button type="button" class="btn btn-primary" id="setting_done">Done</button> -->
                     </div>
                 </div>
@@ -235,155 +316,4 @@
         </div>
     </div>
 </main>
-<script>
-    $(document).ready(() => {
-        $('td:nth-child(13), th:nth-child(13)').hide();
-        $('td:nth-child(14), th:nth-child(14)').hide();
-        var currency_signs = {'gbp': "&pound;", 'eur': "&euro;", 'usd': "&dollar;", 'php': "&#8369;"}
-        $('input[name=full_date]').change(ev => {
-            if ($(ev.target).prop('checked')) {
-                $('.full-date').prop('style', 'display: block;')
-                $('.days').prop('style', 'display: none')
-            } else {
-                $('.days').prop('style', 'display: block;')
-                $('.full-date').prop('style', 'display: none')
-            }
-        })
-
-        $('#currency').change(ev => {
-            
-                var currency = $('#currency option:selected').val().toLowerCase()
-                $.ajax({
-                    url: '/getRate',
-                    method: 'POST',
-                    data: {currency : currency},
-                    success: function (res) {
-                        var rate = JSON.parse(res).rate
-                        document.getElementById('crypto-rate').value = rate
-                        if ($('input[name=show_value]').prop('checked')) {
-                            $('.currency-value').each(function (i, obj) {
-                                var crypto = Number($(obj).parent().find('.crypto-value').text())
-                                var value = rate * crypto
-                                $(obj).html("&#8776;"+currency_signs[currency]+"&nbsp;"+value.toFixed(2))
-                            })
-                        }
-                        $('#current_rate').html(currency_signs[currency] + "&nbsp;" + rate.toFixed(2))
-                        console.log($('#total_avg').data('value'))
-                        $('#total_avg').html("&#8776;"+currency_signs[currency]+"&nbsp;"+(rate*Number($('#total_avg').data('value'))).toFixed(2))
-                        $('#total_sum').html("&#8776;"+currency_signs[currency]+"&nbsp;"+(rate*Number($('#total_sum').data('value'))).toFixed(2))
-                        $('#unclaimed_sum').html("&#8776;"+currency_signs[currency]+"&nbsp;"+(rate*Number($('#unclaimed_sum').data('value'))).toFixed(2))
-                        $('#claimed_sum').html("&#8776;"+currency_signs[currency]+"&nbsp;"+(rate*Number($('#claimed_sum').data('value'))).toFixed(2))
-                        $('#total_manager_share').html("&#8776;"+currency_signs[currency]+"&nbsp;"+(rate*Number($('#total_manager_share').data('value'))).toFixed(2))
-                        $('#total_scholar_share').html("&#8776;"+currency_signs[currency]+"&nbsp;"+(rate*Number($('#total_scholar_share').data('value'))).toFixed(2))
-                    }
-                })
-            
-
-        })
-
-        $('input[name=show_value]').change(ev => {
-            if ($(ev.target).prop('checked')) {
-                var currency = $('#currency option:selected').val().toLowerCase()
-                $.ajax({
-                    url: '/getRate',
-                    method: 'POST',
-                    data: {currency : currency},
-                    success: function (res) {
-                        var rate = JSON.parse(res).rate
-                        document.getElementById('crypto-rate').value = rate
-
-                        $('.currency-value').each(function (i, obj) {
-                            var crypto = Number($(obj).parent().find('.crypto-value').text())
-                            var value = rate * crypto
-                            // $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
-                            $(obj).html("&#8776;"+currency_signs[currency]+"&nbsp;"+value.toFixed(2))
-                        })
-                    }
-                })
-            } else {
-                $('.currency-value').each(function (i, obj) {
-                    $(obj).text('')
-                })
-            }
-        })
-
-        $('input[name=show_mmr]').change(ev=> {
-            if ($(ev.target).prop('checked')) {
-                $('td:nth-child(13), th:nth-child(13)').show();
-            } else {
-                $('td:nth-child(13), th:nth-child(13)').hide();
-            }
-        })
-
-        $('input[name=show_rank]').change(ev=> {
-            if ($(ev.target).prop('checked')) {
-                $('td:nth-child(14), th:nth-child(14)').show();
-            } else {
-                $('td:nth-child(14), th:nth-child(14)').hide();
-            }
-        })
-        
-        function sortTable(column, order) {
-            var table, rows, switching, i, x, y, shouldSwitch;
-            table = document.getElementById("tracker-table");
-            switching = true;
-            /* Make a loop that will continue until
-            no switching has been done: */
-            while (switching) {
-                // Start by saying: no switching is done:
-                switching = false;
-                rows = table.rows;
-                /* Loop through all table rows (except the
-                first, which contains table headers): */
-                for (i = 2; i < (rows.length - 1); i++) {
-                    // Start by saying there should be no switching:
-                    shouldSwitch = false;
-                    /* Get the two elements you want to compare,
-                    one from current row and one from the next: */
-                    x = rows[i].getElementsByTagName("td")[column];
-                    y = rows[i + 1].getElementsByTagName("td")[column];
-                    // Check if the two rows should switch place:
-                    if (!order) {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            // If so, mark as a switch and break the loop:
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            // If so, mark as a switch and break the loop:
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                }
-                if (shouldSwitch) {
-                    /* If a switch has been marked, make the switch
-                    and mark that a switch has been done: */
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                }
-            }
-        }
-
-        $('#sort-column').change(ev => {
-            var column = Number($('#sort-column option:selected').val())
-            var order = Number($('#sort-order option:selected').val())
-            sortTable(column, order)
-        })
-
-        $('#sort-order').change(ev => {
-            var column = Number($('#sort-column option:selected').val())
-            var order = Number($('#sort-order option:selected').val())
-            sortTable(column, order)
-        })        
-        
-        $("#search").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#tracker-table tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    })
-</script>
 {% endblock content %}

@@ -8,7 +8,7 @@ import os, logging
 from traceback import print_tb 
 
 # Flask modules
-from flask               import json, render_template, request, url_for, redirect, send_from_directory, flash
+from flask               import json, jsonify, render_template, request, url_for, redirect, send_from_directory, flash
 from flask_login         import login_user, logout_user, current_user, login_required
 import sqlalchemy
 from werkzeug.exceptions import HTTPException, NotFound, abort
@@ -20,7 +20,7 @@ from app.models import ScholarshipDaily, User, Scholarship
 from app.forms  import LoginForm, RegisterForm
 from app.token import generate_confirmation_token, confirm_token
 from sqlalchemy.sql import func
-from sqlalchemy import text
+from sqlalchemy import table, text
 # Utils
 from .util import getAllCurrencies, getChangePercent, getRateForSLP
 from datetime import datetime, date
@@ -235,8 +235,8 @@ def index(path):
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
-@app.route('/')
-def index():
+@app.route('/<int:page_num>')
+def index(page_num=1):
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
 
@@ -255,10 +255,66 @@ def index():
 
     today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp()
     yesterday_epoch = datetime(today_date.year, today_date.month, today_date.day-1, 0, 0).timestamp()
+    tabledata = db.session.query( 
+        ScholarshipDaily.Name,
+        Scholarship.RoninAddress,
+        Scholarship.TotalSLP.label('total'),
+        Scholarship.UnclaimedSLP.label('unclaimed'),
+        Scholarship.ClaimedSLP.label('claimed'),
+        Scholarship.ManagerShare.label('manager'),
+        Scholarship.ScholarShare.label('scholar'),
+        Scholarship.LastClaim.label('lastclaim'),
+        Scholarship.NextClaim.label('nextclaim'),
+        Scholarship.MMR.label('mmr'),
+        Scholarship.ArenaRank.label('rank'),
+        Scholarship.daily_average.label('avg'),
+        func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
+        func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total')
+    )\
+    .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
+    .group_by(ScholarshipDaily.Name)\
+    .paginate(per_page=5, page=page_num, error_out=True)
+    # .all()
+    # sql = text(f""" \
+    #     SELECT
+    #         d.`Name`,
+    #         s.RoninAddress,
+    #         s.TotalSLP as total,
+    #         s.UnclaimedSLP as unclaimed,
+    #         s.ClaimedSLP as claimed,
+    #         s.ManagerShare as manager,
+    #         s.ScholarShare as scholar,
+    #         s.LastClaim as lastclaim,
+    #         s.NextClaim as nextclaim,
+    #         s.MMR as mmr,
+    #         s.ArenaRank as `rank`,
+    #         s.daily_average as avg,
+    #         SUM(CASE WHEN (d.Date > {today_epoch} AND d.Date < {today_epoch+86400}) THEN d.SLP ELSE 0 END) AS today_total,
+    #         SUM(CASE WHEN (d.Date > {yesterday_epoch} AND d.Date < {yesterday_epoch+86400}) THEN d.SLP ELSE 0 END) AS yesterday_total
+    #     FROM scholar_daily_totals d
+    #     LEFT JOIN scholarship_tracker s
+    #     ON d.RoninAddress = s.RoninAddress
+    #     GROUP BY `Name`
+    #     """)
+    # print(sql)
+    # tabledata = db.engine.execute(sql)
+    
+    currentRateForSLP = getRateForSLP()
+    percentage = getChangePercent()
+    
+    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, percentage=percentage)
+
+@app.route('/data', methods=['POST', 'GET'])
+def data():
+    today_date = date.today()
+
+    today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp()
+    yesterday_epoch = datetime(today_date.year, today_date.month, today_date.day-1, 0, 0).timestamp()
     sql = text(f""" \
         SELECT
-            d.`Name`,
-            s.RoninAddress,
+            s.id,
+            d.`Name` as name,
+            s.RoninAddress as ronin,
             s.TotalSLP as total,
             s.UnclaimedSLP as unclaimed,
             s.ClaimedSLP as claimed,
@@ -267,8 +323,8 @@ def index():
             s.LastClaim as lastclaim,
             s.NextClaim as nextclaim,
             s.MMR as mmr,
-            s.ArenaRank as `rank`,
-            s.daily_average as avg,
+            s.ArenaRank as arena_rank,
+            s.daily_average as daily_avg,
             SUM(CASE WHEN (d.Date > {today_epoch} AND d.Date < {today_epoch+86400}) THEN d.SLP ELSE 0 END) AS today_total,
             SUM(CASE WHEN (d.Date > {yesterday_epoch} AND d.Date < {yesterday_epoch+86400}) THEN d.SLP ELSE 0 END) AS yesterday_total
         FROM scholar_daily_totals d
@@ -277,26 +333,8 @@ def index():
         GROUP BY `Name`
         """)
     tabledata = db.engine.execute(sql)
-
-    print(tabledata)
-    """ tabledata = db.session.query( \
-        func.sum(case([between(ScholarshipDaily.Date, today_epoch, today_epoch+3600*24), ScholarshipDaily.SLP], else_=0)).label('today') ,\
-        Scholarship.Name, \
-        Scholarship.RoninAddress, \
-        Scholarship.TotalSLP.label('total'), \
-        Scholarship.UnclaimedSLP.label('unclaimed'), \
-        Scholarship.ClaimedSLP.label('claimed'), \
-        Scholarship.ManagerShare.label('manager'), \
-        Scholarship.ScholarShare.label('scholar'), \
-        Scholarship.LastClaim.label('lastclaim'), \
-        Scholarship.NextClaim.label('nextclaim'), \
-        Scholarship.MMR.label('mmr'), \
-        Scholarship.ArenaRank.label('rank')
-        ).join(ScholarshipDaily.RoninAddress == Scholarship.RoninAddress)\
-        .all() """
-    currentRateForSLP = getRateForSLP()
-    percentage = getChangePercent()
-    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, percentage=percentage)
+    return jsonify(tabledata)
+    # return json.dumps({'data': tabledata})
 
 @app.route('/getRate', methods=['POST'])
 def getRate():
