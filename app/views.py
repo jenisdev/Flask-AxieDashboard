@@ -4,8 +4,8 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Python modules
-import os, logging
-from traceback import print_tb 
+import os
+import decimal 
 
 # Flask modules
 from flask               import json, jsonify, render_template, request, url_for, redirect, send_from_directory, flash
@@ -24,6 +24,17 @@ from sqlalchemy import table, text
 # Utils
 from .util import getAllCurrencies, getChangePercent, getRateForSLP
 from datetime import datetime, date
+
+class DecimalEncoder(json.JSONEncoder):
+
+    def default(self, o):
+
+        if isinstance(o, decimal.Decimal):
+            return str(o)
+
+        super(DecimalEncoder, self).default(o)
+
+app.json_encoder = DecimalEncoder
 
 def datatime_from_epoch(epoch_time):
     if epoch_time == None:
@@ -273,7 +284,8 @@ def index():
     )\
     .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
     .group_by(ScholarshipDaily.Name)\
-    .paginate(per_page=10, page=1, error_out=True)
+    .all()
+    # .paginate(per_page=10, page=1, error_out=True)
     # .all()
     # sql = text(f""" \
     #     SELECT
@@ -306,35 +318,43 @@ def index():
 
 @app.route('/data', methods=['POST', 'GET'])
 def data():
-    today_date = date.today()
 
+    page_num = request.form.get('page_num')
+    per_page = request.form.get('per_page')
+
+    today_date = date.today()
     today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp()
     yesterday_epoch = datetime(today_date.year, today_date.month, today_date.day-1, 0, 0).timestamp()
-    sql = text(f""" \
-        SELECT
-            s.id,
-            d.`Name` as name,
-            s.RoninAddress as ronin,
-            s.TotalSLP as total,
-            s.UnclaimedSLP as unclaimed,
-            s.ClaimedSLP as claimed,
-            s.ManagerShare as manager,
-            s.ScholarShare as scholar,
-            s.LastClaim as lastclaim,
-            s.NextClaim as nextclaim,
-            s.MMR as mmr,
-            s.ArenaRank as arena_rank,
-            s.daily_average as daily_avg,
-            SUM(CASE WHEN (d.Date > {today_epoch} AND d.Date < {today_epoch+86400}) THEN d.SLP ELSE 0 END) AS today_total,
-            SUM(CASE WHEN (d.Date > {yesterday_epoch} AND d.Date < {yesterday_epoch+86400}) THEN d.SLP ELSE 0 END) AS yesterday_total
-        FROM scholar_daily_totals d
-        LEFT JOIN scholarship_tracker s
-        ON d.RoninAddress = s.RoninAddress
-        GROUP BY `Name`
-        """)
-    tabledata = db.engine.execute(sql)
-    return jsonify(tabledata)
-    # return json.dumps({'data': tabledata})
+    tabledata = db.session.query( 
+        ScholarshipDaily.Name,
+        Scholarship.RoninAddress,
+        func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
+        func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total'),
+        Scholarship.daily_average.label('avg'),
+        Scholarship.UnclaimedSLP.label('unclaimed'),
+        Scholarship.ClaimedSLP.label('claimed'),
+        Scholarship.TotalSLP.label('total'),
+        Scholarship.LastClaim.label('lastclaim'),
+        Scholarship.NextClaim.label('nextclaim'),
+        Scholarship.ManagerShare.label('manager'),
+        Scholarship.ScholarShare.label('scholar'),
+        Scholarship.MMR.label('mmr'),
+        Scholarship.ArenaRank.label('rank'),
+    )\
+    .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
+    .group_by(ScholarshipDaily.Name)\
+    .paginate(per_page=int(per_page), page=int(page_num), error_out=True)
+    obj = {}
+    if tabledata.has_prev:
+        obj['prev_num'] = int(tabledata.prev_num)
+    if tabledata.has_next:
+        obj['next_num'] = int(tabledata.next_num)
+    obj['pages'] = []
+    for page in tabledata.iter_pages(left_edge=2, right_edge=3):
+        obj['pages'].append(page)
+    obj['data'] = tabledata.items
+    
+    return jsonify(obj)
 
 @app.route('/getRate', methods=['POST'])
 def getRate():
