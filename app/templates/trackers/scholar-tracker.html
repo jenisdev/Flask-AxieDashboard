@@ -177,57 +177,48 @@
             </table>
         </div>
 
-        <div class="me-4">
-            <ul class="pagination">
-                {% if tabledata.has_prev %}
-                 <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=tabledata.prev_num) }}">Previous</a></li>
-                {% else %}
-                 <li class="page-item disabled"><span class="page-link">Previous</span>
-                {% endif %}
-                 </li>
-                  
-                {% for page in tabledata.iter_pages(left_edge=3, right_edge=3) %}
-                {% if page %}
-                 <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=page) }}">{{ page }}</a></li>
-                {% else %}
-                 <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li> 
-                {% endif %}
-                {% endfor %}
-                
-                {% if tabledata.has_next %}
-                 <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=tabledata.next_num) }}">Next</a></li>
-                {% else %}
-                 <li class="page-item disabled"><span class="page-link">Next</span>
-                {% endif %}
-                 </ul>
-        </div>
         <!-- pagination bar -->
         <div class="me-4">
             <div class="d-flex justify-content-end pt-5">
                 <p class="fs-5-b text-grey-3 mt-2">Rows per page : &nbsp;</p>
                 <select class="form-select fs-5-b pagination-select" aria-label="Default select">
-                    <option selected>200</option>
-                    <option value="1">100</option>
-                    <option value="2">50</option>
-                    <option value="3">10</option>
+                    <option value="200">200</option>
+                    <option value="100">100</option>
+                    <option value="50">50</option>
+                    <option value="10" selected>10</option>
                 </select>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
+                        {% if tabledata.has_prev %}
                         <li class="page-item">
+                            <a class="page-link pagenation-previous" href="{{ url_for('index', page_num=tabledata.prev_num) }}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        {% else %}
+                        <li class="page-item disabled">
                             <a class="page-link pagenation-previous" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&lt;</span>
                             </a>
+                        {% endif %}
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link pagenation-expand" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                        <li class="page-item ">
-                            <a class="page-link pagenation-next" href="#" aria-label="Next">
+                        {% for page in tabledata.iter_pages(left_edge=3, right_edge=3) %}
+                        {% if page %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('index', page_num=page) }}">{{ page }}</a></li>
+                        {% else %}
+                        <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link pagenation-expand">...</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if tabledata.has_next %}
+                        <li class="page-item">
+                            <a class="page-link pagenation-next" href="{{ url_for('index', page_num=tabledata.next_num) }}" aria-label="Next">
                                 <span aria-hidden="true">&gt;</span>
                             </a>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link pagenation-next" href="#" aria-label="Previous">
+                                <span class="page-link" aria-hidden="true">&gt;</span>
+                            </a>
+                        {% endif %}
                         </li>
                     </ul>
                 </nav>

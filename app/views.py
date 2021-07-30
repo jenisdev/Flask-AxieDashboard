@@ -235,8 +235,8 @@ def index(path):
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
-@app.route('/<int:page_num>')
-def index(page_num=1):
+@app.route('/')
+def index():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
 
@@ -273,7 +273,7 @@ def index(page_num=1):
     )\
     .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
     .group_by(ScholarshipDaily.Name)\
-    .paginate(per_page=5, page=page_num, error_out=True)
+    .paginate(per_page=10, page=1, error_out=True)
     # .all()
     # sql = text(f""" \
     #     SELECT
