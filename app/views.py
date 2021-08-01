@@ -263,9 +263,9 @@ def index():
     # func.count(case([((Child.naughty == True), Child.id)], else_=literal_column("NULL"))).label("naughty")])
 
     today_date = date.today()
-
-    today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp()
-    yesterday_epoch = datetime(today_date.year, today_date.month, today_date.day-1, 0, 0).timestamp()
+    today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
+    yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
+    
     tabledata = db.session.query( 
         ScholarshipDaily.Name,
         Scholarship.RoninAddress,
