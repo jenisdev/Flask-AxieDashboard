@@ -191,8 +191,7 @@ input[type="text"]:focus{
 .btn-action {
   padding: 9px 13px;
   border-radius: 8px;
-
-  margin-right: -20px;
+  margin-right: 5px;
 }
 .text-green-2 {
   color: #4ccb8e;

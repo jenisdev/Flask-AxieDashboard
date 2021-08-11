@@ -3,16 +3,6 @@ $(document).ready(function () {
 
     // $('td:nth-child(13), th:nth-child(13)').hide();
     // $('td:nth-child(14), th:nth-child(14)').hide();
-   
-    $('input[name=full_date]').change(ev => {
-        if ($(ev.target).prop('checked')) {
-            $('.full-date').prop('style', 'display: block;')
-            $('.days').prop('style', 'display: none')
-        } else {
-            $('.days').prop('style', 'display: block;')
-            $('.full-date').prop('style', 'display: none')
-        }
-    })
 
     $('#currency').change(ev => {
 
@@ -224,7 +214,6 @@ $(document).ready(function () {
         "ajax":     "/data",
         "dataSrc":  "",
         "bPaginate": false,
-        "order": [[ 1, 'asc' ]],
         "columnDefs": [
             {
                 "targets": 0,
@@ -233,6 +222,7 @@ $(document).ready(function () {
             },
             {
                 "targets": 1,
+                "orderable": false,
                 "render": function ( data, type, row ) {
                     var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:nin:${row[0]}/axie"
                                     target="_blank" rel="noreferrer">${row[1]}</a>`
@@ -240,18 +230,67 @@ $(document).ready(function () {
                 }
             },
             {
+                "targets": 2,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
+                "targets": 3,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
+                "targets": 4,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
+                "targets": 5,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
+                "targets": 6,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
+                "targets": 7,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
                 "targets": 8,
+                "orderable": false,
                 "render": function ( data, type, row ) {
                     const milliseconds = Number(data) * 1000
 
                     const dateObject = new Date(milliseconds)
 
                     const humanDateFormat = dateObject.toLocaleString()
-                    return humanDateFormat
+                    
+                    var timeInterval = timeConversion(milliseconds)
+
+                    var content = `<span class="text-cyan full-date" style="display: none;">${humanDateFormat}</span>
+                    <span class="text-cyan interval-days" style="display: block;">${timeInterval}</span>`
+                    return content
                 }
             },
             {
                 "targets": 9,
+                "orderable": false,
                 "render": function ( data, type, row ) {
                     const milliseconds = Number(data) * 1000
 
@@ -263,30 +302,42 @@ $(document).ready(function () {
             },
             {
                 "targets": 10,
+                "orderable": false,
                 "render": function ( data, type, row ) {
                     var val = data / 100 * row[7]
-                    return val.toFixed(2)
+                    return `<span class="crypto-value">${val.toFixed(2)}</span><br><span class="currency-value">`
                 }
             },
             {
                 "targets": 11,
+                "orderable": false,
                 "render": function ( data, type, row ) {
                     var val = data / 100 * row[7]
-                    return val.toFixed(2)
+                    return `<span class="crypto-value">${val.toFixed(2)}</span><br><span class="currency-value">`
                 }
             },
             {
                 "targets": 12,
-                "visible": false
+                "orderable": false,
+                "visible": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
             },
             {
                 "targets": 13,
-                "visible": false
+                "orderable": false,
+                "visible": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
             },
             {
                 "targets": 14,
+                "orderable": false,
                 "render": function (data, type, row) {
-                    return `<i class="bi bi-pencil-square btn-action bg-green-2"></i>&nbsp;&nbsp;<i class="bi bi-trash btn-action bg-blue-2"></i>`
+                    return `<span><i class="bi bi-pencil-square btn-action bg-green-2"></i></span>
+                            <span><i class="bi bi-trash btn-action bg-blue-2"></i></span>`
                 }
             }
             // { "visible": false,  "targets": [ 3 ] }
@@ -307,7 +358,8 @@ $(document).ready(function () {
             { "width": "4%" },
             { "width": "4%" },
             { "width": "20%" }
-        ]
+        ],
+        "bFilter": false,
     })
 
     t.on( 'order.dt search.dt', function () {
@@ -356,5 +408,45 @@ $(document).ready(function () {
         .order( [ column, order ] )
         .draw();
         console.log(column, order)
-    })
+    } );
+
+    $('#search').keyup(function(){
+        t
+        .search($(this).val())
+        .draw() ;
+    } );
+
+    $('input[name=full_date]').on("change", function (ev) {
+        if ($(ev.target).prop('checked')) {
+            $('#tracker-table tbody td .full-date').prop('style', 'display: block;')
+            $('#tracker-table tbody td .interval-days').prop('style', 'display: none')
+        } else {
+            $('#tracker-table tbody td .interval-days').prop('style', 'display: block;')
+            $('#tracker-table tbody td .full-date').prop('style', 'display: none')
+        }
+    } );
+
+    function timeConversion(millisec) {
+        var now = Date.now();
+
+        var intervalMillisec = now - millisec;
+
+        var seconds = (intervalMillisec / 1000).toFixed(0);
+
+        var minutes = (intervalMillisec / (1000 * 60)).toFixed(0);
+
+        var hours = (intervalMillisec / (1000 * 60 * 60)).toFixed(0);
+
+        var days = (intervalMillisec / (1000 * 60 * 60 * 24)).toFixed(0);
+
+        if (seconds < 60) {
+            return seconds + " Sec";
+        } else if (minutes < 60) {
+            return minutes + " Min";
+        } else if (hours < 24) {
+            return hours + " Hrs";
+        } else {
+            return days + " Days"
+        }
+    }
 })
