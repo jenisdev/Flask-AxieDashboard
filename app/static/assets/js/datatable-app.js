@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var currency_signs = { 'gbp': "&pound;", 'eur': "&euro;", 'usd': "&dollar;", 'php': "&#8369;" }
 
-    $('td:nth-child(13), th:nth-child(13)').hide();
-    $('td:nth-child(14), th:nth-child(14)').hide();
+    // $('td:nth-child(13), th:nth-child(13)').hide();
+    // $('td:nth-child(14), th:nth-child(14)').hide();
    
     $('input[name=full_date]').change(ev => {
         if ($(ev.target).prop('checked')) {
@@ -71,22 +71,6 @@ $(document).ready(function () {
         }
     })
 
-    $('input[name=show_mmr]').change(ev => {
-        if ($(ev.target).prop('checked')) {
-            $('td:nth-child(13), th:nth-child(13)').show();
-        } else {
-            $('td:nth-child(13), th:nth-child(13)').hide();
-        }
-    })
-
-    $('input[name=show_rank]').change(ev => {
-        if ($(ev.target).prop('checked')) {
-            $('td:nth-child(14), th:nth-child(14)').show();
-        } else {
-            $('td:nth-child(14), th:nth-child(14)').hide();
-        }
-    })
-
     function sortTable(column, order) {
         var table, rows, switching, i, x, y, shouldSwitch;
         table = document.getElementById("tracker-table");
@@ -136,11 +120,6 @@ $(document).ready(function () {
         sortTable(column, order)
     }) */
 
-    $('#sort-order').change(ev => {
-        var column = Number($('#sort-column option:selected').val())
-        var order = Number($('#sort-order option:selected').val())
-        sortTable(column, order)
-    })
 
     $("#search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -239,5 +218,143 @@ $(document).ready(function () {
                 $('#pagination-bar').html(pagination_body)
             }
         })
+    })
+
+    var t = $("#tracker-table").DataTable({
+        "ajax":     "/data",
+        "dataSrc":  "",
+        "bPaginate": false,
+        "order": [[ 1, 'asc' ]],
+        "columnDefs": [
+            {
+                "targets": 0,
+                "searchable": false,
+                "orderable": false
+            },
+            {
+                "targets": 1,
+                "render": function ( data, type, row ) {
+                    var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:nin:${row[0]}/axie"
+                                    target="_blank" rel="noreferrer">${row[1]}</a>`
+                    return content
+                }
+            },
+            {
+                "targets": 8,
+                "render": function ( data, type, row ) {
+                    const milliseconds = Number(data) * 1000
+
+                    const dateObject = new Date(milliseconds)
+
+                    const humanDateFormat = dateObject.toLocaleString()
+                    return humanDateFormat
+                }
+            },
+            {
+                "targets": 9,
+                "render": function ( data, type, row ) {
+                    const milliseconds = Number(data) * 1000
+
+                    const dateObject = new Date(milliseconds)
+
+                    const humanDateFormat = dateObject.toLocaleString()
+                    return humanDateFormat
+                }
+            },
+            {
+                "targets": 10,
+                "render": function ( data, type, row ) {
+                    var val = data / 100 * row[7]
+                    return val.toFixed(2)
+                }
+            },
+            {
+                "targets": 11,
+                "render": function ( data, type, row ) {
+                    var val = data / 100 * row[7]
+                    return val.toFixed(2)
+                }
+            },
+            {
+                "targets": 12,
+                "visible": false
+            },
+            {
+                "targets": 13,
+                "visible": false
+            },
+            {
+                "targets": 14,
+                "render": function (data, type, row) {
+                    return `<i class="bi bi-pencil-square btn-action bg-green-2"></i>&nbsp;&nbsp;<i class="bi bi-trash btn-action bg-blue-2"></i>`
+                }
+            }
+            // { "visible": false,  "targets": [ 3 ] }
+        ],
+        "columns": [
+            { "width": "2%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "15%" },
+            { "width": "15%" },
+            { "width": "5%" },
+            { "width": "5%" },
+            { "width": "4%" },
+            { "width": "4%" },
+            { "width": "20%" }
+        ]
+    })
+
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    $('input[name=show_rank]').on( 'change', function (e) {
+        e.preventDefault();
+ 
+        // Get the column API object
+        var column = t.column( $(this).attr('data-column') );
+ 
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+    } );
+
+    $('input[name=show_mmr]').on( 'change', function (e) {
+        e.preventDefault();
+ 
+        // Get the column API object
+        var column = t.column( $(this).attr('data-column') );
+ 
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+    } );
+    $('#sort-column').on( 'change', function (e) {
+        var column = Number($('#sort-column option:selected').val())
+        var order = Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'des';
+        // Sort by column 1 and then re-draw
+        console.log(t)
+        t
+        .order( [ column, order ] )
+        .draw();
+        console.log(column, order)
+    } );
+
+    
+    $('#sort-order').on( 'change', function (e) {
+        var column = Number($('#sort-column option:selected').val())
+        var order = Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'des';
+        // Sort by column 1 and then re-draw
+        console.log(t)
+        t
+        .order( [ column, order ] )
+        .draw();
+        console.log(column, order)
     })
 })

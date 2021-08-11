@@ -147,7 +147,7 @@ input[type="text"]:focus{
   border:1px solid black;
 }*/
 .main-table-body table td, .main-table-body table th {
-  padding: 20px 10px;
+  padding: 20px 3px;
   color: white ;
 
 }
@@ -161,11 +161,11 @@ input[type="text"]:focus{
 }*/
 .main-table-body table tr td:first-child,
 .main-table-body table tr th:first-child {
-  padding-left: 25px;
+  padding-left: 5px;
 }
 .main-table-body table tr td:last-child,
 .main-table-body table tr th:last-child {
-  padding-right: 45px;
+  padding-right: 5px;
 }
 .main-table-body table tr td:nth-child(3),
 .main-table-body table tr td:nth-child(9),

@@ -15,12 +15,12 @@ from werkzeug.exceptions import HTTPException, NotFound, abort
 from jinja2              import TemplateNotFound
 
 # App modules
-from app        import app, check_confirmed, lm, db, bc, send_email
-from app.models import ScholarshipDaily, User, Scholarship
-from app.forms  import LoginForm, RegisterForm
-from app.token import generate_confirmation_token, confirm_token
-from sqlalchemy.sql import func
-from sqlalchemy import table, text
+from app                 import app, check_confirmed, lm, db, bc, send_email
+from app.models          import ScholarshipDaily, User, Scholarship
+from app.forms           import LoginForm, RegisterForm
+from app.token           import generate_confirmation_token, confirm_token
+from sqlalchemy.sql      import func
+from sqlalchemy          import table, text
 # Utils
 from .util import getAllCurrencies, getChangePercent, getRateForSLP
 from datetime import datetime, date
@@ -326,8 +326,8 @@ def data():
     today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
     yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
     tabledata = db.session.query( 
-        ScholarshipDaily.Name,
         Scholarship.RoninAddress,
+        ScholarshipDaily.Name,
         func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
         func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total'),
         Scholarship.daily_average.label('avg'),
@@ -340,21 +340,15 @@ def data():
         Scholarship.ScholarShare.label('scholar'),
         Scholarship.MMR.label('mmr'),
         Scholarship.ArenaRank.label('rank'),
+        Scholarship.id
     )\
     .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
     .group_by(ScholarshipDaily.Name)\
-    .paginate(per_page=int(per_page), page=int(page_num), error_out=True)
-    obj = {}
-    if tabledata.has_prev:
-        obj['prev_num'] = int(tabledata.prev_num)
-    if tabledata.has_next:
-        obj['next_num'] = int(tabledata.next_num)
-    obj['pages'] = []
-    for page in tabledata.iter_pages(left_edge=2, right_edge=3):
-        obj['pages'].append(page)
-    obj['data'] = tabledata.items
+    .all()
     
-    return jsonify(obj)
+    res = {"data": tabledata}
+
+    return jsonify(res)
 
 @app.route('/getRate', methods=['POST'])
 def getRate():
