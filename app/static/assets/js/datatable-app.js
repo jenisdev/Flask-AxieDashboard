@@ -1,9 +1,6 @@
 $(document).ready(function () {
     var currency_signs = { 'gbp': "&pound;", 'eur': "&euro;", 'usd': "&dollar;", 'php': "&#8369;" }
 
-    // $('td:nth-child(13), th:nth-child(13)').hide();
-    // $('td:nth-child(14), th:nth-child(14)').hide();
-
     $('#currency').change(ev => {
 
         var currency = $('#currency option:selected').val().toLowerCase()
@@ -103,13 +100,6 @@ $(document).ready(function () {
             }
         }
     }
-
-    /* $('#sort-column').change(ev => {
-        var column = Number($('#sort-column option:selected').val())
-        var order = Number($('#sort-order option:selected').val())
-        sortTable(column, order)
-    }) */
-
 
     $("#search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -217,8 +207,8 @@ $(document).ready(function () {
         "columnDefs": [
             {
                 "targets": 0,
+                "orderable": false,
                 "searchable": false,
-                "orderable": false
             },
             {
                 "targets": 1,
@@ -363,7 +353,7 @@ $(document).ready(function () {
     })
 
     t.on( 'order.dt search.dt', function () {
-        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        t.column(0, {}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
         } );
     } ).draw();

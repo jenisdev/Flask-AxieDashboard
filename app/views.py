@@ -9,6 +9,7 @@ import decimal
 
 # Flask modules
 from flask               import json, jsonify, render_template, request, url_for, redirect, send_from_directory, flash
+from sqlalchemy.sql.expression import desc
 from flask_login         import login_user, logout_user, current_user, login_required
 import sqlalchemy
 from werkzeug.exceptions import HTTPException, NotFound, abort
@@ -322,14 +323,15 @@ def data():
     page_num = request.form.get('page_num')
     per_page = request.form.get('per_page')
 
+    # func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
+    # func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total'),
+
     today_date = date.today()
     today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
     yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
     tabledata = db.session.query( 
         Scholarship.RoninAddress,
-        ScholarshipDaily.Name,
-        func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
-        func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total'),
+        Scholarship.Name,
         Scholarship.daily_average.label('avg'),
         Scholarship.UnclaimedSLP.label('unclaimed'),
         Scholarship.ClaimedSLP.label('claimed'),
@@ -342,11 +344,24 @@ def data():
         Scholarship.ArenaRank.label('rank'),
         Scholarship.id
     )\
-    .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
-    .group_by(ScholarshipDaily.Name)\
     .all()
+
+    res_list = []
+
+    for row in tabledata:
+        # Get Ronin Address
+        roninAddress = row[0]
+        # Get 3 SLP Ordered by Date 
+        slpdata = db.session.query(ScholarshipDaily.SLP).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(3).all()
+        # Get Earned SLP of today and yesterday
+        today_slp = abs( slpdata[0][0] - slpdata[1][0] )
+        yesterday_slp = abs( slpdata[1][0] - slpdata[2][0] )
+        plain_row = [roninAddress, row[1], today_slp, yesterday_slp, row[2], row[3],\
+             row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]]
+        res_list.append(plain_row)
+
     
-    res = {"data": tabledata}
+    res = {"data": res_list}
 
     return jsonify(res)
 
