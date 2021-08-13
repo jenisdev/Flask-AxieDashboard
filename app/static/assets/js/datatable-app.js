@@ -207,8 +207,8 @@ $(document).ready(function () {
         "columnDefs": [
             {
                 "targets": 0,
-                "orderable": false,
                 "searchable": false,
+                "orderable": false
             },
             {
                 "targets": 1,
@@ -353,7 +353,7 @@ $(document).ready(function () {
     })
 
     t.on( 'order.dt search.dt', function () {
-        t.column(0, {}).nodes().each( function (cell, i) {
+        t.column(0).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
         } );
     } ).draw();
