@@ -372,3 +372,6 @@ def getRate():
     currency = request.form.get('currency')
     rate = getRateForSLP(currency)
     return json.dumps({"rate": rate})
+
+
+# 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 
