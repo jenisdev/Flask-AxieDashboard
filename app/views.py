@@ -354,13 +354,14 @@ def data():
         # Get 3 SLP Ordered by Date 
         slpdata = db.session.query(ScholarshipDaily.SLP).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(3).all()
         # Get Earned SLP of today and yesterday
+        today_slp = yesterday_slp = 0
         if len(slpdata) == 3:
-	        today_slp = abs( slpdata[0][0] - slpdata[1][0] )
-        	yesterday_slp = abs( slpdata[1][0] - slpdata[2][0] )
+            today_slp = abs( slpdata[0][0] - slpdata[1][0] )
+            yesterday_slp = abs( slpdata[1][0] - slpdata[2][0] )
+
         plain_row = [roninAddress, row[1], today_slp, yesterday_slp, row[2], row[3],\
              row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]]
         res_list.append(plain_row)
-
     
     res = {"data": res_list}
 
