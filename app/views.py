@@ -355,6 +355,7 @@ def data():
         slpdata = db.session.query(ScholarshipDaily.SLP).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(3).all()
         # Get Earned SLP of today and yesterday
         today_slp = yesterday_slp = 0
+        print("length: ", len(slpdata))
         if len(slpdata) == 3:
             today_slp = abs( slpdata[0][0] - slpdata[1][0] )
             yesterday_slp = abs( slpdata[1][0] - slpdata[2][0] )
