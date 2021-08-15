@@ -201,10 +201,20 @@ $(document).ready(function () {
     })
 
     var t = $("#tracker-table").DataTable({
-        "ajax":     "/data",
-        "dataSrc":  "",
-        "bPaginate": false,
-        "columnDefs": [
+        "dom"           : 'Bfrtip',
+        "ajax"          : "/data",
+        "dataSrc"       :  "",
+        "bPaginate"     : false,
+        "buttons"       : [
+            {
+                extend: 'excelHtml5',
+                text: 'Excel',
+                customize: function( xlsx ) {
+                    
+                }     
+            }
+        ],
+        "columnDefs"    : [
             {
                 "targets": 0,
                 "searchable": false,
@@ -349,8 +359,10 @@ $(document).ready(function () {
             { "width": "4%" },
             { "width": "20%" }
         ],
-        "bFilter": false,
+        "bFilter": false
     })
+
+    $(".dt-buttons").hide()
 
     t.on( 'order.dt search.dt', function () {
         t.column(0).nodes().each( function (cell, i) {
@@ -439,4 +451,8 @@ $(document).ready(function () {
             return days + " Days"
         }
     }
+
+    $("#export_btn").on("click", function (ev) {
+        $(".buttons-excel").trigger("click");
+    });
 })
