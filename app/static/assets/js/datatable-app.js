@@ -235,6 +235,8 @@ $(document).ready(function () {
                 }     
             }
         ],
+        "serverSide": false,
+        "processing": false,
         "columnDefs"    : [
             {
                 "targets": 0,
@@ -245,7 +247,7 @@ $(document).ready(function () {
                 "targets": 1,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:nin:${row[0]}/axie"
+                    var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:${row[0]}/axie"
                                     target="_blank" rel="noreferrer">${row[1]}</a>`
                     return content
                 }
@@ -368,7 +370,7 @@ $(document).ready(function () {
             // { "visible": false,  "targets": [ 3 ] }
         ],
         "columns": [
-            { "width": "3%" },
+            { "width": "3%", "mData": null },
             { "width": "4%" },
             { "width": "4%" },
             { "width": "4%" },
