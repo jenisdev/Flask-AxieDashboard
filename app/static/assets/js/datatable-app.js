@@ -279,7 +279,7 @@ $(document).ready(function () {
 
                     const dateObject = new Date(milliseconds)
 
-                    const humanDateFormat = dateObject.toLocaleString()
+                    const humanDateFormat = dateObject.toLocaleString().split(",")[0]
                     
                     var timeInterval = timeConversion(milliseconds)
 
@@ -296,7 +296,7 @@ $(document).ready(function () {
 
                     const dateObject = new Date(milliseconds)
 
-                    const humanDateFormat = dateObject.toLocaleString()
+                    const humanDateFormat = dateObject.toLocaleString().split(",")[0]
                     return humanDateFormat
                 }
             },
