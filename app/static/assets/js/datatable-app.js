@@ -199,6 +199,26 @@ $(document).ready(function () {
             }
         })
     })
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+    ];
+
+    function ordinal_suffix_of(i) {
+        var j = i % 10,
+            k = i % 100;
+        if (j == 1 && k != 11) {
+            return i + "st";
+        }
+        if (j == 2 && k != 12) {
+            return i + "nd";
+        }
+        if (j == 3 && k != 13) {
+            return i + "rd";
+        }
+        return i + "th";
+    }
+
     
     var t = $("#tracker-table").DataTable({
         "dom"           : 'Bfrtip',
@@ -281,7 +301,8 @@ $(document).ready(function () {
                     const dateObject = new Date(milliseconds)
                     
                     // const humanDateFormat = dateObject.toLocaleString().split(",")[0]
-                    const humanDateFormat = dateObject.getDate()+"/"+dateObject.getMonth()+"/"+dateObject.getFullYear()
+                    const humanDateFormat = ordinal_suffix_of(dateObject.getDate()) + " " + monthNames[dateObject.getMonth()] + ", "
+                                            + dateObject.getHours() + ":" + dateObject.getMinutes();
                     
                     var timeInterval = timeConversion(milliseconds)
 
@@ -297,9 +318,10 @@ $(document).ready(function () {
                     const milliseconds = Number(data) * 1000
 
                     const dateObject = new Date(milliseconds)
-
+                    
                     // const humanDateFormat = dateObject.toLocaleString().split(",")[0]
-                    const humanDateFormat = dateObject.getDate()+"/"+dateObject.getMonth()+"/"+dateObject.getFullYear()
+                    const humanDateFormat = ordinal_suffix_of(dateObject.getDate()) + " " + monthNames[dateObject.getMonth()] + ", "
+                                            + dateObject.getHours() + ":" + dateObject.getMinutes();
                     return humanDateFormat
                 }
             },
