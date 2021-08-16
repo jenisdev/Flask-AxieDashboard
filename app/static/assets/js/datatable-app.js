@@ -278,8 +278,9 @@ $(document).ready(function () {
                     const milliseconds = Number(data) * 1000
 
                     const dateObject = new Date(milliseconds)
-
-                    const humanDateFormat = dateObject.toLocaleString().split(",")[0]
+                    
+                    // const humanDateFormat = dateObject.toLocaleString().split(",")[0]
+                    const humanDateFormat = dateObject.getDate()+"/"+dateObject.getMonth()+"/"+dateObject.getFullYear()
                     
                     var timeInterval = timeConversion(milliseconds)
 
@@ -296,7 +297,8 @@ $(document).ready(function () {
 
                     const dateObject = new Date(milliseconds)
 
-                    const humanDateFormat = dateObject.toLocaleString().split(",")[0]
+                    // const humanDateFormat = dateObject.toLocaleString().split(",")[0]
+                    const humanDateFormat = dateObject.getDate()+"/"+dateObject.getMonth()+"/"+dateObject.getFullYear()
                     return humanDateFormat
                 }
             },
