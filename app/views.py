@@ -253,14 +253,15 @@ def index():
         return redirect(url_for('login'))
 
     slpdata = db.session.query( \
-        func.avg(Scholarship.TotalSLP).label('avg_total'), \
+        func.avg(Scholarship.daily_average).label('avg_total'), \
         func.sum(Scholarship.TotalSLP).label('sum_total'), \
         # func.count(Scholarship.Name).label('total_count'), \
         func.sum(Scholarship.UnclaimedSLP).label('sum_unclaimed'), \
         func.sum(Scholarship.ClaimedSLP).label('sum_claimed'), \
         func.sum(Scholarship.ManagerShare).label('sum_manager'), \
         func.sum(Scholarship.ScholarShare).label('sum_scholar'), \
-        ).one_or_none()
+        ) \
+        .one_or_none()
     # func.count(case([((Child.naughty == True), Child.id)], else_=literal_column("NULL"))).label("naughty")])
 
     today_date = date.today()
