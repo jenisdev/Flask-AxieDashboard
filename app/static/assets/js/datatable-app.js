@@ -199,12 +199,13 @@ $(document).ready(function () {
             }
         })
     })
-
+    
     var t = $("#tracker-table").DataTable({
         "dom"           : 'Bfrtip',
         "ajax"          : "/data",
-        "dataSrc"       :  "",
         "bPaginate"     : false,
+        "orderCellsTop" : true,
+        "fixedHeader"   : true,
         "buttons"       : [
             {
                 extend: 'excelHtml5',
@@ -306,16 +307,16 @@ $(document).ready(function () {
                 "targets": 10,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    var val = data / 100 * row[7]
-                    return `<span class="crypto-value">${val.toFixed(2)}</span><br><span class="currency-value">`
+                    var val = Math.round(data / 100 * row[7])
+                    return `<span class="crypto-value">${val}</span><br><span class="currency-value">`
                 }
             },
             {
                 "targets": 11,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    var val = data / 100 * row[7]
-                    return `<span class="crypto-value">${val.toFixed(2)}</span><br><span class="currency-value">`
+                    var val = Math.round(data / 100 * row[7])
+                    return `<span class="crypto-value">${val}</span><br><span class="currency-value">`
                 }
             },
             {
@@ -345,7 +346,7 @@ $(document).ready(function () {
             // { "visible": false,  "targets": [ 3 ] }
         ],
         "columns": [
-            { "width": "2%" },
+            { "width": "3%" },
             { "width": "4%" },
             { "width": "4%" },
             { "width": "4%" },
@@ -359,9 +360,9 @@ $(document).ready(function () {
             { "width": "5%" },
             { "width": "4%" },
             { "width": "4%" },
-            { "width": "20%" }
+            { "width": "19%" }
         ],
-        "bFilter": false
+        "bFilter"       : false
     })
 
     $(".dt-buttons").hide()
