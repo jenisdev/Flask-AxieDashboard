@@ -242,8 +242,7 @@ $(document).ready(function () {
         "dom"           : 'Bfrtip',
         "ajax"          : "/data",
         "bPaginate"     : false,
-        "orderCellsTop" : true,
-        "fixedHeader"   : true,
+        "order"         : [[ 1, 'asc' ]],
         "buttons"       : [
             {
                 extend: 'excelHtml5',
@@ -263,7 +262,6 @@ $(document).ready(function () {
             },
             {
                 "targets": 1,
-                "orderable": true,
                 "type": 'natural-nohtml',
                 "render": function ( data, type, row ) {
                     var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:${row[0]}/axie"
@@ -437,25 +435,25 @@ $(document).ready(function () {
     } );
     $('#sort-column').on( 'change', function (e) {
         var column = Number($('#sort-column option:selected').val())
-        var order = Number($('#sort-order option:selected').val()) == 0 ? 'natural-asc' : 'natural-desc';
+        var order = 'asc';
         // Sort by column 1 and then re-draw
-        console.log(column);
+        if (column == 1) order = Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'desc';
+        else order =  Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'desc';
         t
         .order( [ column, order ] )
         .draw();
-        console.log(column, order)
     } );
 
     
     $('#sort-order').on( 'change', function (e) {
         var column = Number($('#sort-column option:selected').val())
-        var order = Number($('#sort-order option:selected').val()) == 0 ? 'natural-asc' : 'natural-desc';
+        var order = 'asc';
         // Sort by column 1 and then re-draw
-        console.log(t)
+        if (column == 1) order = Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'desc';
+        else order =  Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'desc';
         t
         .order( [ column, order ] )
         .draw();
-        console.log(column, order)
     } );
 
     $('#search').keyup(function(){
