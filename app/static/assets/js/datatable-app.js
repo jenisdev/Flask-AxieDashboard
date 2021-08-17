@@ -307,7 +307,7 @@ $(document).ready(function () {
                 "targets": 1,
                 "type": 'natural-nohtml',
                 "render": function ( data, type, row ) {
-                    var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:${row[0]}/axie"
+                    var content = `<a class="link-primary text-cyan" href="https://marketplace.axieinfinity.com/profile/ronin:${row[0]}/axie"
                                     target="_blank" rel="noreferrer">${row[1]}</a>`
                     return content
                 }
