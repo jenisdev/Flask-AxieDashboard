@@ -275,9 +275,9 @@ $(document).ready(function () {
         var date_part = str.split(",")[0];
         var time_part = str.split(",")[1];
         
-        var res = time_part.split(":")[1] + time_part.split(":")[0] * 100;
-        res += monthNames.indexOf(date_part.split(" ")[1]) * 1000000 + date_part.split(" ")[0].slice(0, -2) * 10000
-
+        var res = Number(time_part.split(":")[1]) + Number(time_part.split(":")[0]) * 100;
+        res += monthNames.indexOf(date_part.split(" ")[1]) * 1000000 + Number(date_part.split(" ")[0].slice(0, -2)) * 10000
+        
         return res;
     }
 
@@ -285,6 +285,7 @@ $(document).ready(function () {
         "dom"           : 'Bfrtip',
         "ajax"          : "/data",
         "bPaginate"     : false,
+        "fixedHeader"   : true,
         "order"         : [[ 1, 'asc' ]],
         "buttons"       : [
             {
@@ -446,7 +447,7 @@ $(document).ready(function () {
             { "width": "4%" },
             { "width": "19%" }
         ],
-        "bFilter"       : false
+        "bFilter"       : true
     })
 
     $(".dt-buttons").hide()
