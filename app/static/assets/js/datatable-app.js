@@ -385,7 +385,13 @@ $(document).ready(function () {
                     
                     // const humanDateFormat = dateObject.toLocaleString().split(",")[0]
                     const humanDateFormat = ordinal_suffix_of(dateObject.getDate()) + " " + monthNames[dateObject.getMonth()] + ", "
-                                            + dateObject.getHours() + ":" + dateObject.getMinutes();
+                                            + dateObject.getHours().toLocaleString('en-US', {
+                                                minimumIntegerDigits: 2,
+                                                useGrouping: false
+                                              }) + ":" + dateObject.getMinutes().toLocaleString('en-US', {
+                                                minimumIntegerDigits: 2,
+                                                useGrouping: false
+                                              });
                     return humanDateFormat
                 }
             },
