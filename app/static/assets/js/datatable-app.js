@@ -108,7 +108,7 @@ $(document).ready(function () {
         });
     });
 
-    $(".page-link").click(ev => {
+   /*  $(".page-link").click(ev => {
         var page_num = $(ev.target).attr('page_num')
         var per_page = $("#per_page option:selected").val()
         $.ajax({
@@ -198,7 +198,7 @@ $(document).ready(function () {
                 $('#pagination-bar').html(pagination_body)
             }
         })
-    })
+    }) */
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -237,6 +237,49 @@ $(document).ready(function () {
             return null;  
         }  
     ); */
+
+    $.fn.dataTableExt.oSort["customdate-desc"] = function (x, y)
+    {
+
+        x = convert_sort_value(x);
+        y = convert_sort_value(y);
+
+        if ( x > y)
+        {
+            return -1;
+        }
+
+        return 1;
+
+    };
+
+    $.fn.dataTableExt.oSort["customdate-asc"] = function (x, y)
+    {
+        
+        x = convert_sort_value(x);
+        y = convert_sort_value(y);
+
+        if ( x > y)
+        {
+            return 1;
+        }
+
+        return -1;
+    }
+    
+    function convert_sort_value(str)
+    {
+        /* 14th August, 18:39 */
+
+        if (str == null || str == 'null') return 0;
+        var date_part = str.split(",")[0];
+        var time_part = str.split(",")[1];
+        
+        var res = time_part.split(":")[1] + time_part.split(":")[0] * 100;
+        res += monthNames.indexOf(date_part.split(" ")[1]) * 1000000 + date_part.split(" ")[0].slice(0, -2) * 10000
+
+        return res;
+    }
 
     var t = $("#tracker-table").DataTable({
         "dom"           : 'Bfrtip',
@@ -332,7 +375,8 @@ $(document).ready(function () {
             },
             {
                 "targets": 9,
-                "orderable": false,
+                "orderable": true,
+                "type": "customdate",
                 "render": function ( data, type, row ) {
                     const milliseconds = Number(data) * 1000
 
@@ -384,7 +428,6 @@ $(document).ready(function () {
                             <span><i class="bi bi-trash btn-action bg-blue-2"></i></span>`
                 }
             }
-            // { "visible": false,  "targets": [ 3 ] }
         ],
         "columns": [
             { "width": "3%", "mData": null },
