@@ -219,7 +219,25 @@ $(document).ready(function () {
         return i + "th";
     }
 
+    /* jQuery.fn.dataTableExt.oSort['natural-asc']  = function(a,b) {
+        return naturalSort(a,b);
+    };
     
+    jQuery.fn.dataTableExt.oSort['natural-desc'] = function(a,b) {
+        return naturalSort(a,b) * -1;
+    };
+
+    jQuery.fn.dataTableExt.aTypes.unshift(  
+        function ( sData )  
+        {  
+            var deformatted = sData.replace(/[^d-./a-zA-Z]/g,'');
+            if ( $.isNumeric( deformatted ) ) {
+                return 'formatted-num';
+            }
+            return null;  
+        }  
+    ); */
+
     var t = $("#tracker-table").DataTable({
         "dom"           : 'Bfrtip',
         "ajax"          : "/data",
@@ -245,7 +263,8 @@ $(document).ready(function () {
             },
             {
                 "targets": 1,
-                "orderable": false,
+                "orderable": true,
+                "type": 'natural-nohtml',
                 "render": function ( data, type, row ) {
                     var content = `<a class="link-primary" href="https://marketplace.axieinfinity.com/profile/ronin:${row[0]}/axie"
                                     target="_blank" rel="noreferrer">${row[1]}</a>`
@@ -418,9 +437,9 @@ $(document).ready(function () {
     } );
     $('#sort-column').on( 'change', function (e) {
         var column = Number($('#sort-column option:selected').val())
-        var order = Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'des';
+        var order = Number($('#sort-order option:selected').val()) == 0 ? 'natural-asc' : 'natural-desc';
         // Sort by column 1 and then re-draw
-        console.log(t)
+        console.log(column);
         t
         .order( [ column, order ] )
         .draw();
@@ -430,7 +449,7 @@ $(document).ready(function () {
     
     $('#sort-order').on( 'change', function (e) {
         var column = Number($('#sort-column option:selected').val())
-        var order = Number($('#sort-order option:selected').val()) == 0 ? 'asc' : 'des';
+        var order = Number($('#sort-order option:selected').val()) == 0 ? 'natural-asc' : 'natural-desc';
         // Sort by column 1 and then re-draw
         console.log(t)
         t
