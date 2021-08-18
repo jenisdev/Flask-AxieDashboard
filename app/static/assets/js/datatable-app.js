@@ -210,7 +210,11 @@ $(document).ready(function () {
             }
         ],
         "serverSide": false,
-        "processing": false,
+        'processing': true,
+        'language': {
+            'loadingRecords': '&nbsp;',
+            'processing': '<div class="spinner"></div>'
+        },
         "columnDefs"    : [
             {
                 "targets": 0,
@@ -244,7 +248,12 @@ $(document).ready(function () {
                 "targets": 4,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    data = Number(data);
+                    color = 'red';
+                    if (data < 76) color = "red";
+                    else if (data > 75 && data < 136) color = "orange";
+                    else color = "green";
+                    return `<span class="text-${color}">${data}</span><br><span class="currency-value">`
                 }
             },
             {
@@ -282,9 +291,18 @@ $(document).ready(function () {
                                             + dateObject.getHours() + ":" + dateObject.getMinutes();
                     
                     var timeInterval = timeConversion(milliseconds)
+    /* 
+22. 14 -7 days its red 7-1 day its orange and when claim is available its green */
+                    var color = "white";
+                    if (timeInterval.search("Hrs") != -1) color = "green"
+                    if (timeInterval.search("Days") != -1) {
+                        var value = Number(timeInterval.split(" ")[0]);
+                        if ( value >= 1 && value < 7 ) color = "orange";
+                        else if( value >= 7 && value <= 14 ) color = "red";
+                    }
 
-                    var content = `<span class="text-cyan full-date" style="display: none;" orignial="${data}">${humanDateFormat}</span>
-                    <span class="text-cyan interval-days" style="display: block;">${timeInterval}</span>`
+                    var content = `<span class="full-date text-${color}" style="display: none;" orignial="${data}">${humanDateFormat}</span>
+                    <span class="interval-days text-${color}" style="display: block;">${timeInterval}</span>`
                     return content
                 }
             },
