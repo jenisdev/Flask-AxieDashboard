@@ -374,6 +374,14 @@ $(document).ready(function () {
             {
                 "targets": 14,
                 "orderable": false,
+                "visible": false,
+                "render": function ( data, type, row ) {
+                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                }
+            },
+            {
+                "targets": 15,
+                "orderable": false,
                 "render": function (data, type, row) {
                     return `<span><i class="bi bi-pencil-square btn-action bg-green-2"></i></span>
                             <span><i class="bi bi-trash btn-action bg-blue-2"></i></span>`
@@ -393,9 +401,10 @@ $(document).ready(function () {
             { "width": "15%" },
             { "width": "5%" },
             { "width": "5%" },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "19%" }
+            { "width": "5%" },
+            { "width": "5%" },
+            { "width": "5%" },
+            { "width": "12%" }
         ],
         "bFilter"       : true
     })
@@ -419,6 +428,15 @@ $(document).ready(function () {
     } );
 
     $('input[name=show_mmr]').on( 'change', function (e) {
+        e.preventDefault();
+ 
+        // Get the column API object
+        var column = t.column( $(this).attr('data-column') );
+ 
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+    } );
+    $('input[name=show_arena]').on( 'change', function (e) {
         e.preventDefault();
  
         // Get the column API object

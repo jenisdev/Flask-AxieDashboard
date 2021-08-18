@@ -343,6 +343,7 @@ def data():
         Scholarship.ScholarShare.label('scholar'),
         Scholarship.MMR.label('mmr'),
         Scholarship.ArenaRank.label('rank'),
+        Scholarship.Matches.label('arena'),
         Scholarship.id
     )\
     .all()
@@ -362,7 +363,7 @@ def data():
             yesterday_slp = abs( int(0 if slpdata[1][0] is None else slpdata[1][0]) - int(0 if slpdata[2][0] is None else slpdata[2][0]) )
 
         plain_row = [roninAddress, row[1], today_slp, yesterday_slp, row[2], row[3],\
-             row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]]
+             row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12]]
         res_list.append(plain_row)
     
     res = {"data": res_list}
