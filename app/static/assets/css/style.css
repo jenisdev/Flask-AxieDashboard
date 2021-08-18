@@ -170,8 +170,11 @@ input[type="text"]:focus{
 .main-table-body table tr td:nth-child(3),
 .main-table-body table tr td:nth-child(9),
 .main-table-body table tr td:nth-child(11),
-.main-table-body table tr td:nth-child(13) {
+.main-table-body table tr td:last-child{
   border-left: 1px solid rgba(255,255,255,.6);
+}
+.main-table-body table tr td:nth-child(12) {
+  border-right: 1px solid rgba(255,255,255,.6);
 }
 .main-table-body .table-striped>tbody>tr:nth-of-type(odd) {
   background: rgba(36, 43, 85, 0.6);
@@ -187,6 +190,9 @@ input[type="text"]:focus{
 }
 .border-left {
   border-left: 1px solid rgba(255,255,255,.6);
+}
+.border-right {
+  border-right: 1px solid rgba(255,255,255,.6);
 }
 .btn-action {
   padding: 9px 13px;
