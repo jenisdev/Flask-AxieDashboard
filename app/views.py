@@ -377,4 +377,4 @@ def getRate():
     return json.dumps({"rate": rate})
 
 
-# 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 
+# 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
