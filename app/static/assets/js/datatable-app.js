@@ -108,97 +108,29 @@ $(document).ready(function () {
         });
     });
 
-   /*  $(".page-link").click(ev => {
-        var page_num = $(ev.target).attr('page_num')
-        var per_page = $("#per_page option:selected").val()
-        $.ajax({
-            url: "/data",
-            data: {page_num: page_num, per_page: per_page},
-            method: "POST",
-            success: function (res) {
-                console.log(res)
-                let tablebody = "",
-                    index = 1;
-                for (let row of res.data) {
-                    tablebody +=
-                    `<tr>
-                        <td>${index++}</td>
-                        <td><span><a class="link-primary"
-                                    href="https://marketplace.axieinfinity.com/profile/ronin:nin:${row[1]}/axie"
-                                    target="_blank" rel="noreferrer">${row[0]}</a></strong></span></td>
-                        <td><span class="crypto-value">${row[2]}</span><br><span
-                                class="currency-value"></span></td>
-                        <td><span class="yesterday rounded-3 crypto-value">${row[3]}</span><br><span
-                                class="currency-value"></span></td>
-                        <td><span class="crypto-value">${row[4]}</span><br><span class="currency-value"></span></td>
-                        <td><span class="crypto-value">${row[5]}</span><br><span class="currency-value"></span>
-                        </td>
-                        <td><span class="crypto-value">${row[6]}</span><br><span class="currency-value"></span>
-                        </td>
-                        <td><span class="crypto-value">${row[7]}</span><br><span class="currency-value"></span>
-                        </td>
-                        <td>
-                            <span class="text-cyan full-date" style="display: none;">${row[8]}</span>
-                            <span class="text-cyan days">${row[8]}</span>
-                        </td>
-                        <td>${row[9]}</td>
-                        <td><span class="crypto-value">--</span>
-                            <span class="text-green-2">(${row[10]}%)</span><br><span class="currency-value"></span>
-                        </td>
-                        <td><span class="crypto-value">--</span>
-                            <span class="text-green-2">(${row[11]}%)</span><br><span class="currency-value"></span>
-                        </td>
-                        <td>${row[12]}</td>
-                        <td>${row[13]}</td>
-                        <td><i class="bi bi-pencil-square btn-action bg-green-2"></i></td>
-                        <td><i class="bi bi-trash btn-action bg-blue-2"></i></td>
-                    </tr>`
-                }
-                $('#table-body').html(tablebody)
+    function timeConversion(millisec) {
+        var now = Date.now();
 
-                let pagination_body = ""
-                if ('prev_num' in res) 
-                    pagination_body += `
-                    <li class="page-item">
-                    <a class="page-link pagenation-previous" page_num="${res.prev_num}" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                    </li>`
-                else
-                    pagination_body += `
-                    <li class="page-item disabled">
-                    <a class="page-link pagenation-previous" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>    
-                    </li>`
-                for (page of res.pages) {
-                    if (page != 'None') 
-                        pagination_body += `
-                        <li class="page-item"><a class="page-link" page_num="${page}">${page}</a></li>
-                        `
-                    else
-                        pagination_body += `
-                        <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link pagenation-expand">...</a></li>
-                        `
-                }
-                if ('next_num' in res) 
-                    pagination_body += `
-                    <li class="page-item">
-                    <a class="page-link pagenation-previous" page_num="${res.next_num}" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                    </li>`
-                else
-                    pagination_body += `
-                    <li class="page-item disabled">
-                    <a class="page-link pagenation-previous" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>    
-                    </li>`
-                $('#pagination-bar').html(pagination_body)
-            }
-        })
-    }) */
+        var intervalMillisec = now - millisec;
+
+        var seconds = (intervalMillisec / 1000).toFixed(0);
+
+        var minutes = (intervalMillisec / (1000 * 60)).toFixed(0);
+
+        var hours = (intervalMillisec / (1000 * 60 * 60)).toFixed(0);
+
+        var days = (intervalMillisec / (1000 * 60 * 60 * 24)).toFixed(0);
+
+        if (seconds < 60) {
+            return seconds + " Sec";
+        } else if (minutes < 60) {
+            return minutes + " Min";
+        } else if (hours < 24) {
+            return hours + " Hrs";
+        } else {
+            return days + " Days"
+        }
+    }
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -219,58 +151,37 @@ $(document).ready(function () {
         return i + "th";
     }
 
-    /* jQuery.fn.dataTableExt.oSort['natural-asc']  = function(a,b) {
-        return naturalSort(a,b);
-    };
-    
-    jQuery.fn.dataTableExt.oSort['natural-desc'] = function(a,b) {
-        return naturalSort(a,b) * -1;
-    };
-
-    jQuery.fn.dataTableExt.aTypes.unshift(  
-        function ( sData )  
-        {  
-            var deformatted = sData.replace(/[^d-./a-zA-Z]/g,'');
-            if ( $.isNumeric( deformatted ) ) {
-                return 'formatted-num';
-            }
-            return null;  
-        }  
-    ); */
-
-    $.fn.dataTableExt.oSort["customdate-desc"] = function (x, y)
-    {
-
-        x = convert_sort_value(x);
-        y = convert_sort_value(y);
-
-        if ( x > y)
-        {
-            return -1;
-        }
-
+    // Claimed On Column sorting function
+    $.fn.dataTableExt.oSort["customdate-desc"] = function (x, y) {
+        x = convert_sort_value(x); y = convert_sort_value(y);
+        if ( x > y ) return -1;
         return 1;
-
     };
 
-    $.fn.dataTableExt.oSort["customdate-asc"] = function (x, y)
+    $.fn.dataTableExt.oSort["customdate-asc"] = function (x, y) {
+        x = convert_sort_value(x); y = convert_sort_value(y);
+        if ( x > y ) return 1;
+        return -1;
+    }
+
+    $.fn.dataTableExt.oSort["mixdate-desc"] = function (x, y)
     {
-        
-        x = convert_sort_value(x);
-        y = convert_sort_value(y);
+        x = $(x)[0].attributes[2].nodeValue
+        y = $(y)[0].attributes[2].nodeValue
+        if ( x > y ) return -1;
+        return 1;
+    };
 
-        if ( x > y)
-        {
-            return 1;
-        }
-
+    $.fn.dataTableExt.oSort["mixdate-asc"] = function (x, y)
+    {
+        x = $(x)[0].attributes[2].nodeValue
+        y = $(y)[0].attributes[2].nodeValue
+        if ( x > y ) return 1;
         return -1;
     }
     
     function convert_sort_value(str)
     {
-        /* 14th August, 18:39 */
-
         if (str == null || str == 'null') return 0;
         var date_part = str.split(",")[0];
         var time_part = str.split(",")[1];
@@ -282,10 +193,12 @@ $(document).ready(function () {
     }
 
     var t = $("#tracker-table").DataTable({
-        "dom"           : 'Bfrtip',
+        "dom"           : 'ltipr',
         "ajax"          : "/data",
+        "searching"     : true,
+        "bLengthChange" : false,
         "bPaginate"     : false,
-        "fixedHeader"   : true,
+        // "fixedHeader"   : true,
         "order"         : [[ 1, 'asc' ]],
         "buttons"       : [
             {
@@ -357,7 +270,8 @@ $(document).ready(function () {
             },
             {
                 "targets": 8,
-                "orderable": false,
+                "orderable": true,
+                "type": "mixdate",
                 "render": function ( data, type, row ) {
                     const milliseconds = Number(data) * 1000
 
@@ -369,7 +283,7 @@ $(document).ready(function () {
                     
                     var timeInterval = timeConversion(milliseconds)
 
-                    var content = `<span class="text-cyan full-date" style="display: none;">${humanDateFormat}</span>
+                    var content = `<span class="text-cyan full-date" style="display: none;" orignial="${data}">${humanDateFormat}</span>
                     <span class="text-cyan interval-days" style="display: block;">${timeInterval}</span>`
                     return content
                 }
@@ -493,7 +407,6 @@ $(document).ready(function () {
         .order( [ column, order ] )
         .draw();
     } );
-
     
     $('#sort-order').on( 'change', function (e) {
         var column = Number($('#sort-column option:selected').val())
@@ -521,30 +434,6 @@ $(document).ready(function () {
             $('#tracker-table tbody td .full-date').prop('style', 'display: none')
         }
     } );
-
-    function timeConversion(millisec) {
-        var now = Date.now();
-
-        var intervalMillisec = now - millisec;
-
-        var seconds = (intervalMillisec / 1000).toFixed(0);
-
-        var minutes = (intervalMillisec / (1000 * 60)).toFixed(0);
-
-        var hours = (intervalMillisec / (1000 * 60 * 60)).toFixed(0);
-
-        var days = (intervalMillisec / (1000 * 60 * 60 * 24)).toFixed(0);
-
-        if (seconds < 60) {
-            return seconds + " Sec";
-        } else if (minutes < 60) {
-            return minutes + " Min";
-        } else if (hours < 24) {
-            return hours + " Hrs";
-        } else {
-            return days + " Days"
-        }
-    }
 
     $("#export_btn").on("click", function (ev) {
         $(".buttons-excel").trigger("click");
