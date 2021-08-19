@@ -15,7 +15,7 @@ $(document).ready(function () {
                     $('.currency-value').each(function (i, obj) {
                         var crypto = Number($(obj).parent().find('.crypto-value').text())
                         var value = rate * crypto
-                        $(obj).html("&#8776;" + currency_signs[currency] + "&nbsp;" + value.toFixed(2))
+                        $(obj).html(/* "&#8776;" + */ currency_signs[currency] + "&nbsp;" + value.toFixed(2))
                     })
                 }
                 $('#current_rate').html(currency_signs[currency] + "&nbsp;" + rate.toFixed(2))
@@ -47,7 +47,7 @@ $(document).ready(function () {
                         var crypto = Number($(obj).parent().find('.crypto-value').text())
                         var value = rate * crypto
                         // $(obj).text("≈ " + value.toFixed(2) + " " + $('#currency option:selected').val())
-                        $(obj).html("&#8776;" + currency_signs[currency] + "&nbsp;" + value.toFixed(2))
+                        $(obj).html(/* "&#8776;" +  */currency_signs[currency] + "&nbsp;" + value.toFixed(2))
                     })
                 }
             })
@@ -57,49 +57,6 @@ $(document).ready(function () {
             })
         }
     })
-
-    function sortTable(column, order) {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("tracker-table");
-        switching = true;
-        /* Make a loop that will continue until
-        no switching has been done: */
-        while (switching) {
-            // Start by saying: no switching is done:
-            switching = false;
-            rows = table.rows;
-            /* Loop through all table rows (except the
-            first, which contains table headers): */
-            for (i = 2; i < (rows.length - 1); i++) {
-                // Start by saying there should be no switching:
-                shouldSwitch = false;
-                /* Get the two elements you want to compare,
-                one from current row and one from the next: */
-                x = rows[i].getElementsByTagName("td")[column];
-                y = rows[i + 1].getElementsByTagName("td")[column];
-                // Check if the two rows should switch place:
-                if (!order) {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        // If so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        // If so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                /* If a switch has been marked, make the switch
-                and mark that a switch has been done: */
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
 
     $("#search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -270,14 +227,14 @@ $(document).ready(function () {
                 "targets": 5,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
                 "targets": 6,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
@@ -344,7 +301,7 @@ $(document).ready(function () {
                 "orderable": false,
                 "render": function ( data, type, row ) {
                     var val = Math.round(data / 100 * row[7])
-                    return `<span class="crypto-value">${val}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${val}</span>`
                 }
             },
             {
@@ -352,7 +309,7 @@ $(document).ready(function () {
                 "orderable": false,
                 "render": function ( data, type, row ) {
                     var val = Math.round(data / 100 * row[7])
-                    return `<span class="crypto-value">${val}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${val}</span>`
                 }
             },
             {
@@ -360,7 +317,7 @@ $(document).ready(function () {
                 "orderable": false,
                 "visible": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
@@ -368,7 +325,7 @@ $(document).ready(function () {
                 "orderable": false,
                 "visible": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
@@ -376,7 +333,7 @@ $(document).ready(function () {
                 "orderable": false,
                 "visible": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
