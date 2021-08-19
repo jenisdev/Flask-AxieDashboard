@@ -528,3 +528,7 @@ main {
 .text-white {
   color: white;
 }
+
+.main-tablerow-display {
+  display: table-row!important;
+}
