@@ -1,0 +1,57 @@
+.unconfirm-area{
+  background: url(../img/login-model.png) top center no-repeat;
+  padding:150px 20px 100px;
+  box-shadow: 0 19px 35px rgba(0,0,0,0.3);
+  border-radius: 60px ;
+  max-width: 702px;
+  margin: 160px auto;
+}
+.message-title{
+  font-size: 40px;
+}
+.message-header{
+  color: #ffcb1b;
+}
+.message-intern{
+  color: #8991c0;
+}
+.message-footer{
+  margin-top: 26px;
+  margin-bottom: 62px;
+}
+.message-footer{
+  color: #8991c0;
+}
+main {
+  background: url(../img/bg-potion.png) center 42% no-repeat;
+}
+@media (max-width: 767px) {
+  .message-title{
+   font-size: 35px;
+   padding: 20px 0px 50px;
+  }
+  .unconfirm-area{
+    margin-top: 20px;
+    margin: 10px auto;
+    padding: 100px 10px;  
+  }
+  main{
+    background-size: 90%;
+  }
+}
+@media (max-width: 635px) {
+    .message-title{
+      padding: 20px 0px 5px;
+    }
+}
+@media (max-width: 591px) {
+  .unconfirm-area{
+    padding: 80px 10px 40px;  
+    background-image: none;
+  }
+}
+
+
+
+
+

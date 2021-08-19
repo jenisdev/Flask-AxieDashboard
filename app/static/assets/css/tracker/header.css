@@ -1,0 +1,116 @@
+header img {
+  max-width: 80%;
+}
+.resize-img{
+  margin-bottom: 45px;
+}
+.user-menu{
+  cursor: pointer;
+  margin-top: -40px;
+  color: #121525;
+}
+
+.icon-select{
+  color: #acb4e6;
+}
+.icon-select:hover{
+  color: white;
+}
+.icon-users:hover{
+  color: #56bad4;
+}
+.icon-dropdown{
+  background:url(../img/navbar.png);
+  display: none;
+  width: 226px;
+  z-index: 10;
+  border-radius: 14px;
+  right: 10px;
+  box-shadow:3px 3px 2px 0px rgba(0,0,0,.5);
+}
+.icon-dropdown>div:nth-child(even) {
+  background-color:  #7684b2;
+
+}
+.icon-dropdown>div{
+  border-bottom: 1px solid white;
+  color: white;
+  text-decoration: none !important;
+}
+.icon-dropdown>div a{
+  color: white;
+}
+.icon-dropdown>div a:hover{
+  color: black;
+}
+.icon-dropdown>div:last-child{
+  border-bottom: 0;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.indi-icon{
+  height: 38px;
+}
+.user-icon1{
+  width: 27px;
+  background:url(../img/icons/user-icon1.png);
+}
+.user-icon1:hover{
+  background:url(../img/icons/user-icon-hover1.png);
+}
+.user-icon2{
+  width: 36px;
+  background:url(../img/icons/history-icon1.png);
+}
+.user-icon2:hover{
+  background:url(../img/icons/history-icon-hover1.png);
+}
+.user-icon3{
+  width: 22px;
+  background:url(../img/icons/logout-icon1.png);
+}
+.user-icon3:hover{
+
+  background:url(../img/icons/logout-icon-hover1.png);
+}
+.icon-select{
+  width: 37px;
+  background:url(../img/icons/menu-icon1.png) no-repeat;
+}
+.icon-select:hover{
+
+  background:url(../img/icons/menu-icon-hover1.png) no-repeat;
+}
+.banner-mobile{
+  display: none;
+}
+
+@media (max-width: 767px) {
+  header{
+    margin-bottom: 10px !important;
+  }
+  header img{
+    max-width: 65%;
+  }
+}
+@media (max-width: 500px) {
+  header img{
+    max-width: 100%;
+  }
+}
+@media (max-width: 1200px) {
+  .banner-mobile{
+    display: block;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .top-banner{
+    visibility: hidden;
+  }
+}
+@media (max-width: 1600px) {
+  header {
+    margin-bottom: 50px;
+  }
+}

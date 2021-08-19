@@ -1,0 +1,50 @@
+body{
+  background:url(../img/bg-login.png) top center no-repeat;
+}
+.email-area{
+  background: url(../img/login-model.png) top center no-repeat;
+  padding:150px 10px;
+  box-shadow: 0 19px 35px rgba(0,0,0,0.3);
+  border-radius: 60px ;
+  max-width: 702px;
+  margin: 160px auto;
+}
+.message-title{
+  font-size: 45px;
+}
+.message-header{
+  color: #ffcb1b;
+}
+.message-intern{
+  color: #8991c0;
+}
+.message-footer{
+  margin-top: 26px;
+  margin-bottom: 62px;
+}
+.message-footer{
+  color: #8991c0;
+}
+main {
+  background: url(../img/bg-potion.png) center 42% no-repeat;
+}
+@media (max-width: 767px) {
+  .email-area{
+    margin: 20px 10px 50px;
+    padding: 160px 10px;
+    background-position:  center 17%;
+  }
+  main{
+    background-size: 90%;
+  }
+}
+@media (max-width: 575px) {
+  .email-area{
+    padding: 132px 10px;
+  }
+}
+@media (max-width: 468px) {
+  .email-area{
+    padding: 112px 10px;
+  }
+}

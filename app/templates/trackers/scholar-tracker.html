@@ -1,9 +1,8 @@
 {% extends "layouts/scholar-tracker-base.html" %}
 {% block content %}
 <main class="container position-relative px-xxl-5 px-xl-4 px-lg-3 px-md-2 px-sm-1">
-    <div class="price-link d-flex justify-content-between align-items-center mb-5 flex-wrap">
-        <div
-            class="slp-exchange-area d-flex align-items-center justify-content-center rounded-5 py-3  py-lg-1 px-10 mt-4 flex-wrap">
+    <!-- <div class="price-link d-flex justify-content-between align-items-center mb-5 flex-wrap">
+        <div class="slp-exchange-area d-flex align-items-center justify-content-center rounded-5 py-3  py-lg-1 px-10 mt-4 flex-wrap">
             <p class="text-white fs-6 text-slp">Smooth Love Potion Price (SLP)</p>
             <p class="price-letter fs-main-semi ps-3 pe-4" id="current_rate">&pound;&nbsp;{{"%.2f" |
                 format(currentRateForSLP | float)}}</p>
@@ -12,11 +11,42 @@
                 format(percentage | float)}}%
             </div>
         </div>
-        <!-- <div class="link-address text-center text-white fs-5 fs-main-semi mt-4">
-            <img src="/static/assets/img/scholar-tracker/icon-heart.png" alt="heart" class="me-3" />
-            Love this group? Please consider <span class="text-green-2">do`nating.</span>
-        </div> -->
+    </div> -->
+
+    <div
+        class="price-link rounded-5 mt-n5 mt-md-0 d-flex justify-content-between align-items-center mb-5 slp-exchange-area">
+        <div
+            class="indi-token d-flex align-items-center justify-content-center  py-3  py-lg-1 px-10 my-md-4 my-xxl-0  flex-wrap ">
+            <p class="text-white fs-6 text-slp">Smooth Love Potion Price (SLP)</p>
+            <img src="/static/assets/img/scholar-tracker/icon-slp1.png" class="ms-2">
+            <p class="price-letter fs-main-semi ps-3 pe-4" id="current_rate">&pound;&nbsp;{{"%.2f" |
+                format(currentRateForSLP | float)}}</p>
+            <div class="price-percent py-2 px-4 rounded-4">
+                <i class="bi {{ 'bi-caret-up-fill' if percentage > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" |
+                format(percentage | float)}}%
+            </div>
+        </div>
+        <div
+            class="indi-token d-flex align-items-center justify-content-center py-3  py-lg-1 px-10 my-md-4 my-xxl-0 flex-wrap">
+            <p class="text-white fs-6 text-slp token-border ps-xxl-5">Axie Infinity (AXS)</p>
+            <img src="/static/assets/img/scholar-tracker/icon-axs1.png" class="ms-2">
+            <p class="price-letter fs-main-semi ps-3 pe-4">&euro;36.07</p>
+            <div class="price-percent  price-down py-2 px-3 rounded-4">
+
+                <i class="bi bi-caret-down-fill me-3"></i><i class="d-none bi bi-caret-up-fill me-3"></i>0.46%
+            </div>
+        </div>
+        <div
+            class="indi-token d-flex align-items-center justify-content-center py-3  py-lg-1 px-10 my-md-4 my-xxl-0 flex-wrap">
+            <p class="text-white fs-6 text-slp token-border ps-xxl-5">Ethereum (ETH)</p>
+            <img src="/static/assets/img/scholar-tracker/icon-eth1.png" class="ms-2">
+            <p class="price-letter fs-main-semi ps-3 pe-4">&euro;2,061.30</p>
+            <div class="price-percent py-2 px-3 rounded-4">
+                <i class="bi bi-caret-up-fill me-3"></i>1.33%
+            </div>
+        </div>
     </div>
+
     <div class="top-box cards row">
         <div
             class="col-md-12 col-lg-8 col-xll-4 justify-content-around align-items-center d-flex flex-column flex-md-row">
@@ -100,7 +130,11 @@
                     class="table-search fs-5 mx-3 rounded-4 w-100">
             </div>
             <div id="buttons"></div>
-            <button class="btn-export flex-shrink-0 bg-orange-2 fs-5-b rounded-4 " id="export_btn" export-type="excel">Export Excel</button>
+            <button class="btn-export flex-shrink-0 bg-orange-2 fs-5-b rounded-4 " id="export_btn"
+                export-type="excel">Export Excel</button>
+            <a href="#addaccount" data-bs-toggle="modal" role="button"
+                class="btn-export btn-addacount flex-shrink-0  fs-5-b rounded-4 d-flex align-items-center">
+                <img src="/static/assets/img/scholar-tracker/icons/user-account-icon.png" class="pe-2">Add Acount</a>
             <a href="#settingModalToggle" class="btn-setting flex-shrink-0 rounded-4 fs-5-b ms-auto"
                 data-bs-toggle="modal" role="button">
                 <img src="/static/assets/img/scholar-tracker/icon-setting.png" alt="setting-icon" />
@@ -140,12 +174,12 @@
                     </tr>
                 </thead>
                 <tbody id="table-body">
-                    
+
                 </tbody>
             </table>
         </div>
 
-        <!-- Modal -->
+        <!-- Modals -->
         <div class="modal fade" id="settingModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -208,15 +242,18 @@
                                 Show value
                             </div>
                             <div class="row mt-2 mt-xxl-4 text-white">
-                                <input class="form-check-input me-1" type="checkbox" name="show_mmr" aria-label="..." data-column="12">
+                                <input class="form-check-input me-1" type="checkbox" name="show_mmr" aria-label="..."
+                                    data-column="12">
                                 Show ELO (MMR)
                             </div>
                             <div class="row mt-2 mt-xxl-4 text-white">
-                                <input class="form-check-input me-1" type="checkbox" name="show_rank" aria-label="..." data-column="13">
+                                <input class="form-check-input me-1" type="checkbox" name="show_rank" aria-label="..."
+                                    data-column="13">
                                 Show Rank
                             </div>
                             <div class="row mt-2 mt-xxl-4 text-white">
-                                <input class="form-check-input me-1" type="checkbox" name="show_arena" aria-label="..." data-column="14">
+                                <input class="form-check-input me-1" type="checkbox" name="show_arena" aria-label="..."
+                                    data-column="14">
                                 Show Games
                             </div>
                         </div>
@@ -229,6 +266,58 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="addaccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-account">
+                <div class="modal-content modal-main">
+                    <div class="modal-header">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <img src="/static/assets/img/scholar-tracker/icons/ellipse.png">
+                            <h5 class="modal-title fs-4 fs-main-semi ms-3 text-white" id="staticBackdropLabel">Add new
+                                account</h5>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white btn-cancel" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fs-5-b">
+                        <form>
+                            <div class="mb-3 mt-2">
+                                <label for="accountname" class="form-label fs-6 text-white mb-3">Scholar name or account
+                                    name <span class="text-cyan">(descriptive)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="accountname"
+                                    placeholder="type your name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="walletaddress" class="form-label fs-6 text-white mb-3">Public Ronin Address
+                                    with the prefix ronin</label>
+                                <input type="text" class="form-control text-black fw-bold" id="walletaddress"
+                                    placeholder="ronin: 07845R3448367E478932">
+                            </div>
+                            <div class="mb-3">
+                                <label for="manger" class="form-label fs-6 text-white mb-3">Manager Percentage</label>
+                                <input type="text" class="form-control text-black fw-bold" id="manger" placeholder="50">
+                            </div>
+                            <div class="mb-3">
+                                <label for="walletaddresspayment" class="form-label fs-6 text-white mb-3">Public Ronin
+                                    Address to payment <span class="text-cyan">(optional)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="walletaddresspayment"
+                                    placeholder="ronin: 07845R3448367E478932">
+                            </div>
+                            <div class="mb-3">
+                                <label for="walletaddress" class="form-label fs-6 text-white mb-3">Investor / Trainer
+                                    percentage <span class="text-cyan">(optional)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="walletaddress"
+                                    placeholder="0">
+                            </div>
+                            <button type="submit" class="btn btn-account fs-main-semi mt-4"
+                                data-bs-dismiss="modal">Track Account</button>
+                            <p class="text-cyan text-center mt-4 fs-small">Worried about security?</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modals -->
         <div class="logo-bottom position-absolute top-100 start-50 translate-middle">
             <img src="/static/assets/img/scholar-tracker/logo-lfg-footer.png" alt="logo-bottom" />
         </div>

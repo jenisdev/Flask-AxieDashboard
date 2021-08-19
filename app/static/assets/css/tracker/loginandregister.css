@@ -1,0 +1,152 @@
+body{
+  background:url(../img/bg-login.png) top center no-repeat;
+}
+.login-model{
+  background: url(../img/login-model.png) top center no-repeat;
+  box-shadow: 0 19px 35px rgba(0,0,0,0.3);
+  max-width: 702px;
+  margin: auto;
+  margin-bottom: 130px;
+  padding: 24px 52px 45px;
+  border-radius: 60px;
+}
+input[type="email"]::placeholder{
+  color:  #abaec3;
+}
+input[type="password"]:focus{
+  border-color: rgba(126, 239, 104, 0.8);
+  outline: none;
+}
+input[type="email"]:focus{
+  border-color: rgba(126, 239, 104, 0.8);
+  outline: none;
+}
+.register-model input[type="text"]{
+  font-size: 21px;
+  padding:10px 20px;
+  border-radius: 17px;
+  border:2px solid #2c304d;
+  background-color: rgba(136,142,190,.3);
+  color: #1be9eb;
+}
+.register-model input[type="email"]{
+  font-size: 21px;
+  padding:10px 20px;
+  border-radius: 17px;
+  border:2px solid #2c304d;
+  background-color: rgba(136,142,190,.3);
+  color: #1be9eb;
+}
+.register-model input[type="password"]{
+  font-size: 21px;
+  padding:10px 20px;
+  border-radius: 12px;
+  border:2px solid #2c304d;
+  background-color: rgba(136,142,190,.3);
+  color: #1be9eb;
+}
+
+.login-model input[type="text"]{
+  font-size: 21px;
+  padding:15px 20px;
+  border-radius: 17px;
+  border:2px solid #2c304d;
+  background-color: rgba(136,142,190,.3);
+  color: #1be9eb;
+}
+.login-model input[type="email"]{
+  font-size: 25px;
+  padding:13px 20px;
+  border-radius: 17px;
+  border:2px solid #2c304d;
+  background-color: rgba(136,142,190,.3);
+  color: #1be9eb;
+}
+.login-model input[type="password"]{
+  font-size: 25px;
+  padding:13px 20px;
+  border-radius: 17px;
+  border:2px solid #2c304d;
+  background-color: rgba(136,142,190,.3);
+  color: #1be9eb;
+}
+.field-symbol{
+  border-radius: 12px;
+  border:2px solid #2c304d;
+  border-right: 0;
+  background-color: rgba(136,142,190,.3);
+  color: #c2c6e5;
+}
+.input.form-control:focus{
+  outline: 0;
+  box-shadow: none;
+  border: none;
+}
+.btn-signup{
+  width: 100%;
+  background-color: #2a2f50;
+  font-size: 1.5rem;
+  font-family: poppins-semibold;
+  color: #c2c6e5;
+  border-radius: 17px;
+  padding: 12px ;
+}
+.btn-login{
+  width: 100%;
+  margin-bottom: -5px;
+  background-color: #2a2f50;
+  font-size: 1.5rem;
+  font-family: poppins-semibold;
+  color: #c2c6e5;
+  border-radius: 17px;
+  padding: 1rem ;
+}
+.account-creation{
+  font-size: 19px;
+  color: #c2c6e5;
+}
+.mt-h{
+  margin-top: 270px;
+}
+main {
+  background: url(../img/bg-potion.png) center 42% no-repeat;
+}
+@media (max-width: 1770px) {
+  .mt-h{
+    margin-top: 150px;
+  }
+}
+@media (max-width: 1600px) {
+  .mt-h{
+  margin-top: 100px;
+  }
+}
+@media (max-width: 1441px) {
+  .mt-h{
+    margin-top: 50px;
+    }
+}
+@media (max-width: 767px) {
+  .mt-h{
+    margin-top: 10px;
+    }
+  .login-model{
+    margin: 0 10px 50px;
+    padding: 32px 22px 50px;
+    background-position:  center 17%;
+  }
+  main{
+    background-size: 90%;
+  }
+  .btn-login{
+    width: 100%;
+    background-color: #2a2f50;
+    font-size: 1rem;
+    border-radius: 17px;
+  }
+  .account-creation{
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
