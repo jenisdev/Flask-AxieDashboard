@@ -220,7 +220,7 @@ $(document).ready(function () {
                     if (data < 76) color = "red";
                     else if (data > 75 && data < 136) color = "orange";
                     else color = "green";
-                    return `<span class="text-${color}">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="currency-value">`
                 }
             },
             {
