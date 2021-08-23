@@ -196,7 +196,7 @@ $(document).ready(function () {
                     if (data < 76) color = "red";
                     else if (data > 75 && data < 136) color = "orange";
                     else color = "green";
-                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="text-subtext currency-value">`
                 }
             },
             {
@@ -208,7 +208,7 @@ $(document).ready(function () {
                     if (data < 76) color = "red";
                     else if (data > 75 && data < 136) color = "orange";
                     else color = "green";
-                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="text-subtext currency-value">`
                 }
             },
             {
@@ -220,7 +220,7 @@ $(document).ready(function () {
                     if (data < 76) color = "red";
                     else if (data > 75 && data < 136) color = "orange";
                     else color = "green";
-                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value text-${color}">${data}</span><br><span class="text-subtext currency-value">`
                 }
             },
             {
@@ -241,7 +241,7 @@ $(document).ready(function () {
                 "targets": 7,
                 "orderable": false,
                 "render": function ( data, type, row ) {
-                    return `<span class="crypto-value">${data}</span><br><span class="currency-value">`
+                    return `<span class="crypto-value">${data}</span><br><span class="text-subtext currency-value">`
                 }
             },
             {
@@ -270,7 +270,7 @@ $(document).ready(function () {
                         color = "red"
                     }
 
-                    var content = `<span class="full-date text-${color}" style="display: none;" orignial="${data}">${humanDateFormat}</span>
+                    var content = `<span class="full-date text-${color} text-subtext" style="display: none;" orignial="${data}">${humanDateFormat}</span>
                     <span class="interval-days text-${color}" style="display: block;">${timeInterval}</span>`
                     return content
                 }
@@ -340,8 +340,8 @@ $(document).ready(function () {
                 "targets": 15,
                 "orderable": false,
                 "render": function (data, type, row) {
-                    return `<span><i class="bi bi-pencil-square btn-action bg-green-2"></i></span>
-                            <span><i class="bi bi-trash btn-action bg-blue-2"></i></span>`
+                    return `<i class="bi bi-pencil-square btn-action bg-green-2"></i>
+                            <i class="bi bi-trash btn-action bg-blue-2"></i></span>`
                 }
             }
         ],

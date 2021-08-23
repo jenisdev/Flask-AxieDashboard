@@ -20,7 +20,7 @@ header img {
   color: #56bad4;
 }
 .icon-dropdown{
-  background:url(../img/navbar.png);
+  background:url(../../img/scholar-tracker/navbar.png);
   display: none;
   width: 226px;
   z-index: 10;
@@ -53,33 +53,33 @@ header img {
 }
 .user-icon1{
   width: 27px;
-  background:url(../img/icons/user-icon1.png);
+  background:url(../../img/scholar-tracker/icons/user-icon1.png);
 }
 .user-icon1:hover{
-  background:url(../img/icons/user-icon-hover1.png);
+  background:url(../../img/scholar-tracker/icons/user-icon-hover1.png);
 }
 .user-icon2{
   width: 36px;
-  background:url(../img/icons/history-icon1.png);
+  background:url(../../img/scholar-tracker/icons/history-icon1.png);
 }
 .user-icon2:hover{
-  background:url(../img/icons/history-icon-hover1.png);
+  background:url(../../img/scholar-tracker/icons/history-icon-hover1.png);
 }
 .user-icon3{
   width: 22px;
-  background:url(../img/icons/logout-icon1.png);
+  background:url(../../img/scholar-tracker/icons/logout-icon1.png);
 }
 .user-icon3:hover{
 
-  background:url(../img/icons/logout-icon-hover1.png);
+  background:url(../../img/scholar-tracker/icons/logout-icon-hover1.png);
 }
 .icon-select{
   width: 37px;
-  background:url(../img/icons/menu-icon1.png) no-repeat;
+  background:url(../../img/scholar-tracker/icons/menu-icon1.png) no-repeat;
 }
 .icon-select:hover{
 
-  background:url(../img/icons/menu-icon-hover1.png) no-repeat;
+  background:url(../../img/scholar-tracker/icons/menu-icon-hover1.png) no-repeat;
 }
 .banner-mobile{
   display: none;

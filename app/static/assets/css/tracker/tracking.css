@@ -1,5 +1,5 @@
 main {
-  background: url(../img/bg-potion.png) center 42% no-repeat;
+  background: url(../../img/scholar-tracker/bg-potion.png) center 42% no-repeat;
 }
 .price-letter{
   color: #fa7cfc;
@@ -21,7 +21,7 @@ main {
   border-left: 1px solid white;
 }
 .price-card{
-  background: url(../img/top-box-card.png);
+  background: url(../../img/scholar-tracker/top-box-card.png);
   background-size: 100% 100%;
   width: 275px;
   height: 180px;
@@ -73,7 +73,7 @@ input[type="text"]:focus{
   margin-bottom: 0;
 }
 .main-table-body table td, .main-table-body table th {
-  /* padding: 20px 10px; */
+  padding: 20px 5px;
   color: white ;
 }
 .main-table-body table thead{
@@ -86,7 +86,7 @@ input[type="text"]:focus{
 }
 .main-table-body table tr td:last-child,
 .main-table-body table tr th:last-child {
-  padding-right: 45px;
+  padding-right: 5px;
 }
 .main-table-body table tr td:nth-child(3),
 .main-table-body table tr td:nth-child(9),
@@ -110,9 +110,9 @@ input[type="text"]:focus{
   border-left: 1px solid rgba(255,255,255,.6);
 }
 .btn-action {
-  padding: 9px 13px;
+  padding: 5px 8px;
   border-radius: 8px;
-  margin-right: -20px;
+  /* margin-right: -20px; */
 }
 .main-table-body table tr.text-orange-3 th {
   padding-top: 30px;
@@ -138,7 +138,7 @@ input[type="text"]:focus{
   background-color: #57abcc;
 }
 .modal-content{
-  background: url(../img/bg-modal.png) center center no-repeat #3e446d;
+  background: url(../../img/scholar-tracker/bg-modal.png) center center no-repeat #3e446d;
   border-radius: 30px;
   box-shadow: 0 19px 35px black;
   padding:20px 30px 55px;
@@ -320,4 +320,28 @@ input[type="text"]:focus{
   .main-table{
   background-size: 100% auto;
   }
+}
+
+.text-subtext {
+  font-size: 10px;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-orange {
+  color: orange;
+}
+
+.text-green {
+  color: #00ff00;
+}
+
+.text-white {
+  color: white;
+}
+
+.main-tablerow-display {
+  display: table-row!important;
 }
