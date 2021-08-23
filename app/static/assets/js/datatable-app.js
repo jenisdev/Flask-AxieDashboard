@@ -379,7 +379,7 @@ $(document).ready(function () {
  
         // Get the column API object
         var column = t.column( $(this).attr('data-column') );
- 
+        
         // Toggle the visibility
         column.visible( ! column.visible() );
     } );
@@ -389,7 +389,6 @@ $(document).ready(function () {
  
         // Get the column API object
         var column = t.column( $(this).attr('data-column') );
- 
         // Toggle the visibility
         column.visible( ! column.visible() );
     } );

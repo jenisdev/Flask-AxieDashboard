@@ -109,6 +109,10 @@ input[type="text"]:focus{
 .border-left {
   border-left: 1px solid rgba(255,255,255,.6);
 }
+
+.border-right {
+  border-right: 1px solid rgba(255,255,255,.6);
+}
 .btn-action {
   padding: 5px 8px;
   border-radius: 8px;
@@ -323,7 +327,7 @@ input[type="text"]:focus{
 }
 
 .text-subtext {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .text-red {
@@ -344,4 +348,8 @@ input[type="text"]:focus{
 
 .main-tablerow-display {
   display: table-row!important;
+}
+
+table tr th:nth-child(13), table tr th:last-child, table tr td:last-child {
+  border-left: 1px solid rgba(255,255,255,.6);
 }
