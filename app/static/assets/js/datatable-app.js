@@ -189,7 +189,7 @@ $(document).ready(function () {
             },
             {
                 "targets": 2,
-                "orderable": false,
+                "orderable": true,
                 "render": function ( data, type, row ) {
                     data = Number(data);
                     color = 'red';
@@ -201,7 +201,7 @@ $(document).ready(function () {
             },
             {
                 "targets": 3,
-                "orderable": false,
+                "orderable": true,
                 "render": function ( data, type, row ) {
                     data = Number(data);
                     color = 'red';
@@ -213,7 +213,7 @@ $(document).ready(function () {
             },
             {
                 "targets": 4,
-                "orderable": false,
+                "orderable": true,
                 "render": function ( data, type, row ) {
                     data = Number(data);
                     color = 'red';
@@ -225,21 +225,21 @@ $(document).ready(function () {
             },
             {
                 "targets": 5,
-                "orderable": false,
+                "orderable": true,
                 "render": function ( data, type, row ) {
                     return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
                 "targets": 6,
-                "orderable": false,
+                "orderable": true,
                 "render": function ( data, type, row ) {
                     return `<span class="crypto-value">${data}</span>`
                 }
             },
             {
                 "targets": 7,
-                "orderable": false,
+                "orderable": true,
                 "render": function ( data, type, row ) {
                     return `<span class="crypto-value">${data}</span><br><span class="text-subtext currency-value">`
                 }
@@ -379,7 +379,7 @@ $(document).ready(function () {
  
         // Get the column API object
         var column = t.column( $(this).attr('data-column') );
-        
+
         // Toggle the visibility
         column.visible( ! column.visible() );
     } );
