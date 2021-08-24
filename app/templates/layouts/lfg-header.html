@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+
+  <!-- ICON CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  
+  <!-- Style CSS -->
+  <link rel="stylesheet" type="text/css" href="/static/assets/css/lfgpages/common.css">
+  <link rel="stylesheet" type="text/css" href="/static/assets/css/lfgpages/header.css">
+  
+  <link rel="stylesheet" type="text/css" href="/static/assets/css/lfgpages/footer.css">
+  
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+	<title>LFG Company</title>
+</head>
+<body>
+  <!-- header -->
+  <header class="">
+    <div class="header-top">
+      <div class="header-logo">
+        <img src="/static/assets/img/lfgpages/logo-lfg.png">
+      </div>
+      <div class="header-nav">
+        <div class="header-login">
+          <p>Login</p>
+          <a href="/login"><img src="/static/assets/img/lfgpages/icon-login.png"></a>
+        </div>
+
+        <nav class="navbar navbar-expand-lg  navbar-dark nav-selection">
+          <div class="container-fluid justify-content-end position-relative">
+            <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav text-end">
+                <li class="nav-item">
+                  <a class="nav-link"  href="/about">About LFG</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Our Games</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Tools  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="/contact">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav> 
+        <div class="gear-one"><img src="/static/assets/img/lfgpages/gear1.png"></div>
+        <div class="gear-two"><img src="/static/assets/img/lfgpages/gear2.png"></div>
+        <div class="swap-charging">
+          <div class="position-relative">
+            <div class="form-check form-switch custom-switch">
+              <div class="position-relative">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <div class="charging-img">
+                  <img src="/static/assets/img/lfgpages/discharge.gif">
+                </div>
+                <div class="swap-img" id="swap-skin">
+                </div>
+              </div>
+            </div>
+            <div class="bulb-charge">
+              <img src="/static/assets/img/lfgpages/bulb1.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-top-mob">
+      <div class="d-flex justify-content-around align-items-center">
+        <div><img src="/static/assets/img/lfgpages/logo-lfg-mob.png"></div>
+        <div class="swap-menu">
+          <div class="position-relative d-flex justify-content-around ">
+            <div class="form-check form-switch custom-switch-mob">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            </div>    
+            <div class="swap-menu-selection">
+              <img src="/static/assets/img/lfgpages/icon-menu.png">
+            </div>
+          </div>
+          <div class="nav-menu">
+            <div class="menu-item"><a href="#">About LFG</a></div>
+            <div class="menu-item"><a href="#">Our Games</a></div>
+            <div class="menu-item"><a href="#">Tools</a></div>
+            <div class="menu-item"><a href="#">Contact us</a></div>
+          </div>
+        </div>
+        <div class="log-in-out">
+          <img src="/static/assets/img/lfgpages/icon-logout.png">
+          <img src="/static/assets/img/lfgpages/icon-login.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="header-game">
+      <p class="game-title">OUR GAMES</p>
+      <div class="swiper-container swiper-header">       
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">  
+            <img src="/static/assets/img/lfgpages/logo-defi.png">
+          </div>
+          <div class="swiper-slide">  
+            <img src="/static/assets/img/lfgpages/logo-mirandus.png">
+          </div>
+          <div class="swiper-slide">  
+            <img src="/static/assets/img/lfgpages/content-title0.png">
+          </div>        
+          <div class="swiper-slide">
+            <img src="/static/assets/img/lfgpages/logo-axie.png">
+          </div>
+          <div class="swiper-slide">
+            <img src="/static/assets/img/lfgpages/logo-guardian.png">
+          </div>         
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </header>
+  <!-- end header -->
+
+  {% block content %}{% endblock content %}
+
+  <!-- footer -->
+  <footer class="position-relative">
+    <div></div>
+    <div class="footer-title">
+      <p class="">Louiserin Finance Gaming</p>
+    </div>
+    <div class="footer-content">
+      <p class="footer-content-title">Louiserin Finance Gaming</p>
+      <p class="footer-content-description">
+      is a decentralized autonomous organization (DAO) based in Europe
+      (Andorra - London [England]- Cannes [France]) that specializes in investing 
+      exclusively in yielded non-fungible tokens (NFTs). These are then used in immersive, 
+      exciting, and unique blockchain-based games that are play-to-earn while also having a 
+      valuable game economy that any gamer can thrive in.
+      <div class="footer-learn">learn more</div>
+    </div>
+    <div class="footer-link">
+      <div class="footer-social">
+        <div class="social-icon social-icon5"></div>
+        <div class="social-icon social-icon1"></div>
+        <div class="social-icon social-icon2"></div>
+        <div class="social-icon social-icon3"></div>
+        <div class="social-icon social-icon4"></div>
+      </div>
+      <p class="footer-copy">© 2021 Louserin Finance Gaming.</p>
+    </div>
+  </footer>
+  <!-- end footer -->
+
+  <!-- Optional JavaScript; choose one of the two! -->
+  
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script type="text/javascript" src="/static/assets/js/header.js"></script>
+  <script type="text/javascript" src="/static/assets/js/info.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+*{box-sizing: border-box;}
+body{
+  background: url(../../img/lfgpages/bg-body.png) top center no-repeat #000000;
+  font-family: poppins;
+}
+p{
+	margin: 0;
+}
+a{
+	text-decoration: none;
+  color: #626161;
+}
+a:hover{
+  color: #9e1fcd;
+}
+a:active{
+  color: #9e1fcd;
+}
+img{
+  vertical-align: middle;
+}
+@font-face {
+    font-family: 'poppins';
+    src: url('../font/Poppins-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'poppins-bold';
+    src: url('../font/Poppins-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'poppins-semibold';
+    src: url('../font/Poppins-SemiBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'passion';
+    src: url('../font/PassionOne-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'passion-bold';
+    src: url('../font/PassionOne-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'passion-black';
+    src: url('../font/PassionOne-Black.ttf') format('truetype');
+}
+.fs-main {
+  font-family: passion ;
+}
+.fs-main-bold {
+  font-family: passion-bold;
+}
+.fs-main-semi {
+  font-family: passion-black;
+}
+.fs-22 {
+  font-size: 1.375rem;
+}
+.text-grey-2 {
+  color: #e2e2e2;
+}
+.container{
+  max-width: 1920px;
+}
+.rounded-4{
+  border-radius: 12px;
+}
+.rounded-5{
+  border-radius: 30px;
+}
+.px-10{
+  padding-right: 3px;
+  padding-left: 3px;
+}
+.fs-7{
+  font-size: 3rem;
+}
+.fs-5-b{
+  font-size: 21px;
+}
+.fs-2-b{
+  font-size: 36px;
+}
+.text-green-2{
+ color: #4ccb8e;
+}
+.text-orange-2 {
+  color: #e3923a;
+}
+.text-orange-3 {
+  color: #ffcb1b;
+}
+.text-cyan {
+  color: #61d7f5;
+}
+.text-grey-3{
+  color: #abb0d5;
+}
+.bg-orange-2{
+  background-color: #e3923a;
+}
+.bg-green-2 {
+  background: #23a667;
+}
+.bg-blue-2 {
+  background: #2f3452;
+}
+@media (max-width: 767px) {
+   .fs-22 {
+    font-size: 13px;
+  }
+  .fs-2-b{
+    font-size: 1.5rem;
+  }
+  body {
+    background-size: 1300px;
+  }
+}
+@media (max-width: 1600px) { 
+  .fs-5-b{
+    font-size: 1rem;
+  }
+}

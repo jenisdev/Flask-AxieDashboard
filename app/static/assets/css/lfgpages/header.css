@@ -1,0 +1,401 @@
+header{
+  background:url(../../img/lfgpages/bg-header1.png) no-repeat;
+}
+.header-top{
+  display: flex;
+  justify-content: space-between; 
+}
+.header-logo img{
+  margin: 50px
+}
+.header-nav{
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 100%;
+}
+.nav-selection{
+  flex-shrink: 0;
+  margin-left: 176px;
+  position: relative !important;
+  background: url(../../img/lfgpages/bg-menu.png)  no-repeat;
+  padding-top: 28px;
+  padding-left: 90px;
+  padding-bottom: 10px;
+  width: 885px;
+}
+.gear-one{
+  position: absolute;
+  top: 87px;
+  left: 1309px;
+  animation-name: gear1;
+  animation-duration: 4s;
+  animation-iteration-count:infinite;
+}
+@keyframes gear1 {
+  0%   {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+.gear-two{
+  position: absolute;
+  top: 152px;
+  left: 1373px;
+  animation-name: gear2;
+  animation-duration: 4s;
+  animation-iteration-count:infinite;
+}
+@keyframes gear2 {
+  0%   {transform: rotate(0deg);}
+  100% {transform: rotate(-360deg);}
+}
+.nav-selection .active{
+  color: #601daa !important;
+  background:url(../../img/lfgpages/menu-hover1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.nav-link:focus, .nav-link:hover{
+  color: #9e1fcd !important;
+}
+.nav-selection a{
+  font-size: 21px;
+  padding-right: 4px !important;
+  padding-left: 30px !important;
+  text-decoration: none;
+  color: black !important;
+}
+.nav-selection a:hover{
+  background:url(../../img/lfgpages/menu-hover1.png) no-repeat;
+  background-size: 100% 100%;
+  color: #601daa;
+}
+.nav-selection a:active{
+  color: #601daa;
+}
+.navbar-toggler {
+  border-color: #626161;
+}
+.header-login{
+  margin-right: 64px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.header-login p{
+  color: #626161;
+  font-size: 25px;
+  margin-right: 23px;
+}
+.header-game{
+  position: relative;
+  background: url(../../img/lfgpages/bg-games.png) top center no-repeat,linear-gradient(to right, rgba(0,0,0,0),rgba(0,0,0,.5), rgba(0,0,0,1), rgba(0,0,0,1));
+  padding :0 90px;
+  height: 366px;
+}
+.game-carousel{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.game-carousel{
+  padding-top: 35px;
+  padding-bottom: 50px;
+}
+.game-title{
+  padding-top: 32px;
+  text-align: center;
+  color: black;
+  font-size: 45px;
+  font-family: passion;
+  text-shadow: 0 0 20px rgba(167, 91, 238, .74);
+}
+.swiper-button-next{
+  right: 0;
+  color:#333333;
+  position: absolute;
+  top: 38%;
+  width: 71px;
+  height: 145px;
+  background: url(../../img/lfgpages/arrow-right.png) top center no-repeat;
+  background-size: 100% ,100%;
+}
+.swiper-button-prev{
+  left: 0;
+  color:#333333;
+  position: absolute;
+  top: 38%;
+  background:url(../../img/lfgpages/arrow-left.png) top center no-repeat;
+  background-size: 100% 100%;
+  width: 71px;
+  height: 145px;
+  background-size: 100%;
+}
+.swap-charging{
+  position: absolute;
+  left: 933px;
+  width: 354px;
+  height: 106px;
+  top: 0;
+}
+.custom-switch {
+  position: absolute;
+  right: 3px;
+  top: 119px;
+}
+.custom-switch .form-check-input {
+  height: 18px;
+  width: 90px;
+  cursor: pointer;
+}
+.custom-switch .form-check-input{
+  border:2px solid yellow;
+  background-image: url(../../img/lfgpages/swiper-toggle.png);
+}
+.custom-switch .form-check-input:checked {
+  background-position: right center;
+  background-image: url(../../img/lfgpages/swiper-toggle.png);
+}
+.custom-switch .form-check-input:hover{
+  background-color: black;
+}
+.swiper-header .swiper-slide img{
+  width: 100%; 
+  height: auto;
+  margin-top: 26px;
+}
+.swiper-header .swiper-slide{
+  display: flex;
+  justify-content: center;
+}
+.swap-img{
+  position: absolute;
+  top: -60px;
+  right: -25px;
+  width: 141px;
+  height: 41px;
+  cursor: pointer;
+}
+.custom-switch:hover .swap-img{
+  background:url(../../img/lfgpages/dark-swapskin.png) no-repeat;
+}
+.charging-img{
+  position: absolute;
+  width: 111px;
+  height: 57px;
+  top: -70px;
+  right: 157px;
+  z-index: 2;
+  display: none;
+}
+.custom-switch:hover .charging-img{
+  display: block;
+}
+.bulb-charge{
+  position: absolute;
+  top: 27px;
+  left: 29px;
+}
+
+.header-top-mob{
+  padding: 10px 0;
+  display: none;
+}
+.swap-menu-selection{
+  cursor: pointer;
+}
+.swap-menu{
+  background:url(../../img/lfgpages/bg-menu-mob.png) no-repeat;
+  background-size: 100% 100%;
+  padding:12px 0px;
+  width: 50%;
+  position: relative;
+}
+.custom-switch-mob .form-check-input {
+  height: 18px;
+  width: 90px;
+  cursor: pointer;
+}
+.custom-switch-mob .form-check-input{
+  border:2px solid yellow;
+  background-image: url(../../img/lfgpages/swiper-toggle.png);
+}
+.custom-switch-mob .form-check-input:checked {
+  background-position: right center;
+  background-image: url(../../img/lfgpages/swiper-toggle.png);
+}
+.custom-switch-mob .form-check-input:hover{
+  background-color: black;
+}
+.log-in-out{
+  cursor: pointer;
+}
+.nav-menu{
+  position: absolute;
+  z-index: 10;
+  width: 94%;
+  top:45px;
+  left: 3%;
+  display: none;
+}
+.menu-item{
+  background-color: rgba(41,41,41,.6);
+  font-size: 16px;
+  text-align: center;
+  font-family: poppins-semibold;
+  padding:12px;
+  border:1px solid white;
+  border-bottom:none;
+  cursor: pointer
+}
+.menu-item:last-child{
+  border-bottom:1px solid white;
+}
+.menu-item:hover{
+  background-image:linear-gradient(to right, rgba(0,0,0,0),rgba(82,18,153,1), rgba(0,0,0,0));
+}
+.menu-item a{
+  color: #ed9e10;
+  cursor: pointer;
+}
+.menu-item a:hover{
+  color: #9e1fcd;
+}
+
+.swiper-container-android .swiper-slide, .swiper-wrapper{
+  align-items: center;
+}
+@media (max-width: 1720px) {
+  header{
+    background-position: -230px 0;
+  }
+  .gear-one{
+        left: 1083px;
+  }
+  .gear-two{
+    left: 1146px
+  }
+  .header-logo img{
+    margin-right: 0;
+  }
+  .nav-selection{
+    margin-left: 0px;
+  }
+  .swiper-button-next{
+    width: 64px;
+    height: 133px;
+  }
+  .swiper-button-prev{
+    width: 64px;
+    height: 133px;
+  }
+   .game-carousel{
+    padding-bottom: 250px;
+  }
+  .game-carousel img{
+    width: 20%;
+  }
+  .header-login{
+    margin-right: 24px;
+  }
+  .swap-charging {
+    left: 706px;
+  }
+}
+@media (max-width: 1320px) {
+   .header-top{
+    background:none;
+  }
+  .gear-one{
+    display: none;
+  }
+  .gear-two{
+    display: none;
+  }
+  .nav-selection{
+    width: auto;
+    background:none;
+  }
+  .nav-selection .active{
+    background:none;
+  }
+  .nav-selection a
+    {color: #626161 !important;}  
+  .nav-selection a:hover{
+    background:none;
+  }
+  .swap-charging{
+    display: none;
+  }
+}
+@media (max-width: 1168px) {
+  .swiper-header .swiper-slide img{
+    width:250px;
+    margin-top: 35px; 
+  }
+
+   .navbar-expand-lg .navbar-collapse{
+    justify-content: flex-end ;
+  }
+  .header-nav {
+  }
+  .swiper-button-next{
+    width: 54px;
+    height: 110px;
+    margin-top: 20px;
+  }
+  .swiper-button-prev{
+    width: 54px;
+    height: 110px;
+    margin-top: 20px;
+  }  
+  .nav-selection{
+    margin-top: 20px;
+    margin-right: 8px;
+  }
+  .header-login{
+   justify-content: flex-end;
+   margin-right: 30px;
+  }
+  .header-nav{
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-title{
+    font-size: 32px;
+  }
+  .swiper-header .swiper-slide img{
+    width:250px;
+    margin-top: 60px; 
+  }
+  .nav-selection {
+   margin-right: 2px;
+   margin-top: 4px;
+   }
+  .nav-selection a{
+    font-size: 16px;
+  }
+  .header-login{
+    margin-right: 15px;
+  }
+  .header-logo img{
+    width: 120%;
+    margin-left: 20px;
+  }
+  .header-login p{
+    font-size: 16px;
+  }
+  .header-game{
+    padding: 0 10px;
+    background:url(../../img/lfgpages/bg-games-mob.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .header-top{
+    display: none;
+  }
+  .header-top-mob{
+    display: block;
+  }
+}

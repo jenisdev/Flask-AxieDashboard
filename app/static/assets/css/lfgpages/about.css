@@ -1,0 +1,136 @@
+.info-corner{
+  margin:55px 0 75px;
+}
+.info-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 92px;
+}
+.info-title-img img{
+  width: 100%;
+}
+
+.info-title p{
+  flex-shrink: 0;
+  margin:0 20px;
+  color: #edb850;
+  font-size: 25px;
+}
+.investor-contact{
+}
+.investor-wrap{
+  display: flex;
+  justify-content: center;
+}
+.investor-indi{
+  width: 586px;
+  height: 738px;
+  background:url(../../img/lfgpages/bg-investor.png) top center no-repeat;
+  background-size: 100%;
+  margin:0 65px 120px;
+  position: relative;
+
+}
+.investor-avator{
+  position: absolute;
+  top:48px;
+  right: 200px;
+}
+.investor-intro{
+  margin-top: 360px;
+  text-align: center;
+}
+.investor-name{
+  font-size: 35px;
+
+  color: #e9963b;
+}
+.investor-title{
+  color: #adadad;
+  font-size: 28px;
+}
+
+.icon-detail{
+  position: absolute;
+  padding-top: 209px;
+  cursor: pointer;
+}
+.detail-modal{
+  border-radius: 30px;
+  box-shadow: 0 0 17px 23px rgba(128, 105, 41,.5);
+  margin: 0;
+
+}
+.modal-body{
+  margin-top: 200px;
+  padding :280px 34px 0;
+}
+.investor-narration{
+  font-size: 23px;
+  color: #9f9e9e;
+  margin-top: 30px;
+  text-align: justify;
+}
+
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 586px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .modal-body{
+  
+  padding :170px 34px 0;
+}
+  .investor-indi{
+    max-width: 360px;
+    height: 453px;
+    margin:0 20px 20px;
+  }
+  .detail-modal{
+    margin: auto;
+  }
+  .investor-title{
+    font-size: 16px;
+  }
+  .investor-name{
+  font-size: 21px;
+  }
+  .investor-intro{
+    margin-top: 220px;
+    text-align: center;
+  }
+  .icon-detail{
+    padding-top: 110px;
+  }
+  .investor-avator{
+    width: 120px;
+    height: 120px;
+    right: 117px;
+    top:25px;
+  }
+  .investor-avator img{
+    width: 100%;
+  }
+  .investor-narration{
+    font-size: 14px;
+  }
+}
+@media (max-width: 820px) {
+ .investor-wrap{
+  flex-wrap: wrap;
+ }
+ .modal-body{
+  margin-top: 40px;
+ }
+ .investor-indi{
+  margin-left: 0;
+  margin-right: 0;
+ }
+ .detail-modal{
+  margin: auto;
+ }
+
+}

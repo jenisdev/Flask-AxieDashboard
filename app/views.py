@@ -247,8 +247,8 @@ def index(path):
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
-@app.route('/')
-def index():
+@app.route('/tracker')
+def tracker():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
 
@@ -292,6 +292,17 @@ def index():
     percentage = getChangePercent()
     
     return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, percentage=percentage)
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('aboutus.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contactus.html')
 
 @app.route('/data', methods=['POST', 'GET'])
 def data():

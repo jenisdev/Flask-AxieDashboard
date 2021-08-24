@@ -1,0 +1,253 @@
+.info-corner{
+  margin:55px 0 75px;
+}
+.info-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 92px;
+}
+.info-title-img img{
+  width: 100%;
+}
+.info-title p{
+  flex-shrink: 0;
+  margin:0 20px;
+  color: #edb850;
+  font-size: 25px;
+  text-align: center;
+  line-height: 12px;
+}
+.corner-content{
+  display: flex;
+  justify-content: space-around;
+}
+.swiper-container-autoheight .swiper-wrapper-info{
+  align-items: stretch;
+}
+.indi-content{
+  position:relative;
+  background:url("../../img/lfgpages/lfgpages/bg-content2.png") top center no-repeat;
+  background-size: 100% 100%;
+  width: 497px;
+  /*flex-shrink: 0;*/
+  margin:0 10px; 
+  /*margin:auto;*/
+  padding:28px 35px 200px;
+  /*height: 100%;*/
+}
+.indi-content-modal{
+  background:url("../../img/lfgpages/bg-content-modal1.png") top center no-repeat;
+  background-size: 100% 100%;
+  padding:28px 35px 150px;
+  margin:auto;
+
+}
+.content-title{
+  background:url(../../img/lfgpages/bg-content-title.png) top center no-repeat;
+  background-size: 100% 100%;
+  color: #e9963b;
+  font-size: 28px;
+  font-family: poppins-semibold;
+  padding: 13px 0 8px;
+  text-align: center;
+}
+.title-img{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.title-right img{
+  width: 100%;
+}
+.content-description p{
+  font-size: 21px;
+  color: #939393;
+  padding: 5px 0;
+  line-height: 27px;
+}
+.learn-more{
+  position: absolute;
+  bottom:130px;
+  background: url(../../img/lfgpages/learnmorebutton.png) top center no-repeat;
+  font-family: poppins-semibold;
+  color: black;
+  font-size: 19px;
+  text-align: center;
+  padding: 10px 25px;
+  cursor: pointer;
+  /*right:40px;*/
+}
+.learn-more:hover{
+  color: white;
+}
+.learn-more a{
+  font-size: 21px;
+  color: #c7ba73;
+}
+.learn-less{
+  bottom:30px;
+}
+.leader-board{
+  height: 482px;
+  background:url(../../img/lfgpages/bg-leaderboard.png) top center no-repeat;
+}
+.board-title{
+  text-align: center;
+  font-size:45px ;
+  color: black;
+  font-family:passion;
+  text-shadow: 0 0 20px rgba(167, 91, 238, .74);
+}
+.promo-area-mob{
+  background:url(../../img/lfgpages/bg-promo-area.png) no-repeat;
+  background-size: 100%;
+  display: flex;
+  justify-content: center;
+  display: none;
+}
+.promo-area img{
+  width: 100%
+}
+.swiper-container-autoheight, .swiper-container-autoheight .swiper-slide{
+  /*height: 722px;*/
+}
+.title-space{
+  display: none;
+}
+
+@media (max-width: 1720px) {
+  .promo-area-mob img{
+  width: 100%;
+  }
+  .swiper-container-autoheight, .swiper-container-autoheight .swiper-slide{
+  /*height: 660px;*/
+}
+  .corner-content{
+    justify-content: space-around;
+  }
+  .learn-more{
+    bottom: 108px;
+  }
+  .learn-less{
+    bottom:11px;
+  }
+  .indi-content{
+    /*margin: 0;
+    margin:auto;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 161px;*/
+    /*width: 350px;*/
+    /*width: 100%;*/
+  }
+/*  .indi-content-modal{
+    padding-bottom:58px;
+    margin:auto;
+  }*/
+  .token-img img{
+    width: 100%;
+  }
+  .content-title{
+    font-size: 21px;
+  }
+  .content-description p{
+    font-size: 14px;
+  }
+  .learn-more a{
+    font-size: 16px;
+  }
+  .modal-content{
+    background:none;
+  }
+}
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 557px;
+  }
+  .modal-content{
+    background:none;
+  }
+}
+
+@media (max-width: 1168px){  
+  .corner-content{
+    display: block;
+  }
+  .indi-content{
+    margin:auto;
+    margin-top: 30px;
+    /*width: 0;*/
+    max-width: 497px;
+    /*width: 497px;
+    /*margin:auto;*/
+    /*margin-top: 20px;*/
+    /*padding:20px 35px 165px;*/
+  }
+  .indi-content-modal{
+    padding:20px 35px 90px;
+  }
+  .content-title{
+    font-size: 28px;
+  }
+  .content-description p{
+    font-size: 21px;
+  }
+  .learn-more{
+    bottom: 110px;
+  }
+  .learn-less{
+    bottom:20px;
+  }
+  .learn-more a{
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 900px){
+  .info-title p{
+    font-size: 22px; 
+  }
+}
+
+@media (max-width: 767px){
+  .promo-area-mob{
+    display: block;
+  }
+  .promo-area{
+    display: none;
+  }
+  .title-space{
+  display: block;
+  }
+  .content-title{
+    font-size: 21px;
+  }
+  .content-description p{
+    font-size: 14px;
+  }
+  .learn-more{
+    bottom: 130px;
+  }
+  .learn-less{
+    bottom:11px;
+  }
+  .indi-content{
+    
+    width: 95%;
+  }
+  .indi-content-modal{
+     width: 98%;
+  }
+  .learn-more a{
+    font-size: 16px;
+  }
+ .leader-board {
+    background-size: 100%;
+ }
+ .swiper-container-autoheight, .swiper-container-autoheight .swiper-slide{
+  /*height: 660px;*/
+  }
+}

@@ -1,0 +1,61 @@
+{% extends "layouts/lfg-header.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/assets/css/lfgpages/contact.css">
+<!-- main content -->
+<main>
+    <div class="contact-us">
+        <div class="info-title">
+            <div class="info-title-img">
+                <img src="/static/assets/img/lfgpages/blurred-line-left.png">
+            </div>
+            <p class="">LFG Contact Form</p>
+            <div class="info-title-img">
+                <img src="/static/assets/img/lfgpages/blurred-line-right.png">
+            </div>
+        </div>
+        <div class="contact-title">
+            For more information please fill in the contact form below.
+            Fields with * are mandatory
+        </div>
+    </div>
+    <form>
+        <div class="contact-info">
+            <div class="form-wrap">
+                <div class="mb-6 row">
+                    <label for="firstName" class="form-label col-5 col-md-12">First Name *</label>
+                    <div class="col-7 col-md-12">
+                        <input type="text" class="form-control" id="firstName">
+                    </div>
+                </div>
+                <div class="mb-6 row">
+                    <label for="lastName" class="form-label col-5 col-md-12">Last Name *</label>
+                    <div class="col-7 col-md-12">
+                        <input type="password" class="form-control" id="lastName">
+                    </div>
+                </div>
+                <div class="mb-6 row">
+                    <label for="inputEmail" class="form-label col-5 col-md-12">your email *</label>
+                    <div class="col-7 col-md-12">
+                        <input type="email" class="form-control" id="inputEmail">
+                    </div>
+                </div>
+            </div>
+            <div class="form-wrap">
+                <div class="mb-6 pb-3 row">
+                    <label for="inputSubject" class="form-label col-5 col-md-12">Subject</label>
+                    <div class="col-7 col-md-12">
+                        <input type="text" class="form-control" id="inputSubject">
+                    </div>
+                </div>
+                <div class="mb-3 mb-md-5 pb-2">
+                    <textarea class="form-control text-area" placeholder="type your message"
+                        id="formTextarea"></textarea>
+                </div>
+                <button type="submit" class="btn-purple">SUBMIT</button>
+            </div>
+        </div>
+    </form>
+</main>
+<!-- end main content -->
+
+{% endblock content %}

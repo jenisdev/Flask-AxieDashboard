@@ -1,0 +1,136 @@
+footer{
+	height: 816px;
+	background: url(../../img/lfgpages/bg-footer.png) top center no-repeat;
+}
+.footer-title{
+	background:url(../../img/lfgpages/bg-title.png) top center no-repeat;
+	text-align: center;
+	font-size: 34px;
+	color: black;
+	font-family: passion;
+	text-shadow: 0 0 20px rgba(167, 91, 238, .74);
+	line-height: 46px;
+  padding-bottom: 57px;
+	margin-bottom: 90px;
+}
+.footer-content{
+	background:rgba(255,255,255,.07);
+	border:1px solid #726a7d;
+	border-radius: 20px;
+	margin:auto;
+	margin-bottom: 52px;
+	max-width: 1062px;
+	padding:35px 95px 30px;
+	line-height: 30px;
+}
+.footer-content-title{
+	color: #e9963b;
+	font-size: 37px;
+	text-align: center;
+	text-shadow:0 9px 7px  rgba(0,0,0);
+	margin-bottom: 20px;
+}
+.footer-content-description{
+	color: #aeaeae;
+	font-size: 25px;
+	margin-bottom: 30px;
+}
+.footer-learn {
+	background: url(../../img/lfgpages/learnmorebutton.png) top center no-repeat;
+	font-family: poppins-semibold;
+	color: black;
+	font-size: 19px;
+	text-align: center;
+	padding: 9px 0;
+  cursor: pointer;
+}
+.footer-learn:hover {
+	color: white;
+}
+.footer-link{
+}
+.footer-copy{
+	color:  #541599;
+	font-size: 23px;
+	text-align: center;
+	padding: 50px 0;
+}
+.footer-social{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.social-icon{
+	width: 61px;
+	height: 61px;
+	cursor: pointer;
+}
+.social-icon1{
+	background:url(../../img/lfgpages/icon-twitter.png) center center no-repeat;
+}
+.social-icon2{
+	background:url(../../img/lfgpages/icon-footer1.png) center center no-repeat;
+}
+.social-icon3{
+	background:url(../../img/lfgpages/icon-footer2.png) center center no-repeat;
+}
+.social-icon4{
+	background:url(../../img/lfgpages/icon-footer3.png) center center no-repeat;
+}
+.social-icon5{
+	background:url(../../img/lfgpages/icon-footer4.png) center center no-repeat;
+}
+.social-icon1:hover{
+	background:url(../../img/lfgpages/icon-twitter-hover.png) center center no-repeat;
+}
+.social-icon2:hover{
+	background:url(../../img/lfgpages/icon-footer1-hover.png) center center no-repeat;
+}
+.social-icon3:hover{
+	background:url(../../img/lfgpages/icon-footer2-hover.png) center center no-repeat;
+}
+.social-icon4:hover{
+	background:url(../../img/lfgpages/icon-footer3-hover.png) center center no-repeat;
+}
+.social-icon5:hover{
+	background:url(../../img/lfgpages/icon-footer4-hover.png) center center no-repeat;
+}
+
+@media (max-width: 1168px) {
+  .footer-content{
+    margin-right: 20px;
+    margin-left: 20px;
+    background:rgba(0,0,0,0);
+    border:none;
+  }
+  footer{
+    height: 690px;
+  }
+  .footer-title {}
+  .footer-content-title{
+  	font-size: 21px;
+  }
+  .footer-content-description{
+  	font-size: 16px;
+  }
+  .footer-learn{
+  	font-size: 16px;
+  }
+  .footer-copy{
+  	font-size: 18px;
+  }
+  .footer-title{
+    line-height: 75px;
+  }
+}
+@media (max-width: 767px) {
+	.footer-content{
+  	padding:35px 25px 30px;
+  }
+  .footer-title{
+    margin-bottom: 0px;
+  }
+}
+
+
+
