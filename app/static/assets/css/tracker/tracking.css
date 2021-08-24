@@ -353,3 +353,7 @@ input[type="text"]:focus{
 table tr th:nth-child(13), table tr th:last-child, table tr td:last-child {
   border-left: 1px solid rgba(255,255,255,.6);
 }
+
+.dataTables_info {
+  color: white;
+}
