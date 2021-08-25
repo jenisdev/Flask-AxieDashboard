@@ -1,18 +1,6 @@
 {% extends "layouts/scholar-tracker-base.html" %}
 {% block content %}
 <main class="container position-relative px-xxl-5 px-xl-4 px-lg-3 px-md-2 px-sm-1">
-    <!-- <div class="price-link d-flex justify-content-between align-items-center mb-5 flex-wrap">
-        <div class="slp-exchange-area d-flex align-items-center justify-content-center rounded-5 py-3  py-lg-1 px-10 mt-4 flex-wrap">
-            <p class="text-white fs-6 text-slp">Smooth Love Potion Price (SLP)</p>
-            <p class="price-letter fs-main-semi ps-3 pe-4" id="current_rate">&dollar;&nbsp;{{"%.2f" |
-                format(currentRateForSLP | float)}}</p>
-            <div class="price-percent py-2 px-4 rounded-4">
-                <i class="bi {{ 'bi-caret-up-fill' if percentage > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" |
-                format(percentage | float)}}%
-            </div>
-        </div>
-    </div> -->
-
     <div
         class="price-link rounded-5 mt-n5 mt-md-0 d-flex justify-content-between align-items-center mb-5 slp-exchange-area">
         <div
@@ -20,29 +8,34 @@
             <p class="text-white fs-6 text-slp">Smooth Love Potion Price (SLP)</p>
             <img src="/static/assets/img/scholar-tracker/icon-slp1.png" class="ms-2">
             <p class="price-letter fs-main-semi ps-3 pe-4" id="current_rate">&dollar;&nbsp;{{"%.2f" |
-                format(currentRateForSLP | float)}}</p>
+                format(currentRateForSLP['price'] | float)}}</p>
             <div class="price-percent py-2 px-4 rounded-4">
-                <i class="bi {{ 'bi-caret-up-fill' if percentage > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" |
-                format(percentage | float)}}%
+                <i class="bi {{ 'bi-caret-up-fill' if currentRateForSLP['percent'] > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" |
+                format(currentRateForSLP['percent'] | float)}}%
             </div>
         </div>
         <div
             class="indi-token d-flex align-items-center justify-content-center py-3  py-lg-1 px-10 my-md-4 my-xxl-0 flex-wrap">
             <p class="text-white fs-6 text-slp token-border ps-xxl-5">Axie Infinity (AXS)</p>
             <img src="/static/assets/img/scholar-tracker/icon-axs1.png" class="ms-2">
-            <p class="price-letter fs-main-semi ps-3 pe-4">&dollar;36.07</p>
+            <p class="price-letter fs-main-semi ps-3 pe-4">&dollar;&nbsp;{{"%.2f" |
+                format(currentRateForAXS['price'] | float)}}</p>
             <div class="price-percent  price-down py-2 px-3 rounded-4">
 
-                <i class="bi bi-caret-down-fill me-3"></i><i class="d-none bi bi-caret-up-fill me-3"></i>0.46%
+                <i class="bi {{ 'bi-caret-up-fill' if currentRateForAXS['percent'] > 0  else 'bi-caret-down-fill'}} me-3"></i>{{"%.2f" |
+                format(currentRateForAXS['percent'] | float)}}%
             </div>
         </div>
         <div
             class="indi-token d-flex align-items-center justify-content-center py-3  py-lg-1 px-10 my-md-4 my-xxl-0 flex-wrap">
             <p class="text-white fs-6 text-slp token-border ps-xxl-5">Ethereum (ETH)</p>
             <img src="/static/assets/img/scholar-tracker/icon-eth1.png" class="ms-2">
-            <p class="price-letter fs-main-semi ps-3 pe-4">&dollar;2,061.30</p>
+            <p class="price-letter fs-main-semi ps-3 pe-4">&dollar;&nbsp;{{"%.2f" |
+                format(currentRateForEHT['price'] | float)}}</p>
             <div class="price-percent py-2 px-3 rounded-4">
-                <i class="bi bi-caret-up-fill me-3"></i>1.33%
+                <i class="bi {{ 'bi-caret-up-fill' if currentRateForEHT['percent'] > 0  else 'bi-caret-down-fill'}} me-3"></i>
+                {{"%.2f" |
+                format(currentRateForEHT['percent'] | float)}}%
             </div>
         </div>
     </div>
@@ -58,7 +51,7 @@
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
                 <p class="fs-5-b text-white" id="total_avg" data-value="{{slpdata.avg_total}}">&#8776;&dollar;{{"%.2f" |
-                    format(currentRateForSLP * slpdata.avg_total | float)}} USD</p>
+                    format(currentRateForSLP['price'] * slpdata.avg_total | float)}} USD</p>
             </div>
             <div
                 class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
@@ -68,7 +61,7 @@
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
                 <p class="fs-5-b text-white" id="total_sum" data-value="{{slpdata.sum_total}}">&#8776;&dollar;{{"%.2f" |
-                    format(currentRateForSLP * slpdata.sum_total | float)}} USD</p>
+                    format(currentRateForSLP['price'] * slpdata.sum_total | float)}} USD</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xll-2 justify-content-around d-flex">
@@ -80,7 +73,7 @@
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
                 <p class="fs-5-b text-white" id="unclaimed_sum" data-value="{{slpdata.sum_unclaimed}}">
-                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP * slpdata.sum_unclaimed | float)}} USD</p>
+                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP['price'] * slpdata.sum_unclaimed | float)}} USD</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xll-2 justify-content-around d-flex">
@@ -92,7 +85,7 @@
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
                 <p class="fs-5-b text-white" id="claimed_sum" data-value="{{slpdata.sum_claimed}}">
-                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP * slpdata.sum_claimed | float)}} USD</p>
+                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP['price'] * slpdata.sum_claimed | float)}} USD</p>
             </div>
         </div>
         <div
@@ -105,7 +98,7 @@
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
                 <p class="fs-5-b text-white" id="total_manager_share" data-value="{{slpdata.sum_manager}}">
-                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP * slpdata.sum_manager | float)}} USD</p>
+                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP['price'] * slpdata.sum_manager | float)}} USD</p>
             </div>
             <div
                 class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
@@ -115,7 +108,7 @@
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
                 <p class="fs-5-b text-white" id="total_scholar_share" data-value="{{slpdata.sum_scholar}}">
-                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP * slpdata.sum_scholar | float)}} USD</p>
+                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP['price'] * slpdata.sum_scholar | float)}} USD</p>
             </div>
         </div>
     </div>

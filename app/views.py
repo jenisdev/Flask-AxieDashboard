@@ -23,7 +23,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForSLP
+from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP
 from datetime import datetime, date
 
 class DecimalEncoder(json.JSONEncoder):
@@ -287,11 +287,19 @@ def tracker():
     .group_by(ScholarshipDaily.Name)\
     .all()
     
+    currentRateForAXS = getRateForToken('usd', 'axie-infinity')
+    currentRateForEHT = getRateForToken('usd', 'ethereum')
+    currentRateForSLP = getRateForToken('usd', 'smooth-love-potion')
+
+    print(currentRateForAXS, currentRateForEHT, currentRateForSLP)
+
+    # percentage = getChangePercent()
     
-    currentRateForSLP = getRateForSLP()
-    percentage = getChangePercent()
-    
-    return render_template('trackers/scholar-tracker.html', slpdata=slpdata, tabledata=tabledata, currentRateForSLP=currentRateForSLP, percentage=percentage)
+    return render_template('trackers/scholar-tracker.html', \
+        slpdata=slpdata, tabledata=tabledata,\
+        currentRateForSLP=currentRateForSLP,\
+        currentRateForEHT=currentRateForEHT,\
+        currentRateForAXS=currentRateForAXS)
 @app.route('/')
 def index():
     return render_template('index.html')

@@ -45,6 +45,14 @@ def g_db_del( obj ):
 from urllib.request import urlopen
 import json
 
+def getRateForToken(currency="usd", id="smooth-love-potion"):
+    url = f"https://api.coingecko.com/api/v3/coins/{id}"
+    with urlopen(url) as url:
+        market_data = json.loads(url.read().decode())
+        percentage = market_data['market_data']['price_change_percentage_24h']
+        price = market_data['market_data']['current_price'][currency]
+
+        return {"price": price, "percent": percentage}
 #Uses coingecko to get the current value in json and parse it.
 #Default currency is PHP which is what the scholars use, but you can change it to whatever you need.
 def getRateForSLP(currency="usd"):
