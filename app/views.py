@@ -320,15 +320,15 @@ def tracker():
         currentRateForAXS=currentRateForAXS)
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', logged=current_user.is_authenticated, page="index")
 
 @app.route('/about')
 def about():
-    return render_template('aboutus.html')
+    return render_template('aboutus.html', logged=current_user.is_authenticated, page="aboutus")
 
 @app.route('/contact')
 def contact():
-    return render_template('contactus.html')
+    return render_template('contactus.html', logged=current_user.is_authenticated, page="contactus")
 
 @app.route('/data', methods=['POST', 'GET'])
 def data():
