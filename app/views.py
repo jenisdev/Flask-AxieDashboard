@@ -253,39 +253,15 @@ def tracker():
         return redirect(url_for('login'))
 
     slpdata = db.session.query( \
-        func.avg(Scholarship.daily_average).label('avg_total'), \
-        func.sum(Scholarship.TotalSLP).label('sum_total'), \
+        func.avg(Scholarship.daily_average).label('avg_total'),\
+        func.sum(Scholarship.TotalSLP).label('sum_total'),\
         # func.count(Scholarship.Name).label('total_count'), \
-        func.sum(Scholarship.UnclaimedSLP).label('sum_unclaimed'), \
+        func.sum(Scholarship.UnclaimedSLP).label('sum_unclaimed'),\
         func.sum(Scholarship.ClaimedSLP).label('sum_claimed'), \
         func.sum(Scholarship.ManagerShare).label('sum_manager'), \
         func.sum(Scholarship.ScholarShare).label('sum_scholar'), \
         ) \
         .one_or_none()
-
-    today_date = date.today()
-    today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
-    yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
-    
-    tabledata = db.session.query( 
-        ScholarshipDaily.Name,
-        Scholarship.RoninAddress,
-        Scholarship.TotalSLP.label('total'),
-        Scholarship.UnclaimedSLP.label('unclaimed'),
-        Scholarship.ClaimedSLP.label('claimed'),
-        Scholarship.ManagerShare.label('manager'),
-        Scholarship.ScholarShare.label('scholar'),
-        Scholarship.LastClaim.label('lastclaim'),
-        Scholarship.NextClaim.label('nextclaim'),
-        Scholarship.MMR.label('mmr'),
-        Scholarship.ArenaRank.label('rank'),
-        Scholarship.daily_average.label('avg'),
-        func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
-        func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total')
-    )\
-    .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
-    .group_by(ScholarshipDaily.Name)\
-    .all()
     
     currentRateForAXS = getRateForToken('usd', 'axie-infinity')
     currentRateForEHT = getRateForToken('usd', 'ethereum')
@@ -293,10 +269,8 @@ def tracker():
 
     print(currentRateForAXS, currentRateForEHT, currentRateForSLP)
 
-    # percentage = getChangePercent()
-    
     return render_template('trackers/scholar-tracker.html', \
-        slpdata=slpdata, tabledata=tabledata,\
+        slpdata=slpdata,\
         currentRateForSLP=currentRateForSLP,\
         currentRateForEHT=currentRateForEHT,\
         currentRateForAXS=currentRateForAXS)
@@ -314,16 +288,6 @@ def contact():
 
 @app.route('/data', methods=['POST', 'GET'])
 def data():
-
-    page_num = request.form.get('page_num')
-    per_page = request.form.get('per_page')
-
-    # func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
-    # func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total'),
-
-    today_date = date.today()
-    today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
-    yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
     tabledata = db.session.query( 
         Scholarship.RoninAddress,
         Scholarship.Name,
@@ -371,7 +335,30 @@ def getRate():
     return json.dumps({"rate": rate})
 
 
-
+   # today_date = date.today()
+    # today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
+    # yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
+    
+    # tabledata = db.session.query( 
+    #     ScholarshipDaily.Name,
+    #     Scholarship.RoninAddress,
+    #     Scholarship.TotalSLP.label('total'),
+    #     Scholarship.UnclaimedSLP.label('unclaimed'),
+    #     Scholarship.ClaimedSLP.label('claimed'),
+    #     Scholarship.ManagerShare.label('manager'),
+    #     Scholarship.ScholarShare.label('scholar'),
+    #     Scholarship.LastClaim.label('lastclaim'),
+    #     Scholarship.NextClaim.label('nextclaim'),
+    #     Scholarship.MMR.label('mmr'),
+    #     Scholarship.ArenaRank.label('rank'),
+    #     Scholarship.daily_average.label('avg'),
+    #     # func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
+    #     # func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total')
+    # )\
+    # .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
+    # .group_by(ScholarshipDaily.Name)\
+    # .all()
+    
 # .paginate(per_page=10, page=1, error_out=True)
     # .all()
     # sql = text(f""" \
