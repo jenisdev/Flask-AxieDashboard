@@ -346,22 +346,6 @@ $(document).ready(function () {
             }
         ],
         "columns": [
-            { "width": "3%", "mData": null },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "4%" },
-            { "width": "15%" },
-            { "width": "15%" },
-            { "width": "5%" },
-            { "width": "5%" },
-            { "width": "5%" },
-            { "width": "5%" },
-            { "width": "5%" },
-            { "width": "12%" }
         ],
         "bFilter"       : true
     })
