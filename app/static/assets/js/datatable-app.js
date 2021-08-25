@@ -150,7 +150,7 @@ $(document).ready(function () {
     }
 
     var t = $("#tracker-table").DataTable({
-        "dom"           : 'ltipr',
+        "dom"           : 'Bltipr',
         "ajax"          : "/data",
         "searching"     : true,
         "bLengthChange" : false,
