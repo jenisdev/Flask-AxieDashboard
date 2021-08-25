@@ -24,7 +24,7 @@ from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
 from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
 
@@ -255,7 +255,6 @@ def tracker():
     slpdata = db.session.query( \
         func.avg(Scholarship.daily_average).label('avg_total'),\
         func.sum(Scholarship.TotalSLP).label('sum_total'),\
-        # func.count(Scholarship.Name).label('total_count'), \
         func.sum(Scholarship.UnclaimedSLP).label('sum_unclaimed'),\
         func.sum(Scholarship.ClaimedSLP).label('sum_claimed'), \
         func.sum(Scholarship.ManagerShare).label('sum_manager'), \
@@ -267,10 +266,55 @@ def tracker():
     currentRateForEHT = getRateForToken('usd', 'ethereum')
     currentRateForSLP = getRateForToken('usd', 'smooth-love-potion')
 
-    print(currentRateForAXS, currentRateForEHT, currentRateForSLP)
+    # print(currentRateForAXS, currentRateForEHT, currentRateForSLP)
 
+    sql = text(f""" \
+        SELECT L.sDate, SUM(R.SLP) AS total, COUNT(R.SLP) AS total_days
+        FROM (
+            SELECT DISTINCT `Name`, DATE_FORMAT(from_unixtime(FLOOR(`Date`)), '%Y-%m-%d') AS sDate 
+            FROM scholar_daily_totals
+            ) L
+        LEFT JOIN 
+        (
+            SELECT `Name`, DATE_FORMAT(from_unixtime(FLOOR(`Date`)), '%Y-%m-%d') AS sDate, SLP 
+            FROM scholar_daily_totals
+        ) R
+        ON L.`Name`=R.`Name` AND L.sDate=R.sDate
+        GROUP BY sDate;
+        """)
+    
+    result = db.engine.execute(sql)
+    today_date = date.today()
+    today_start = datetime(today_date.year, today_date.month, today_date.day, 0, 0)
+
+    for row in result:
+        print(row['sDate'])
+        date_obj = datetime.strptime(row['sDate'], "%Y-%m-%d")
+        yesterday = today_start - timedelta(days=1)
+        start_of_week = today_start - timedelta(days=today_start.weekday())
+        end_of_week = start_of_week + timedelta(days=6)
+
+        ytdy_sum = ytdy_count = 0
+        week_sum = week_count = 0
+        if date_obj == yesterday:
+            ytdy_sum += row['total']
+            ytdy_count += row['total_days']
+
+        print(start_of_week, date_obj, end_of_week)
+        if date_obj >= start_of_week and date_obj <= end_of_week:
+            week_sum += row['total']
+            week_count += row['total_days']
+    ytdy_avg = week_avg = 0
+    if ytdy_count > 0:
+        ytdy_avg = ytdy_sum/ytdy_count
+    if week_count > 0:
+        week_avg = week_sum/week_count
+    print(week_avg, ytdy_avg)
+        
     return render_template('trackers/scholar-tracker.html', \
         slpdata=slpdata,\
+        week_avg=week_avg,\
+        ytdy_avg=ytdy_avg,\
         currentRateForSLP=currentRateForSLP,\
         currentRateForEHT=currentRateForEHT,\
         currentRateForAXS=currentRateForAXS)
@@ -358,7 +402,7 @@ def getRate():
     # .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
     # .group_by(ScholarshipDaily.Name)\
     # .all()
-    
+
 # .paginate(per_page=10, page=1, error_out=True)
     # .all()
     # sql = text(f""" \
