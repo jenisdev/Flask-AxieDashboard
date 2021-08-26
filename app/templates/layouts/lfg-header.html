@@ -40,7 +40,7 @@
           <a href="/login"><img src="/static/assets/img/lfgpages/icon-login.png"></a>
           {% else %}
           <p>Logout</p>
-          <a href="/logout"><img src="/static/assets/img/lfgpages/icon-login.png"></a>
+          <a href="/logout"><img src="/static/assets/img/lfgpages/icon-logout.png"></a>
           {% endif %}
         </div>
 
@@ -102,15 +102,18 @@
             </div>
           </div>
           <div class="nav-menu">
-            <div class="menu-item"><a href="#">About LFG</a></div>
-            <div class="menu-item"><a href="#">Our Games</a></div>
-            <div class="menu-item"><a href="#">Tools</a></div>
-            <div class="menu-item"><a href="#">Contact us</a></div>
+            <div class="menu-item"><a href="/about">About LFG</a></div>
+            <div class="menu-item"><a href="/">Our Games</a></div>
+            <div class="menu-item"><a href="/tracker">Tools</a></div>
+            <div class="menu-item"><a href="/contact">Contact us</a></div>
           </div>
         </div>
         <div class="log-in-out">
-          <img src="/static/assets/img/lfgpages/icon-logout.png">
-          <img src="/static/assets/img/lfgpages/icon-login.png">
+          {% if not logged %}
+          <a href="/login"><img src="/static/assets/img/lfgpages/icon-login.png"></a>
+          {% else %}
+          <a href="/logout"><img src="/static/assets/img/lfgpages/icon-logout.png"></a>
+          {% endif %}
         </div>
       </div>
     </div>
