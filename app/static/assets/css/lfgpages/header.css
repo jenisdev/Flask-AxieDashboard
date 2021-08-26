@@ -265,6 +265,8 @@ header{
 .swiper-container-android .swiper-slide, .swiper-wrapper{
   align-items: center;
 }
+
+
 @media (max-width: 1720px) {
   header{
     background-position: -230px 0;
@@ -397,5 +399,13 @@ header{
   }
   .header-top-mob{
     display: block;
+  }
+}
+@media (min-width:1920px){
+  .header-game{
+   background-size: 100% 100%;
+  }
+  .swiper-header .swiper-slide img{
+    width: 80%;
   }
 }
