@@ -131,6 +131,10 @@ footer{
     margin-bottom: 0px;
   }
 }
-
+@media (min-width:1920px){
+	footer{
+		background-size: cover;
+	}
+}
 
 
