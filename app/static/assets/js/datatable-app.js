@@ -193,8 +193,8 @@ $(document).ready(function () {
                 "render": function ( data, type, row ) {
                     data = Number(data);
                     color = 'red';
-                    if (data < 150) color = "red";
-                    else if (data > 149 && data < 200) color = "orange";
+                    if (data < 105) color = "red";
+                    else if (data > 104 && data < 150) color = "orange";
                     else color = "green";
                     return `<span class="crypto-value text-${color}">${data}</span><br><span class="text-subtext currency-value">`
                 }
@@ -205,8 +205,8 @@ $(document).ready(function () {
                 "render": function ( data, type, row ) {
                     data = Number(data);
                     color = 'red';
-                    if (data < 150) color = "red";
-                    else if (data > 149 && data < 200) color = "orange";
+                    if (data < 105) color = "red";
+                    else if (data > 104 && data < 150) color = "orange";
                     else color = "green";
                     return `<span class="crypto-value text-${color}">${data}</span><br><span class="text-subtext currency-value">`
                 }
@@ -425,5 +425,9 @@ $(document).ready(function () {
 
     $("#export_btn").on("click", function (ev) {
         $(".buttons-excel").trigger("click");
+    });
+
+    $('#track_account').on("click", function (ev) {
+        
     });
 })
