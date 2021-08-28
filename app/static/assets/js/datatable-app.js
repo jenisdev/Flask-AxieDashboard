@@ -147,10 +147,10 @@ $(document).ready(function () {
         res += monthNames.indexOf(date_part.split(" ")[1]) * 1000000 + Number(date_part.split(" ")[0].slice(0, -2)) * 10000
         
         return res;
-    }
+    }    
 
     var t = $("#tracker-table").DataTable({
-        "dom"           : 'Bltipr',
+        "dom"           : 'Bltipr', //''Bfrltip,
         "ajax"          : "/data",
         "searching"     : true,
         "bLengthChange" : false,
@@ -158,12 +158,73 @@ $(document).ready(function () {
         // "fixedHeader"   : true,
         "order"         : [[ 1, 'asc' ]],
         "buttons"       : [
-            {
+           /*  {
                 extend: 'excelHtml5',
                 text: 'Excel',
                 customize: function( xlsx ) {
                     
                 }     
+            } */
+            {
+                extend: 'excelHtml5',
+                text: 'Save as Excel',
+                customize: function( xlsx ) {
+                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    console.log(sheet);
+                    // console.log($('*', sheet).html())
+                    console.log(sheet.childNodes[0].childNodes[1].childNodes[1]);
+
+                    let header = 
+                        `
+                        <c t="inlineStr" r="A2">
+                            <is><t xml:space="preserve">Ronin Address</t></is>
+                        </c>
+                        <c t="inlineStr" r="B2">
+                            <is><t xml:space="preserve">Name</t></is>
+                        </c>
+                        <c t="inlineStr" r="C2">
+                            <is><t xml:space="preserve">Today</t></is>
+                        </c>
+                        <c t="inlineStr" r="D2">
+                            <is><t xml:space="preserve">Yesterday</t></is>
+                        </c>
+                        <c t="inlineStr" r="E2">
+                            <is><t xml:space="preserve">Average</t></is>
+                        </c>
+                        <c t="inlineStr" r="F2">
+                            <is><t xml:space="preserve">Unclaimed</t></is>
+                        </c>
+                        <c t="inlineStr" r="G2">
+                            <is><t xml:space="preserve">Claimed</t></is>
+                        </c>
+                        <c t="inlineStr" r="H2">
+                            <is><t xml:space="preserve">Total</t></is>
+                        </c>
+                        <c t="inlineStr" r="I2">
+                            <is><t xml:space="preserve">Last Claim</t></is>
+                        </c>
+                        <c t="inlineStr" r="J2">
+                            <is><t xml:space="preserve">Claim on</t></is>
+                        </c>
+                        <c t="inlineStr" r="K2">
+                            <is><t xml:space="preserve">Scholar Manager</t></is>
+                        </c>
+                        <c t="inlineStr" r="L2">
+                            <is><t xml:space="preserve">Scholar Share</t></is>
+                        </c>
+                        <c t="inlineStr" r="M2">
+                            <is><t xml:space="preserve">ELO</t></is>
+                        </c>
+                        <c t="inlineStr" r="N2">
+                            <is><t xml:space="preserve">Rank</t></is>
+                        </c>
+                        <c t="inlineStr" r="O2">
+                            <is><t xml:space="preserve">Games</t></is>
+                        </c>
+                        `
+                    sheet.childNodes[0].childNodes[1].childNodes[1].innerHTML = header
+                    $('row:first c', sheet).attr( 's', '42' );
+                }
             }
         ],
         "serverSide": false,
@@ -424,6 +485,8 @@ $(document).ready(function () {
     } );
 
     $("#export_btn").on("click", function (ev) {
+        var data = t.buttons.exportData();
+        console.log("data: ", data);
         $(".buttons-excel").trigger("click");
     });
 
