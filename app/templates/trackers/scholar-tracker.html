@@ -45,11 +45,11 @@
             <div class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
                 <p class="fs-5 mb-1 text-black fs-main-semi">Today Average</p>
                 <div class="fs-7 text-white">
-                    {{ "%.2f" | format(slpdata.avg_total) }}
+                    {{ "%.2f" | format(today_avg) }}
                     <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
                 </div>
-                <p class="fs-5-b text-white" id="total_avg" data-value="{{slpdata.avg_total}}">&#8776;&dollar;{{"%.2f" |
-                    format(currentRateForSLP['price'] * slpdata.avg_total | float)}} USD</p>
+                <p class="fs-5-b text-white" id="total_avg" data-value="{{today_avg}}">&#8776;&dollar;{{"%.2f" |
+                    format(currentRateForSLP['price'] * today_avg | float)}} USD</p>
             </div>
             <div class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
                 <p class="fs-5 mb-1 text-black fs-main-semi">Yesterday Average</p>

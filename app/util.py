@@ -43,7 +43,9 @@ def g_db_del( obj ):
 
 
 from urllib.request import urlopen
-import json
+import json, datetime, time
+
+from app import db
 
 def getRateForToken(currency="usd", id="smooth-love-potion"):
     url = f"https://api.coingecko.com/api/v3/coins/{id}"
@@ -100,3 +102,70 @@ def getChangePercent():
         percentage = market_data['market_data']['market_cap_change_percentage_24h']
     return percentage
 
+# Utilities to get Averages.
+
+#calculates the average of the list
+def Average(lst):
+    return sum(lst) / len(lst)
+
+
+#converts tuple lists to normal lists
+def Convert(tup, lst):
+    for line in tup:
+        newLine = [line[0],line[1]]
+        lst.append(newLine)
+    return lst
+
+
+#gets the averages based on the two provided dates. Provide dates in the format "dd/mm/yyyy"
+def Average_Gained_On_Date(dateTwo):
+
+    #establish a first date which will be the beginning of the previous day
+    dateOne = datetime.datetime.strptime(dateTwo, "%d/%m/%Y")
+    dateOne = dateOne - datetime.timedelta(days=1)
+    dateOne = dateOne.strftime("%d/%m/%Y")
+
+    #establish a third date which will be the end of the second date
+    dateThree = datetime.datetime.strptime(dateTwo, "%d/%m/%Y")
+    dateThree = dateThree + datetime.timedelta(days=1)
+    dateThree = dateThree.strftime("%d/%m/%Y")
+
+    #convert to timestamps
+    dateOne = int(time.mktime(datetime.datetime.strptime(dateOne, "%d/%m/%Y").timetuple()))
+    dateTwo = int(time.mktime(datetime.datetime.strptime(dateTwo, "%d/%m/%Y").timetuple()))
+    dateThree = int(time.mktime(datetime.datetime.strptime(dateThree, "%d/%m/%Y").timetuple()))
+
+    #get list of todays values
+    statement = "SELECT RoninAddress, SLP FROM scholar_daily_totals WHERE Date BETWEEN %s and %s"
+    values = (dateTwo,dateThree)
+    todaysValuesRaw = db.engine.execute(statement, values)
+    # todaysValuesRaw = cursor.fetchall()
+    
+    #get list of yesterdays values
+    statement = "SELECT RoninAddress, SLP FROM scholar_daily_totals WHERE Date BETWEEN %s and %s"
+    values = (dateOne,dateTwo)
+    yesterdaysValuesRaw = db.engine.execute(statement, values)
+    # yesterdaysValuesRaw = cursor.fetchall()
+
+    #convert tuple lists to normal lists
+    todaysValues = []
+    yesterdaysValues = []
+    Convert(todaysValuesRaw, todaysValues)
+    Convert(yesterdaysValuesRaw, yesterdaysValues)
+
+    #assemble everyones data together in 1 line per person
+    for line in todaysValues:
+        for item in yesterdaysValues:
+            if line[0] == item[0]:
+                line.append(item[1])
+    allValues = todaysValues
+
+    #calculate all differences and assemble into a list
+    differences = []
+    for line in allValues:
+        try:
+            differences.append(line[1]-line[2])
+        except:
+            differences.append(0)
+
+    return(round(Average(differences),2))

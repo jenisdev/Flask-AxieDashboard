@@ -23,7 +23,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP
+from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
@@ -266,54 +266,68 @@ def tracker():
     currentRateForEHT = getRateForToken('usd', 'ethereum')
     currentRateForSLP = getRateForToken('usd', 'smooth-love-potion')
 
-    # print(currentRateForAXS, currentRateForEHT, currentRateForSLP)
-
-    sql = text(f""" \
-        SELECT L.sDate, SUM(R.SLP) AS total, COUNT(R.SLP) AS total_days
-        FROM (
-            SELECT DISTINCT `Name`, DATE_FORMAT(from_unixtime(FLOOR(`Date`)), '%Y-%m-%d') AS sDate 
-            FROM scholar_daily_totals
-            ) L
-        LEFT JOIN 
-        (
-            SELECT `Name`, DATE_FORMAT(from_unixtime(FLOOR(`Date`)), '%Y-%m-%d') AS sDate, SLP 
-            FROM scholar_daily_totals
-        ) R
-        ON L.`Name`=R.`Name` AND L.sDate=R.sDate
-        GROUP BY sDate;
-        """)
+    # sql = text(f""" \
+    #     SELECT L.sDate, SUM(R.SLP) AS total, COUNT(R.SLP) AS total_days
+    #     FROM (
+    #         SELECT DISTINCT `Name`, DATE_FORMAT(from_unixtime(FLOOR(`Date`)), '%Y-%m-%d') AS sDate 
+    #         FROM scholar_daily_totals
+    #         ) L
+    #     LEFT JOIN 
+    #     (
+    #         SELECT `Name`, DATE_FORMAT(from_unixtime(FLOOR(`Date`)), '%Y-%m-%d') AS sDate, SLP 
+    #         FROM scholar_daily_totals
+    #     ) R
+    #     ON L.`Name`=R.`Name` AND L.sDate=R.sDate
+    #     GROUP BY sDate;
+    #     """)
     
-    result = db.engine.execute(sql)
-    today_date = date.today()
-    today_start = datetime(today_date.year, today_date.month, today_date.day, 0, 0)
+    # result = db.engine.execute(sql)
+    # today_date = date.today()
+    # today_start = datetime(today_date.year, today_date.month, today_date.day, 0, 0)
 
-    for row in result:
-        print(row['sDate'])
-        date_obj = datetime.strptime(row['sDate'], "%Y-%m-%d")
-        yesterday = today_start - timedelta(days=1)
-        start_of_week = today_start - timedelta(days=today_start.weekday())
-        end_of_week = start_of_week + timedelta(days=6)
+    # for row in result:
+    #     # print(row['sDate'])
+    #     date_obj = datetime.strptime(row['sDate'], "%Y-%m-%d")
+    #     yesterday = today_start - timedelta(days=1)
+    #     start_of_week = today_start - timedelta(days=today_start.weekday())
+    #     end_of_week = start_of_week + timedelta(days=6)
 
-        ytdy_sum = ytdy_count = 0
-        week_sum = week_count = 0
-        if date_obj == yesterday:
-            ytdy_sum += row['total']
-            ytdy_count += row['total_days']
+    #     ytdy_sum = ytdy_count = 0
+    #     week_sum = week_count = 0
+    #     if date_obj == yesterday:
+    #         ytdy_sum += row['total']
+    #         ytdy_count += row['total_days']
 
-        print(start_of_week, date_obj, end_of_week)
-        if date_obj >= start_of_week and date_obj <= end_of_week:
-            week_sum += row['total']
-            week_count += row['total_days']
-    ytdy_avg = week_avg = 0
-    if ytdy_count > 0:
-        ytdy_avg = ytdy_sum/ytdy_count
-    if week_count > 0:
-        week_avg = week_sum/week_count
-    print(week_avg, ytdy_avg)
+    #     # print(start_of_week, date_obj, end_of_week)
+    #     if date_obj >= start_of_week and date_obj <= end_of_week:
+    #         week_sum += row['total']
+    #         week_count += row['total_days']
+    # ytdy_avg = week_avg = 0
+    # if ytdy_count > 0:
+    #     ytdy_avg = ytdy_sum/ytdy_count
+    # if week_count > 0:
+    #     week_avg = week_sum/week_count
+    # print(week_avg, ytdy_avg)
+
+
+    #get today and yesterday as datetime obj
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    threeday = today - timedelta(days=2)
+
+    #convert to strings
+    today = today.strftime("%d/%m/%Y")
+    yesterday = yesterday.strftime("%d/%m/%Y")
+    threeday = threeday.strftime("%d/%m/%Y")
+
+    today_avg = Average_Gained_On_Date(today)
+    ytdy_avg = Average_Gained_On_Date(yesterday)
+    print("2 days ago", Average_Gained_On_Date(threeday))
         
     return render_template('trackers/scholar-tracker.html', \
         slpdata=slpdata,\
-        week_avg=week_avg,\
+        today_avg =today_avg,\
+        week_avg=0,\
         ytdy_avg=ytdy_avg,\
         currentRateForSLP=currentRateForSLP,\
         currentRateForEHT=currentRateForEHT,\
