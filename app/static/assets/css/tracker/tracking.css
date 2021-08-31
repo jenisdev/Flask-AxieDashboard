@@ -451,3 +451,7 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
     td:nth-of-type(13):before { content: "Edit"; }
     td:nth-of-type(14):before { content: "Delet"; }
   }
+
+  .empty-error {
+    border: 1px solid #e71054;
+  }

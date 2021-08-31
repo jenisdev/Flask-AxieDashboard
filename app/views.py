@@ -394,6 +394,13 @@ def getRate():
 
 @app.route('/addScholar', methods=['POST'])
 def addScholar():
+    accountname             = request.form.get("accountname", type=str)
+    walletaddress           = request.form.get("walletaddress", type=str)
+    manager                 = request.form.get("manager", type=int)
+    walletaddresspayment    = request.form.get("walletaddresspayment", type=str)
+    investor                = request.form.get("investor", type=str)
+
+    print("add Scholoar: ", accountname, walletaddress, manager, investor, walletaddresspayment)
     return json.dumps({"res": "success"})
 
    # today_date = date.today()
@@ -448,4 +455,4 @@ def addScholar():
     # tabledata = db.engine.execute(sql)
 
 # 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
-
+# aakindabad@gmail.com

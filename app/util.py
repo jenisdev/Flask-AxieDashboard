@@ -106,6 +106,8 @@ def getChangePercent():
 
 #calculates the average of the list
 def Average(lst):
+    if len(lst) == 0:
+        return 0
     return sum(lst) / len(lst)
 
 

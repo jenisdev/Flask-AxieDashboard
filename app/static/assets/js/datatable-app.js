@@ -494,16 +494,20 @@ $(document).ready(function () {
     $('#track_account').on("click", function (ev) {
         var accountname             = $("#accountname").val(),
             walletaddress           = $("#walletaddress").val(),
-            manger                  = $("#manger").val(),
+            manager                 = $("#manager").val(),
             walletaddresspayment    = $("#walletaddresspayment").val(),
             investor                = $("#investor").val();
-
+        if (!accountname.length) {
+            $("#accountname").addClass("empty-error")
+            return;
+        }
             $.ajax({
-                url     : "/add_scholar",
+                url     : "/addScholar",
+                method  : "POST",
                 data    : {
                     accountname             :   accountname,
                     walletaddress           :   walletaddress,
-                    manger                  :   manger,
+                    manager                 :   manager,
                     walletaddresspayment    :   walletaddresspayment,
                     investor                :   investor
                 },
