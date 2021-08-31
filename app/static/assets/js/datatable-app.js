@@ -492,6 +492,24 @@ $(document).ready(function () {
     });
 
     $('#track_account').on("click", function (ev) {
-        $.ajax();
+        var accountname             = $("#accountname").val(),
+            walletaddress           = $("#walletaddress").val(),
+            manger                  = $("#manger").val(),
+            walletaddresspayment    = $("#walletaddresspayment").val(),
+            investor                = $("#investor").val();
+
+            $.ajax({
+                url     : "/add_scholar",
+                data    : {
+                    accountname             :   accountname,
+                    walletaddress           :   walletaddress,
+                    manger                  :   manger,
+                    walletaddresspayment    :   walletaddresspayment,
+                    investor                :   investor
+                },
+                success : function (response) {
+                    console.log("RESPONSE: ", response);
+                }
+            })
     });
 })
