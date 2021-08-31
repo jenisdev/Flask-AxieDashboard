@@ -228,6 +228,10 @@ input[type="text"]:focus{
   background:none;
   color: #abb0d5;
 }
+.indi-token img{
+  width: 44px;
+}
+
 @media (max-width: 524px) {
  .btn-setting{
   margin-top: 10px;
@@ -299,6 +303,7 @@ input[type="text"]:focus{
   .btn-setting{
     margin-right: 16px;
   }
+  
 }
 @media (max-width: 1600px) {
   .ps-xxl-5{
@@ -309,7 +314,7 @@ input[type="text"]:focus{
     text-align: center;
   }
   .price-percent{
-    width: 130px;
+    width: 155px;
   }
   .token-border{
     border:none;
@@ -400,56 +405,37 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
     .main-table-body table td, .main-table-body table th {
       border-bottom: 1px solid rgba(255,255,255,.6);
     }
-    /* Force table to not be like tables anymore */
     table, thead, tbody, th, td, tr {
       display: block;
     }
-
-    /* Hide table headers (but not display: none;, for accessibility) */
     thead tr {
       position: absolute;
       top: -9999px;
       left: -9999px;
     }
-
-    /*tr {
-      margin: 0 0 1rem 0;
-    }*/
-      
     tr:nth-child(odd) {
       background: #ccc;
     }
-    
     td {
-      /* Behave  like a "row" */
       border: none;
       border-bottom: 1px solid #eee;
       position: relative;
       padding-left: 60% !important;
     }
-
     td:before {
-      /* Now like a table header */
       position: absolute;
-      /* Top/left values mimic padding */
       top: 30%;
       left: 6px;
       width: 45%;
       padding-right: 10px;
       white-space: nowrap;
-
     }
-
   .main-table-body table tr td:nth-child(3), .main-table-body table tr td:nth-child(9), .main-table-body table tr td:nth-child(11), .main-table-body table tr td:nth-child(13){
     border-left: none;
   }
   .main-table-body table tr td:last-child, .main-table-body table tr th:last-child{
     padding-right: 5px;
   }
-    /*
-    Label the data
-    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
-    */
     td:nth-of-type(1):before { content: "#"; }
     td:nth-of-type(2):before { content: "Name"; }
     td:nth-of-type(3):before { content: "Today"; }
@@ -464,5 +450,4 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
     td:nth-of-type(12):before { content: "M"; }
     td:nth-of-type(13):before { content: "Edit"; }
     td:nth-of-type(14):before { content: "Delet"; }
-
   }
