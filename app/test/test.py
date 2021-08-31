@@ -1,7 +1,8 @@
 import requests
 from requests.api import put
 
-url = 'http://18.170.166.198/'
+# url = 'http://18.170.166.198/'
+url = ' https://lfg-api.com/'
 #url = 'http://127.0.0.1:5500/'
 
 usr = "LFGTeam"

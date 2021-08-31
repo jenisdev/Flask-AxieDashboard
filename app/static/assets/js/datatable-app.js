@@ -491,6 +491,6 @@ $(document).ready(function () {
     });
 
     $('#track_account').on("click", function (ev) {
-        
+        $.ajax();
     });
 })

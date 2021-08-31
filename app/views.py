@@ -392,6 +392,9 @@ def getRate():
     rate = getRateForSLP(currency)
     return json.dumps({"rate": rate})
 
+@app.route('/addScholar', methods=['POST'])
+def addScholar():
+    return json.dumps({"res": "success"})
 
    # today_date = date.today()
     # today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
@@ -416,6 +419,7 @@ def getRate():
     # .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
     # .group_by(ScholarshipDaily.Name)\
     # .all()
+
 
 # .paginate(per_page=10, page=1, error_out=True)
     # .all()
