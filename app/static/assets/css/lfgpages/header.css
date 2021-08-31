@@ -110,6 +110,9 @@ header{
   font-family: passion;
   text-shadow: 0 0 20px rgba(167, 91, 238, .74);
 }
+.swiper-container {
+  overflow: hidden;
+}
 .swiper-button-next{
   right: 0;
   color:#333333;
