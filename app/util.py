@@ -166,8 +166,14 @@ def Average_Gained_On_Date(dateTwo):
     differences = []
     for line in allValues:
         try:
-            differences.append(line[1]-line[2])
+            item = line[1]-line[2]
+            if item >= 0:
+                differences.append(item)
+            else:
+                differences.append(0)
         except:
             differences.append(0)
+
+
 
     return(round(Average(differences),2))

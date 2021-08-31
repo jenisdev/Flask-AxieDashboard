@@ -373,10 +373,38 @@ def data():
         slpdata = db.session.query(ScholarshipDaily.SLP).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(3).all()
         # Get Earned SLP of today and yesterday
         today_slp = yesterday_slp = 0
-        
-        if len(slpdata) == 3:
-            today_slp = abs( int(0 if slpdata[0][0] is None else slpdata[0][0]) - int(0 if slpdata[1][0] is None else slpdata[1][0]) )
-            yesterday_slp = abs( int(0 if slpdata[1][0] is None else slpdata[1][0]) - int(0 if slpdata[2][0] is None else slpdata[2][0]) )
+
+
+        #assign the values to variables so it's easier to read
+        try:
+            one = slpdata[0][0]
+        except:
+            one = 0
+
+        try:
+            two = slpdata[1][0]
+        except:
+            two = 0
+
+        try:
+            three = slpdata[2][0]
+        except:
+            three = 0
+
+        #this if statement means that if we've claimed the SLP so it's lower than the previous value, we just take the new value and call it today's number.
+        #this approach isn't perfect, as once claims are made it sets them to 0 for that day, but it's much cleaner and shows a better picture of what's happening.
+        #there are potential solutions but the database's updating logic need improvements before we can do that.
+        if len (slpdata) == 3:
+            if one > two:
+                today_slp = int(one - two)
+            else:
+                today_slp = int(one)
+
+            if two > three:
+                yesterday_slp = int(two - three)
+            else:
+                yesterday_slp = int(two)
+
 
         plain_row = [roninAddress, row[1], today_slp, yesterday_slp, row[2], row[3],\
              row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13]]
