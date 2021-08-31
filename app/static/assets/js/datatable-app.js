@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var currency_signs = { 'gbp': "&pound;", 'eur': "&euro;", 'usd': "&dollar;", 'php': "&#8369;" }
 
     $('#currency').change(ev => {
