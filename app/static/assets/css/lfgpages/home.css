@@ -43,6 +43,8 @@
   background:url("../../img/lfgpages/bg-content-modal1.png") top center no-repeat;
   background-size: 100% 100%;
   padding:28px 35px 150px;
+  /* height: 550px; */
+  /* overflow-y: auto; */
   margin:auto;
 
 }
@@ -63,6 +65,10 @@
 }
 .title-right img{
   width: 100%;
+}
+.content-description{
+  /* height: 270px; */
+  /* overflow-y: auto; */
 }
 .content-description p{
   font-size: 21px;

@@ -167,7 +167,7 @@ input[type="password"]{
   color: #c2c6e5;
 }
 .mt-h{
-  margin-top: 270px;
+  margin-top: 100px !important;
 }
 .logo-bottom {
   margin-bottom: 20px;
