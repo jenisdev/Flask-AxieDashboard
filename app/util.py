@@ -47,6 +47,9 @@ import json, datetime, time
 
 from app import db
 
+import requests
+from requests.api import put
+
 def getRateForToken(currency="usd", id="smooth-love-potion"):
     url = f"https://api.coingecko.com/api/v3/coins/{id}"
     with urlopen(url) as url:
@@ -177,3 +180,23 @@ def Average_Gained_On_Date(dateTwo):
 
 
     return(round(Average(differences),2))
+
+# Manage Scholar
+
+def add_scholar(auth, sholar_data):
+    param = '0xdb3091a67f647cf209514ace00e13d2d4638cc17'
+    url = auth['url']
+    usr = auth['user']
+    passwd = auth['pswd']
+    
+    response = requests.post(
+        #link we go to
+        url+param,
+
+        #authenticate who we are
+        auth=requests.auth.HTTPBasicAuth(usr, passwd),
+
+        #data we want to write to the scholar
+        data=sholar_data
+    )
+    return(response.json())

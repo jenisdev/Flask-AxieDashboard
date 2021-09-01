@@ -5,7 +5,8 @@ Copyright (c) 2019 - present AppSeed.us
 
 # Python modules
 import os
-import decimal 
+import decimal
+from urllib.request import urlopen 
 
 # Flask modules
 from flask               import json, jsonify, render_template, request, url_for, redirect, send_from_directory, flash
@@ -23,7 +24,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date
+from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
@@ -220,6 +221,10 @@ def login():
             msg = "Unknown user"
 
     return render_template( 'accounts/login.html', form=form, msg=msg )
+
+@app.route('/forgot', methods=['POST', 'GET'] )
+def forgot():
+    return render_template("accounts/forgot.html")
 
 # App main route + generic routing
 """ @app.route('/', defaults={'path': 'trackers/scholar-tracker.html'})
@@ -428,59 +433,32 @@ def addScholar():
     walletaddresspayment    = request.form.get("walletaddresspayment", type=str)
     investor                = request.form.get("investor", type=str)
 
+    data = {
+        "Name"                  : accountname,
+        "DiscordID"             : 280403145270755338,
+        "ManagerShare"          : manager,
+        "InvestorTrainerShare"  : 1,
+        "ScholarShare"          : investor,
+        "PersonalRoninAddress"  : walletaddress
+    }
+
+    # API Auth
+    url = 'https://lfg-api.com/'
+    usr = "LFGTeam"
+    passwd = "3Mc(M~:LR+PY7csw"
+
+    auth = {
+        "url"   : url,
+        "user"  : usr,
+        "pswd"  : passwd
+    }
+
+    res = add_scholar(auth, data)
+
     print("add Scholoar: ", accountname, walletaddress, manager, investor, walletaddresspayment)
-    return json.dumps({"res": "success"})
+    print("result: ", res)
 
-   # today_date = date.today()
-    # today_epoch = datetime(today_date.year, today_date.month, today_date.day, 0, 0).timestamp() # today 00:00:00
-    # yesterday_epoch = today_epoch-86400 # yesterday 00:00:00
-    
-    # tabledata = db.session.query( 
-    #     ScholarshipDaily.Name,
-    #     Scholarship.RoninAddress,
-    #     Scholarship.TotalSLP.label('total'),
-    #     Scholarship.UnclaimedSLP.label('unclaimed'),
-    #     Scholarship.ClaimedSLP.label('claimed'),
-    #     Scholarship.ManagerShare.label('manager'),
-    #     Scholarship.ScholarShare.label('scholar'),
-    #     Scholarship.LastClaim.label('lastclaim'),
-    #     Scholarship.NextClaim.label('nextclaim'),
-    #     Scholarship.MMR.label('mmr'),
-    #     Scholarship.ArenaRank.label('rank'),
-    #     Scholarship.daily_average.label('avg'),
-    #     # func.sum(func.IF((ScholarshipDaily.Date > today_epoch) & (ScholarshipDaily.Date < today_epoch+86400), ScholarshipDaily.SLP, 0)).label('today_total'),
-    #     # func.sum(func.IF((ScholarshipDaily.Date > yesterday_epoch) & (ScholarshipDaily.Date < yesterday_epoch+86400), ScholarshipDaily.SLP, 0)).label('yesterday_total')
-    # )\
-    # .join(Scholarship, Scholarship.RoninAddress==ScholarshipDaily.RoninAddress)\
-    # .group_by(ScholarshipDaily.Name)\
-    # .all()
-
-
-# .paginate(per_page=10, page=1, error_out=True)
-    # .all()
-    # sql = text(f""" \
-    #     SELECT
-    #         d.`Name`,
-    #         s.RoninAddress,
-    #         s.TotalSLP as total,
-    #         s.UnclaimedSLP as unclaimed,
-    #         s.ClaimedSLP as claimed,
-    #         s.ManagerShare as manager,
-    #         s.ScholarShare as scholar,
-    #         s.LastClaim as lastclaim,
-    #         s.NextClaim as nextclaim,
-    #         s.MMR as mmr,
-    #         s.ArenaRank as `rank`,
-    #         s.daily_average as avg,
-    #         SUM(CASE WHEN (d.Date > {today_epoch} AND d.Date < {today_epoch+86400}) THEN d.SLP ELSE 0 END) AS today_total,
-    #         SUM(CASE WHEN (d.Date > {yesterday_epoch} AND d.Date < {yesterday_epoch+86400}) THEN d.SLP ELSE 0 END) AS yesterday_total
-    #     FROM scholar_daily_totals d
-    #     LEFT JOIN scholarship_tracker s
-    #     ON d.RoninAddress = s.RoninAddress
-    #     GROUP BY `Name`
-    #     """)
-    # print(sql)
-    # tabledata = db.engine.execute(sql)
+    return res
 
 # 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
 # aakindabad@gmail.com

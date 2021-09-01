@@ -512,7 +512,12 @@ $(document).ready(function () {
                     investor                :   investor
                 },
                 success : function (response) {
-                    console.log("RESPONSE: ", response);
+                    console.log(response)
+                    if ("res" in response) {
+                        console.log("success");
+                    } else {
+                        console.log(response.Message)
+                    }
                 }
             })
     });
