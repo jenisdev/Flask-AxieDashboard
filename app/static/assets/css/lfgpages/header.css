@@ -6,7 +6,7 @@ header{
   justify-content: space-between; 
 }
 .header-logo img{
-  margin: 50px
+  margin: 75px 50px 25px;
 }
 .header-nav{
   margin-top: 70px;
