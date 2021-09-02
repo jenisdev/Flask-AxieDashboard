@@ -24,7 +24,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar
+from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
@@ -325,7 +325,7 @@ def tracker():
     yesterday = yesterday.strftime("%d/%m/%Y")
     threeday = threeday.strftime("%d/%m/%Y")
 
-    today_avg = Average_Gained_On_Date(today)
+    today_avg = Todays_Average_Gain()
     ytdy_avg = Average_Gained_On_Date(yesterday)
     print("2 days ago", Average_Gained_On_Date(threeday))
         
@@ -365,7 +365,8 @@ def data():
         Scholarship.MMR.label('mmr'),
         Scholarship.ArenaRank.label('rank'),
         Scholarship.Matches.label('arena'),
-        Scholarship.id
+        Scholarship.id,
+        Scholarship.TodaysGains.label('todaysgains')
     )\
     .all()
 
@@ -391,27 +392,14 @@ def data():
         except:
             two = 0
 
-        try:
-            three = slpdata[2][0]
-        except:
-            three = 0
-
-        #this if statement means that if we've claimed the SLP so it's lower than the previous value, we just take the new value and call it today's number.
-        #this approach isn't perfect, as once claims are made it sets them to 0 for that day, but it's much cleaner and shows a better picture of what's happening.
-        #there are potential solutions but the database's updating logic need improvements before we can do that.
         if len (slpdata) == 3:
             if one > two:
-                today_slp = int(one - two)
+                yesterday_slp = int(one - two)
             else:
-                today_slp = int(one)
-
-            if two > three:
-                yesterday_slp = int(two - three)
-            else:
-                yesterday_slp = int(two)
+                yesterday_slp = int(one)
 
 
-        plain_row = [roninAddress, row[1], today_slp, yesterday_slp, row[2], row[3],\
+        plain_row = [roninAddress, row[1], row[14], yesterday_slp, row[2], row[3],\
              row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13]]
         res_list.append(plain_row)
     
