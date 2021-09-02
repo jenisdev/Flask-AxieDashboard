@@ -127,8 +127,8 @@ def Todays_Average_Gain():
     scholars = db.engine.execute("SELECT TodaysGains FROM scholarship_tracker")
     todayGains = []
     for item in scholars:
-        todayGains.append(item[0])
-
+        todayGains.append(0 if item[0] is None else item[0])
+    print("todayGains", todayGains)
     average = sum(todayGains) / len(todayGains)
     return(average)
 
