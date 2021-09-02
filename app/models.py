@@ -77,6 +77,7 @@ class ScholarshipDaily(db.Model):
     RoninAddress            = db.Column(db.String(255),  unique = True)
     Date                    = db.Column(db.Integer)
     SLP                     = db.Column(db.Integer)
+    Gained                  = db.Column(db.Integer)
 
     def __init__(self):
         pass 

@@ -133,6 +133,17 @@ def Todays_Average_Gain():
     return(average)
 
 
+def Yesterday_Average_Gain():
+    scholars = db.engine.execute("SELECT RoninAddress FROM scholarship_tracker")
+    yesterdayGains = []
+    for scholar in scholars:
+        wallet = scholar[0]
+        gain = db.engine.execute("SELECT Gained FROM scholar_daily_totals WHERE RoninAddress = %s ORDER BY Date DESC LIMIT 1", (str(wallet),)).fetchone()
+        yesterdayGains.append(gain[0])
+    
+    average = sum(yesterdayGains) / len(yesterdayGains)
+    return(average)
+
 #gets the averages based on the two provided dates. Provide dates in the format "dd/mm/yyyy"
 def Average_Gained_On_Date(dateTwo):
 
