@@ -51,6 +51,7 @@ class Scholarship(db.Model):
     ClaimedSLP              = db.Column(db.Integer)
     UnclaimedSLP            = db.Column(db.Integer)
     UnclaimedDailyAverage   = db.Column(db.Integer)
+    TodaysGains             = db.Column(db.Integer)
     GuildRank               = db.Column(db.String(255))
     ScholarShare            = db.Column(db.Integer)
     ManagerShare            = db.Column(db.Integer)

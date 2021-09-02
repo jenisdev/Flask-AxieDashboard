@@ -4,3 +4,5 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from app import app, db
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port="5000", debug=True)

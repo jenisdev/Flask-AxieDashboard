@@ -42,6 +42,7 @@ def g_db_del( obj ):
 """
 
 
+from app.models import Scholarship
 from urllib.request import urlopen
 import json, datetime, time
 
@@ -120,6 +121,16 @@ def Convert(tup, lst):
         newLine = [line[0],line[1]]
         lst.append(newLine)
     return lst
+
+
+def Todays_Average_Gain():
+    scholars = db.engine.execute("SELECT TodaysGains FROM scholarship_tracker")
+    todayGains = []
+    for item in scholars:
+        todayGains.append(item[0])
+
+    average = sum(todayGains) / len(todayGains)
+    return(average)
 
 
 #gets the averages based on the two provided dates. Provide dates in the format "dd/mm/yyyy"
