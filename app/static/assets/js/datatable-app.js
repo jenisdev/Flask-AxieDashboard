@@ -149,23 +149,16 @@ $(document).ready(function () {
         
         return res;
     }    
-
+    // linaankudinova148@gmail.com:EdwaSimp36:linnkudva148@hotmail.com
     var t = $("#tracker-table").DataTable({
-        "dom"           : 'Bltipr', //''Bfrltip,
+        "dom"           : 'Bltip', //''Bfrltip,
         "ajax"          : "/data",
         "searching"     : true,
         "bLengthChange" : false,
         "bPaginate"     : false,
-        // "fixedHeader"   : true,
+        "responsive"    : true,
         "order"         : [[ 1, 'asc' ]],
         "buttons"       : [
-           /*  {
-                extend: 'excelHtml5',
-                text: 'Excel',
-                customize: function( xlsx ) {
-                    
-                }     
-            } */
             {
                 extend: 'excelHtml5',
                 text: 'Save as Excel',
@@ -406,8 +399,6 @@ $(document).ready(function () {
                             <i class="bi bi-trash btn-action bg-blue-2"></i></span>`
                 }
             }
-        ],
-        "columns": [
         ],
         "bFilter"       : true
     })

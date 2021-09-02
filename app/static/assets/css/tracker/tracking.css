@@ -397,8 +397,15 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
   right: 0.5em;
   content: "\02C7" !important;
 }
-
 @media
+only screen 
+and (max-width: 760px), (min-device-width: 768px) 
+and (max-device-width: 1024px)  {
+  .col-group-header {
+    display: none !important;
+  }
+}
+/* @media
     only screen 
     and (max-width: 760px), (min-device-width: 768px) 
     and (max-device-width: 1024px)  {
@@ -450,7 +457,7 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
     td:nth-of-type(12):before { content: "M"; }
     td:nth-of-type(13):before { content: "Edit"; }
     td:nth-of-type(14):before { content: "Delet"; }
-  }
+  } */
 
   .empty-error {
     border: 1px solid #e71054;

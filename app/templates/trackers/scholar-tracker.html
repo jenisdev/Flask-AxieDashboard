@@ -96,15 +96,6 @@
                 <p class="fs-5-b text-white" id="unclaimed_sum" data-value="{{slpdata.sum_unclaimed}}">
                     &#8776;&dollar;{{"%.2f" | format(currentRateForSLP['price'] * slpdata.sum_unclaimed | float)}} USD</p>
             </div>
-            <!-- <div class="price-card d-flex justify-content-center align-items-center flex-column flex-shrink-0 rounded-5 mb-5">
-                <p class="fs-5 mb-1 text-black fs-main-semi">Total claimed SLP</p>
-                <div class="fs-7 text-white">
-                    {{ slpdata.sum_claimed }}
-                    <img src="/static/assets/img/scholar-tracker/icon-slp.png" alt="slp-icon" />
-                </div>
-                <p class="fs-5-b text-white" id="claimed_sum" data-value="{{slpdata.sum_claimed}}">
-                    &#8776;&dollar;{{"%.2f" | format(currentRateForSLP['price'] * slpdata.sum_claimed | float)}} USD</p>
-            </div> -->
         </div>
     </div>
     <div class="data-area main-table rounded-5">
@@ -130,10 +121,9 @@
             </a>
         </div>
         <div class="main-table-body">
-            <table class="table table-striped table-responsive text-center align-middle table-borderless fs-5-b table-fs display"
-                id="tracker-table" style="width:100%">
+            <table class="table table-striped table-responsive text-center align-middle table-borderless fs-5-b table-fs display nowrap" id="tracker-table" style="width:100%">
                 <thead>
-                    <tr class="text-orange-3 fs-semi align-middle main-tablerow-display">
+                    <tr class="col-group-header text-orange-3 fs-semi align-middle main-tablerow-display">
                         <th colspan="2"></th>
                         <th colspan="6" class="border-left">SLP</th>
                         <th colspan="2" class="border-left">Claims</th>
