@@ -129,17 +129,17 @@ def register():
 
             pw_hash = bc.generate_password_hash(password)
 
-            user = User(username, email, pw_hash, confirmed=False)
+            user    = User(username, email, pw_hash, confirmed=False)
 
             user.save()
 
             msg     = 'User created, please <a href="' + url_for('login') + '">login</a>'     
             success = True
 
-            token = generate_confirmation_token(user.email)
+            token       = generate_confirmation_token(user.email)
             confirm_url = url_for('confirm_email', token=token, _external=True)
-            html = render_template('confirm_email.html', confirm_url=confirm_url)
-            subject = "Please confirm your email"
+            html        = render_template('confirm_email.html', confirm_url=confirm_url)
+            subject     = "Please confirm your email"
             send_email(user.email, subject, html)
 
             flash('A confirmation email has been sent via email.', 'success')
@@ -224,6 +224,7 @@ def login():
 
 @app.route('/forgot', methods=['POST', 'GET'] )
 def forgot():
+    token       = generate_confirmation_token()
     return render_template("accounts/forgot.html")
 
 # App main route + generic routing
