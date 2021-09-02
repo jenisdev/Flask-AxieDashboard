@@ -111,6 +111,11 @@ input[type="email"]:focus{
 main {
   background: url(../img/bg-potion.png) center 42% no-repeat;
 }
+
+.btn-new-passowrd{
+  background-color: #3d880c;
+}
+
 @media (max-width: 1770px) {
   .mt-h{
     margin-top: 150px;

@@ -106,11 +106,12 @@ main {
 }
 .login-model{
   background: url(../img/scholar-tracker/login-model.png) top center no-repeat;
+  background-size: 100% 100%;
   margin-bottom: 130px;
   box-shadow: 0 19px 35px rgba(0,0,0,0.3);
   max-width: 702px;
   margin: auto;
-  padding: 24px 52px 37px;
+  padding: 24px 52px 18px;
 }
 input[type="email"]::placeholder, input[type="text"]::placeholder{
   color:  #abaec3;
@@ -172,6 +173,10 @@ input[type="password"]{
 .logo-bottom {
   margin-bottom: 20px;
 }
+.btn-new-passowrd{
+  background-color: #3d880c;
+}
+
 @media (max-width: 1770px) {
   .mt-h{
     margin-top: 150px;
