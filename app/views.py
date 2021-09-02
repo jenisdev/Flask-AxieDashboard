@@ -24,7 +24,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain
+from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain, Yesterday_Average_Gain
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
@@ -326,7 +326,7 @@ def tracker():
     threeday = threeday.strftime("%d/%m/%Y")
 
     today_avg = Todays_Average_Gain()
-    ytdy_avg = Average_Gained_On_Date(yesterday)
+    ytdy_avg = Yesterday_Average_Gain()
     print("2 days ago", Average_Gained_On_Date(threeday))
         
     return render_template('trackers/scholar-tracker.html', \
@@ -375,31 +375,9 @@ def data():
     for row in tabledata:
         # Get Ronin Address
         roninAddress = row[0]
-        # Get 3 SLP Ordered by Date 
-        slpdata = db.session.query(ScholarshipDaily.SLP).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(3).all()
-        # Get Earned SLP of today and yesterday
-        today_slp = yesterday_slp = 0
+        yesterday_gain = db.session.query(ScholarshipDaily.Gained).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(1).first()
 
-
-        #assign the values to variables so it's easier to read
-        try:
-            one = slpdata[0][0]
-        except:
-            one = 0
-
-        try:
-            two = slpdata[1][0]
-        except:
-            two = 0
-
-        if len (slpdata) == 3:
-            if one > two:
-                yesterday_slp = int(one - two)
-            else:
-                yesterday_slp = int(one)
-
-
-        plain_row = [roninAddress, row[1], row[14], yesterday_slp, row[2], row[3],\
+        plain_row = [roninAddress, row[1], row[14], yesterday_gain, row[2], row[3],\
              row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13]]
         res_list.append(plain_row)
     
