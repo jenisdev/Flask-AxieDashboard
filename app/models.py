@@ -9,14 +9,14 @@ from flask_login import UserMixin
 import datetime
 
 class User(UserMixin, db.Model):
-    id       = db.Column(db.Integer,     primary_key=True)
-    user     = db.Column(db.String(64),  unique = True)
-    email    = db.Column(db.String(120), unique = True)
-    password = db.Column(db.String(500))
-    admin  = db.Column(db.Boolean, nullable=False, default=False)
-    registered_on = db.Column(db.DateTime, nullable=False)
-    confirmed = db.Column(db.Boolean, nullable=False, default=False)
-    confirmed_on = db.Column(db.DateTime, nullable=True)    
+    id              = db.Column(db.Integer,     primary_key=True)
+    user            = db.Column(db.String(64),  unique = True)
+    email           = db.Column(db.String(120), unique = True)
+    password        = db.Column(db.String(500))
+    admin           = db.Column(db.Boolean, nullable=False, default=False)
+    registered_on   = db.Column(db.DateTime, nullable=False)
+    confirmed       = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on    = db.Column(db.DateTime, nullable=True)    
 
     def __init__(self, user, email, password, confirmed, admin=False, confirmed_on=None):
         self.user           = user
