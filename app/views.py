@@ -199,7 +199,7 @@ def reset(token):
             user.password = pw_hash
 
             user.save()
-            return redirect("login")
+            return redirect(url_for("login"))
         except:
             flash('The confirmation link is invalid or has expired.', 'danger')
 
