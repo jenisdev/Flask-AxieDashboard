@@ -411,6 +411,7 @@ def contact():
         html = render_template('contact_email.html', firstName=firstName, lastName=lastName, inputEmail=inputEmail, formTextarea=formTextarea)
         subject = inputSubject
         # send_email(inputEmail, "aakindabad@gmail.com", subject, html)
+        # test contact us
         send_email(inputEmail, "wangnaixu88@gmail.com", subject, html)
 
 
