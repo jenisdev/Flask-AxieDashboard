@@ -67,9 +67,10 @@ mail_settings = {
 app.config.update(mail_settings)
 mail = Mail(app)
 
-def send_email(to, subject, template):
+def send_email(sender, to, subject, template):
     msg = Message(
         subject,
+        sender=sender,
         recipients=[to],
         html=template,
         sender=app.config['MAIL_DEFAULT_SENDER']

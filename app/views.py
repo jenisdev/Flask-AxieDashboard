@@ -140,7 +140,7 @@ def register():
             confirm_url = url_for('confirm_email', token=token, _external=True)
             html        = render_template('confirm_email.html', confirm_url=confirm_url)
             subject     = "Please confirm your email"
-            send_email(user.email, subject, html)
+            send_email("<no-reply>@lfg.com", user.email, subject, html)
 
             flash('A confirmation email has been sent via email.', 'success')
             login_user(user)
@@ -150,6 +150,37 @@ def register():
         msg = 'Input error'     
 
     return render_template( 'accounts/register.html', form=form, msg=msg, success=success )
+
+
+@app.route('/forgot', methods=['POST', 'GET'] )
+def forgot():
+    # assign form data to variables
+    email = request.form.get('email'   , '', type=str)
+
+    # filter User out of database through username
+    user_by_email   = User.query.filter_by(email=email).first()
+
+    if user_by_email:
+        # generate token
+        token       = generate_confirmation_token(email)
+        confirm_url = url_for('confirm_email', token=token, _external=True)
+        html        = render_template('confirm_email.html', confirm_url=confirm_url)
+        subject     = "Please confirm your email"
+        send_email("<no-reply>@lfg.com", email, subject, html)
+        return render_template('reset_email_sent.html')
+    else: 
+        msg = 'No registered User!'
+
+    return render_template("accounts/forgot.html")
+
+@app.route('/reset/<token>', methods=['POST', 'GET'])
+def reset(token):
+    try:
+        email = confirm_token(token)
+        return render_template("accounts/reset.html")
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+
 
 @app.route('/confirm/<token>')
 @login_required
@@ -221,11 +252,6 @@ def login():
             msg = "Unknown user"
 
     return render_template( 'accounts/login.html', form=form, msg=msg )
-
-@app.route('/forgot', methods=['POST', 'GET'] )
-def forgot():
-    token       = generate_confirmation_token()
-    return render_template("accounts/forgot.html")
 
 # App main route + generic routing
 """ @app.route('/', defaults={'path': 'trackers/scholar-tracker.html'})
