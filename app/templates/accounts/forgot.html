@@ -17,6 +17,9 @@
             <p class="fs-5 text-white">3. Use the link to reset your password<p>
           </div>
           <div class="mb-5 mt-5 forgot-password">
+            {% if msg %}
+            <p>{{msg}}</p>
+            {% endif %}
             <label for="InputEmail" class="form-label fs-5 fs-md-4 text-white mb-4">Enter your email address</label>
             <input type="email" class="form-control text-cyan" id="InputEmail" aria-describedby="emailHelp" >
           </div>

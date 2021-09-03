@@ -154,6 +154,9 @@ def register():
 
 @app.route('/forgot', methods=['POST', 'GET'] )
 def forgot():
+    # assign msg
+    msg = ""
+
     # assign form data to variables
     email = request.form.get('InputEmail'   , '', type=str)
 
@@ -170,8 +173,9 @@ def forgot():
         return render_template('reset_email_sent.html')
     else: 
         msg = 'No registered User!'
+        
 
-    return render_template("accounts/forgot.html")
+    return render_template("accounts/forgot.html", msg=msg)
 
 @app.route('/reset/<token>', methods=['POST', 'GET'])
 def reset(token):
