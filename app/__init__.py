@@ -55,6 +55,7 @@ def check_confirmed(func):
 def initialize_database():
     db.create_all()
 
+# Mail Config
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
     "MAIL_PORT": 465,
@@ -67,6 +68,7 @@ mail_settings = {
 app.config.update(mail_settings)
 mail = Mail(app)
 
+# send a mail
 def send_email(sender, to, subject, template):
     msg = Message(
         subject,
