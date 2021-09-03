@@ -155,7 +155,7 @@ def register():
 @app.route('/forgot', methods=['POST', 'GET'] )
 def forgot():
     # assign form data to variables
-    email = request.form.get('email'   , '', type=str)
+    email = request.form.get('InputEmail'   , '', type=str)
 
     # filter User out of database through username
     user_by_email   = User.query.filter_by(email=email).first()
