@@ -397,9 +397,7 @@ def about():
 
 @app.route('/contact', methods=['POST', 'GET'])
 def contact():
-    if request.method == 'GET': 
-        return render_template('contactus.html', logged=current_user.is_authenticated, page="contactus")
-    else:
+    if request.method == 'POST': 
         # assign the data from form data
         firstName       = request.form.get('firstName'   , '', type=str)
         lastName        = request.form.get('lastName'   , '', type=str)
@@ -413,7 +411,7 @@ def contact():
         # send_email(inputEmail, "aakindabad@gmail.com", subject, html)
         # test contact us
         send_email(inputEmail, "wangnaixu88@gmail.com", subject, html)
-
+    return render_template('contactus.html', logged=current_user.is_authenticated, page="contactus")
 
 @app.route('/data', methods=['POST', 'GET'])
 def data():
