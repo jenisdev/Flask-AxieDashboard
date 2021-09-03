@@ -156,34 +156,52 @@ def register():
 def forgot():
     # assign msg
     msg = ""
+    if request.method == 'GET': 
+        return render_template("accounts/forgot.html", msg=msg)
+    else :
+        # assign form data to variables
+        email = request.form.get('InputEmail'   , '', type=str)
 
-    # assign form data to variables
-    email = request.form.get('InputEmail'   , '', type=str)
+        # filter User out of database through username
+        user_by_email   = User.query.filter_by(email=email).first()
+        print(email, user_by_email)
+        if user_by_email:
+            # generate token
+            token       = generate_confirmation_token(email)
+            confirm_url = url_for('reset', token=token, _external=True)
+            html        = render_template('confirm_email.html', confirm_url=confirm_url)
+            subject     = "Please confirm your email"
+            send_email("aakindabad@gmail.com", email, subject, html)
+            return render_template('reset_email_sent.html')
+        else: 
+            msg = 'No registered User!'
+            
 
-    # filter User out of database through username
-    user_by_email   = User.query.filter_by(email=email).first()
-    print(email, user_by_email)
-    if user_by_email:
-        # generate token
-        token       = generate_confirmation_token(email)
-        confirm_url = url_for('reset', token=token, _external=True)
-        html        = render_template('confirm_email.html', confirm_url=confirm_url)
-        subject     = "Please confirm your email"
-        send_email("aakindabad@gmail.com", email, subject, html)
-        return render_template('reset_email_sent.html')
-    else: 
-        msg = 'No registered User!'
-        
-
-    return render_template("accounts/forgot.html", msg=msg)
+        return render_template("accounts/forgot.html", msg=msg)
 
 @app.route('/reset/<token>', methods=['POST', 'GET'])
 def reset(token):
-    try:
-        email = confirm_token(token)
-        return render_template("accounts/reset.html")
-    except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
+    if request.method == 'GET': 
+        try:
+            email = confirm_token(token)
+            return render_template("accounts/reset.html")
+        except:
+            flash('The confirmation link is invalid or has expired.', 'danger')
+    else :
+        try:
+            email = confirm_token(token)
+            password = request.form.get('InputNewPassword'   , '', type=str)
+
+            pw_hash = bc.generate_password_hash(password)
+
+            user = User.query.filter_by(email=email).first()
+
+            user.password = pw_hash
+
+            user.save()
+            return redirect("login")
+        except:
+            flash('The confirmation link is invalid or has expired.', 'danger')
 
 
 @app.route('/confirm/<token>')

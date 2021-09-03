@@ -6,14 +6,14 @@
         Your password has been reset!
       </div>
       <div class="mb-5 .login-model">
-        <form>
+        <form action="" method="POST">
           <div class="mb-5 mt-5 forgot-password">
             <label for="InputNewPassword" class="form-label fs-5 fs-md-4 text-white mb-4">Enter a New Passowrd</label>
-            <input type="password" class="form-control text-cyan" id="InputNewPassword" aria-describedby="emailHelp" >
+            <input type="password" name="InputNewPassword" class="form-control text-cyan" id="InputNewPassword" aria-describedby="emailHelp" >
           </div>
           <div class="mb-5 mt-5 forgot-password">
             <label for="InputCofirmPassword" class="form-label fs-5 fs-md-4 text-white mb-4">Confirm New Password</label>
-            <input type="password" class="form-control text-cyan" id="InputCofirmPassword" aria-describedby="emailHelp">
+            <input type="password" name="InputCofirmPassword" class="form-control text-cyan" id="InputCofirmPassword" aria-describedby="emailHelp">
           </div>
           <button type="submit" class="btn btn-login btn-new-passowrd">Change password</button>
         </form>
@@ -22,5 +22,17 @@
       <a href="#" class="text-cyan">or back to login</a>
       </div>
     </div>
+    <script>
+      $('button[type=submit]').click(ev => {
+        if (!$("#InputNewPassword").val() || !$("#InputCofirmPassword").val()) {
+          alert("You need to fill the password and confirm password inputs.");
+          return false;
+        }
+        if ($("#InputNewPassword").val() != $("#InputCofirmPassword").val()) {
+          alert("Password not matched!");
+          return false;
+        }
+      })
+    </script>
   </main>
   {% endblock content %}
