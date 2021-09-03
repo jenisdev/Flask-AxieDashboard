@@ -408,9 +408,7 @@ def contact():
         # send email to administrator
         html = render_template('contact_email.html', firstName=firstName, lastName=lastName, inputEmail=inputEmail, formTextarea=formTextarea)
         subject = inputSubject
-        # send_email(inputEmail, "aakindabad@gmail.com", subject, html)
-        # test contact us
-        send_email(inputEmail, "wangnaixu88@gmail.com", subject, html)
+        send_email(inputEmail, "aakindabad@gmail.com", subject, html)
     else:
         return render_template('contactus.html', logged=current_user.is_authenticated, page="contactus")
     return redirect(url_for("index"))
