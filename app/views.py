@@ -169,7 +169,7 @@ def forgot():
         confirm_url = url_for('reset', token=token, _external=True)
         html        = render_template('confirm_email.html', confirm_url=confirm_url)
         subject     = "Please confirm your email"
-        send_email("<no-reply>@lfg.com", email, subject, html)
+        send_email("aakindabad@gmail.com", email, subject, html)
         return render_template('reset_email_sent.html')
     else: 
         msg = 'No registered User!'
