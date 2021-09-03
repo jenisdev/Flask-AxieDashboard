@@ -73,7 +73,7 @@ def send_email(sender, to, subject, template):
         sender=sender,
         recipients=[to],
         html=template,
-        sender=app.config['MAIL_DEFAULT_SENDER']
+        # sender=app.config['MAIL_DEFAULT_SENDER']
     )
     mail.send(msg)
 
