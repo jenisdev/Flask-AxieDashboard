@@ -166,7 +166,7 @@ def forgot():
     if user_by_email:
         # generate token
         token       = generate_confirmation_token(email)
-        confirm_url = url_for('confirm_email', token=token, _external=True)
+        confirm_url = url_for('reset', token=token, _external=True)
         html        = render_template('confirm_email.html', confirm_url=confirm_url)
         subject     = "Please confirm your email"
         send_email("<no-reply>@lfg.com", email, subject, html)
