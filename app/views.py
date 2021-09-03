@@ -11,6 +11,7 @@ from urllib.request import urlopen
 # Flask modules
 from flask               import json, jsonify, render_template, request, url_for, redirect, send_from_directory, flash
 from sqlalchemy.sql.expression import desc
+from sqlalchemy.sql.sqltypes import LargeBinary
 from flask_login         import login_user, logout_user, current_user, login_required
 import sqlalchemy
 from werkzeug.exceptions import HTTPException, NotFound, abort
@@ -394,9 +395,23 @@ def index():
 def about():
     return render_template('aboutus.html', logged=current_user.is_authenticated, page="aboutus")
 
-@app.route('/contact')
+@app.route('/contact', methods=['POST', 'GET'])
 def contact():
-    return render_template('contactus.html', logged=current_user.is_authenticated, page="contactus")
+    if request.method == 'GET': 
+        return render_template('contactus.html', logged=current_user.is_authenticated, page="contactus")
+    else:
+        # assign the data from form data
+        firstName       = request.form.get('firstName'   , '', type=str)
+        lastName        = request.form.get('lastName'   , '', type=str)
+        inputEmail      = request.form.get('inputEmail'   , '', type=str)
+        inputSubject    = request.form.get('inputSubject'   , '', type=str)
+        formTextarea    = request.form.get('formTextarea'   , '', type=str)
+
+        # send email to administrator
+        html = render_template('contact_email.html', firstName=firstName, lastName=lastName, inputEmail=inputEmail, formTextarea=formTextarea)
+        subject = inputSubject
+        send_email(inputEmail, "aakindabad@gmail.com", subject, html)
+
 
 @app.route('/data', methods=['POST', 'GET'])
 def data():
