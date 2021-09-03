@@ -162,7 +162,7 @@ def forgot():
 
     # filter User out of database through username
     user_by_email   = User.query.filter_by(email=email).first()
-
+    print(email, user_by_email)
     if user_by_email:
         # generate token
         token       = generate_confirmation_token(email)
