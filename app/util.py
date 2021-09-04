@@ -208,8 +208,8 @@ def Average_Gained_On_Date(dateTwo):
 
 # Manage Scholar
 
-def add_scholar(auth, sholar_data):
-    param = '0xdb3091a67f647cf209514ace00e13d2d4638cc17'
+def add_scholar(wallet, auth, sholar_data):
+    param = wallet
     url = auth['url']
     usr = auth['user']
     passwd = auth['pswd']

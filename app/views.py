@@ -456,39 +456,54 @@ def getRate():
     return json.dumps({"rate": rate})
 
 @app.route('/addScholar', methods=['POST'])
-def addScholar():
-    accountname             = request.form.get("accountname", type=str)
-    walletaddress           = request.form.get("walletaddress", type=str)
-    manager                 = request.form.get("manager", type=int)
-    walletaddresspayment    = request.form.get("walletaddresspayment", type=str)
-    investor                = request.form.get("investor", type=str)
+def addScholar():    
+    try:
+        walletaddress = request.form.get("walletaddress", type=str)
+    except:
+        walletaddress = ""
+    
+    try:
+        manager = request.form.get("manager", type=str)
+    except:
+        manager = ""
+    
+    try:
+        walletaddresspayment = request.form.get("walletaddresspayment", type=str)
+    except:
+        walletaddresspayment = ""
+    
+    try:
+        investor = request.form.get("investor", type=str)
+    except:
+        investor = ""
 
-    data = {
-        "Name"                  : accountname,
-        "DiscordID"             : 280403145270755338,
-        "ManagerShare"          : manager,
-        "InvestorTrainerShare"  : 1,
-        "ScholarShare"          : investor,
-        "PersonalRoninAddress"  : walletaddress
-    }
+    try:
+        accountname = request.form.get("accountname", type=str)
+        data = {
+            "Name"                  : accountname,
+            "DiscordID"             : 280403145270755338,
+            "ManagerShare"          : manager,
+            "InvestorTrainerShare"  : 1,
+            "ScholarShare"          : investor,
+            "PersonalRoninAddress"  : walletaddresspayment
+        }
 
-    # API Auth
-    url = 'https://lfg-api.com/'
-    usr = "LFGTeam"
-    passwd = "3Mc(M~:LR+PY7csw"
+        # API Auth
+        url = 'https://lfg-api.com/'
+        usr = "LFGTeam"
+        passwd = "3Mc(M~:LR+PY7csw"
 
-    auth = {
-        "url"   : url,
-        "user"  : usr,
-        "pswd"  : passwd
-    }
+        auth = {
+            "url"   : url,
+            "user"  : usr,
+            "pswd"  : passwd
+        }
+        
+        res = add_scholar(walletaddress, auth, data)
+        return res
+    except:
+        return json.dumps({"error": True})
 
-    res = add_scholar(auth, data)
-
-    print("add Scholoar: ", accountname, walletaddress, manager, investor, walletaddresspayment)
-    print("result: ", res)
-
-    return res
 
 # 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
 # aakindabad@gmail.com
