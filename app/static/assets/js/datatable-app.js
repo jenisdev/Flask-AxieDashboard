@@ -504,7 +504,12 @@ $(document).ready(function () {
                 },
                 success : function (response) {
                     console.log(response)
-                    
+                    if (response.Success == 'True') {
+                        $("#addaccount").modal('hide');
+                        alert("Added successfully!");
+                    } else {
+                        alert(response.Message);
+                    }
                 }
             })
     });
