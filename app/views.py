@@ -502,7 +502,7 @@ def addScholar():
         res = add_scholar(walletaddress, auth, data)
         return res
     except:
-        return json.dumps({"error": True})
+        return json.dumps({"Success": "False", "Message": "Required Name"})
 
 
 # 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
