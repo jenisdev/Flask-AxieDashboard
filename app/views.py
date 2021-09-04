@@ -25,7 +25,9 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain, Yesterday_Average_Gain
+from .util import getAllCurrencies, getChangePercent, getRateForToken,\
+     getRateForSLP, Average_Gained_On_Date, add_scholar, edit_scholar,\
+     Todays_Average_Gain, Yesterday_Average_Gain
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
@@ -455,6 +457,52 @@ def getRate():
     rate = getRateForSLP(currency)
     return json.dumps({"rate": rate})
 
+@app.route('/editScholar', methods=['POST'])
+def editScholar():
+    try:
+        walletaddress = request.form.get("walletaddress", type=str)
+    except:
+        walletaddress = ""
+        
+    try:
+        Scholar_Name = request.form.get("Scholar_Name", type=str)
+    except:
+        Scholar_Name = ""
+    try:
+        UnclaimedSLP = request.form.get("UnclaimedSLP", type=str)
+    except:
+        UnclaimedSLP = ""
+    try:
+        ClaimedSLP = request.form.get("ClaimedSLP", type=str)
+    except:
+        ClaimedSLP = ""
+    try:
+        TotalSLP = request.form.get("TotalSLP", type=str)
+    except:
+        TotalSLP = ""
+
+    data = {
+        "Name"                  : Scholar_Name,
+        "ClaimedSLP"            : ClaimedSLP,
+        "UnclaimedSLP"          : UnclaimedSLP,
+        "TotalSLP"              : TotalSLP
+    }
+
+    # API Auth
+    url = 'https://lfg-api.com/'
+    usr = "LFGTeam"
+    passwd = "3Mc(M~:LR+PY7csw"
+
+    auth = {
+        "url"   : url,
+        "user"  : usr,
+        "pswd"  : passwd
+    }
+    
+    res = edit_scholar(walletaddress, auth, data)
+    return res
+
+
 @app.route('/addScholar', methods=['POST'])
 def addScholar():    
     try:
@@ -481,7 +529,7 @@ def addScholar():
         accountname = request.form.get("accountname", type=str)
         data = {
             "Name"                  : accountname,
-            "DiscordID"             : 280403145270755338,
+            "DiscordID"             : "", #280403145270755338,
             "ManagerShare"          : manager,
             "InvestorTrainerShare"  : 1,
             "ScholarShare"          : investor,

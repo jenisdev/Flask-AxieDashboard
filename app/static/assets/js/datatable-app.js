@@ -395,12 +395,50 @@ $(document).ready(function () {
                 "targets": 15,
                 "orderable": false,
                 "render": function (data, type, row) {
-                    return `<i class="bi bi-pencil-square btn-action bg-green-2"></i>
-                            <i class="bi bi-trash btn-action bg-blue-2"></i></span>`
+                    return `<span class="edit-btn"><i class="bi bi-pencil-square btn-action bg-green-2" data-rowdata="${row}"></i></span>
+                            <span class="del-btn"><i class="bi bi-trash btn-action bg-blue-2" data-rowdata="${data}"></i></span>`
                 }
             }
         ],
         "bFilter"       : true
+    })
+
+    $('#tracker-table tbody').on('click', 'tr td span.edit-btn', function (ev) {
+        let target = ev.target;
+
+        $('#editaccount').modal('show');
+
+        let rowdata         = $(target).data('rowdata');
+        let columns_data    = rowdata.split(',');
+        $("#editaccount #walletaddress").val(columns_data[0]);
+        $("#editaccount #Scholar_Name").val(columns_data[1]);
+        $("#editaccount #UnclaimedSLP").val(columns_data[5]);
+        $("#editaccount #ClaimedSLP").val(columns_data[6]);
+        $("#editaccount #TotalSLP").val(columns_data[7]);
+    } );
+
+    $("#save_account").on("click", function() {
+        $.ajax({
+            url: "/editScholar",
+            method: "POST",
+            data: {
+                walletaddress: $("#editaccount #walletaddress").val(),
+                Scholar_Name: $("#editaccount #Scholar_Name").val(),
+                UnclaimedSLP: $("#editaccount #UnclaimedSLP").val(),
+                ClaimedSLP: $("#editaccount #ClaimedSLP").val(),
+                TotalSLP: $("#editaccount #TotalSLP").val()
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.Success == "True") {
+                    $('#editaccount').modal('hide');
+                    alert("Updated successfully!");
+                } else {
+
+                    alert(response.Message);
+                }
+            }
+        })
     })
 
     $(".dt-buttons").hide()
@@ -508,11 +546,11 @@ $(document).ready(function () {
                         $("#addaccount").modal('hide');
                         alert("Added successfully!");
                         t.row.add([walletaddress, accountname, 0, 0, 0, 0, 0, 0, 0, 0, manager, 0, 0, 0, 0, 0]).draw(false)
-                        t.scroller.toPosition( 100 );
                     } else {
                         alert(response.Message);
                     }
                 }
             })
     });
+    
 })

@@ -225,3 +225,22 @@ def add_scholar(wallet, auth, sholar_data):
         data=sholar_data
     )
     return(response.json())
+
+# Edit scholar
+def edit_scholar(wallet, auth, sholar_data):
+    param = wallet #'0xdb3091a67f647cf209514ace00e13d2d4638cc17'
+    url = auth['url']
+    usr = auth['user']
+    passwd = auth['pswd']
+
+    response = requests.put(
+
+        url+param,
+
+        #authenticate who we are
+        auth=requests.auth.HTTPBasicAuth(usr, passwd),
+
+        #data we want to write to the scholar
+        data=sholar_data
+    )
+    return(response.json())

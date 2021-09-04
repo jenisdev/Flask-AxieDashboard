@@ -297,6 +297,56 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="editaccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-account">
+                <div class="modal-content modal-main">
+                    <div class="modal-header">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <img src="/static/assets/img/scholar-tracker/icons/ellipse.png">
+                            <h5 class="modal-title fs-4 fs-main-semi ms-3 text-white" id="staticBackdropLabel">Edit account</h5>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white btn-cancel" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fs-5-b">
+                        <form>
+                            <input type="hidden" id="walletaddress" value="">
+                            <div class="mb-3 mt-2">
+                                <label for="accountname" class="form-label fs-6 text-white mb-3">Scholar name or account
+                                    name <span class="text-cyan">(descriptive)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="Scholar_Name"
+                                    placeholder="type your name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="walletaddress" class="form-label fs-6 text-white mb-3">UnclaimedSLP</label>
+                                <input type="text" class="form-control text-black fw-bold" id="UnclaimedSLP"
+                                    placeholder="ronin: 07845R3448367E478932">
+                            </div>
+                            <div class="mb-3">
+                                <label for="manger" class="form-label fs-6 text-white mb-3">ClaimedSLP</label>
+                                <input type="text" class="form-control text-black fw-bold" id="ClaimedSLP" placeholder="50">
+                            </div>
+                            <div class="mb-3">
+                                <label for="walletaddresspayment" class="form-label fs-6 text-white mb-3">TotalSLP
+                                    <span class="text-cyan">(optional)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="TotalSLP"
+                                    placeholder="ronin: 07845R3448367E478932">
+                            </div>
+                            <!-- <div class="mb-3">
+                                <label for="walletaddress" class="form-label fs-6 text-white mb-3">Investor / Trainer
+                                    percentage <span class="text-cyan">(optional)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="investor"
+                                    placeholder="0">
+                            </div> -->
+                            <button type="button" id="save_account" class="btn btn-account fs-main-semi mt-4"
+                                >Save Account</button>
+                            <!-- <p class="text-cyan text-center mt-4 fs-small">Worried about security?</p> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- End Modals -->
         <div class="logo-bottom position-absolute top-100 start-50 translate-middle">
             <img src="/static/assets/img/scholar-tracker/logo-lfg-footer.png" alt="logo-bottom" />
