@@ -507,7 +507,7 @@ $(document).ready(function () {
                     if (response.Success == 'True') {
                         $("#addaccount").modal('hide');
                         alert("Added successfully!");
-                        t.row.add([walletaddress, accountname])
+                        t.row.add([walletaddress, accountname]).draw(false)
                     } else {
                         alert(response.Message);
                     }
