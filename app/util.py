@@ -150,10 +150,9 @@ def Week_Average():
     weeklyGains = []
     for scholar in scholars:
         weeklyGains.append(scholar[0])
-
+    
     average = sum(weeklyGains) / len(weeklyGains)
     return(average)
-
 
 
 #gets the averages based on the two provided dates. Provide dates in the format "dd/mm/yyyy"
