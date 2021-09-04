@@ -385,6 +385,7 @@ table tr th:nth-child(13), table tr th:last-child, table tr td:last-child {
 }
 
 .dataTables_info {
+  padding-left: 1em;
   color: white;
 }
 
@@ -467,8 +468,4 @@ and (max-device-width: 1024px)  {
 
   .empty-error {
     border: 1px solid #e71054;
-  }
-
-  div.dataTables_wrapper div.dataTables_info {
-    padding-left: 1em;
   }
