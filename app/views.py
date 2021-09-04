@@ -24,7 +24,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain, Yesterday_Average_Gain
+from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain, Yesterday_Average_Gain, Week_Average
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
@@ -328,11 +328,13 @@ def tracker():
     today_avg = Todays_Average_Gain()
     ytdy_avg = Yesterday_Average_Gain()
     print("2 days ago", Average_Gained_On_Date(threeday))
+
+    week_avg = Week_Average()
         
     return render_template('trackers/scholar-tracker.html', \
         slpdata=slpdata,\
         today_avg =today_avg,\
-        week_avg=0,\
+        week_avg=week_avg,\
         ytdy_avg=ytdy_avg,\
         currentRateForSLP=currentRateForSLP,\
         currentRateForEHT=currentRateForEHT,\
