@@ -25,13 +25,7 @@ from app.token           import generate_confirmation_token, confirm_token
 from sqlalchemy.sql      import func
 from sqlalchemy          import table, text
 # Utils
-<<<<<<< HEAD
-from .util import getAllCurrencies, getChangePercent, getRateForToken,\
-     getRateForSLP, Average_Gained_On_Date, add_scholar, edit_scholar,\
-     Todays_Average_Gain, Yesterday_Average_Gain, Week_Average
-=======
 from .util import getAllCurrencies, getChangePercent, getRateForToken, getRateForSLP, Average_Gained_On_Date, add_scholar, Todays_Average_Gain, Yesterday_Average_Gain, Week_Average
->>>>>>> origin/Jack's-Branch
 from datetime import datetime, date, timedelta
 
 class DecimalEncoder(json.JSONEncoder):
