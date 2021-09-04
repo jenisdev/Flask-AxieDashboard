@@ -128,10 +128,8 @@ def Todays_Average_Gain():
     todayGains = []
     for item in scholars:
         todayGains.append(0 if item[0] is None else item[0])
-    print("todayGains", todayGains)
     average = sum(todayGains) / len(todayGains)
     return(average)
-
 
 def Yesterday_Average_Gain():
     scholars = db.engine.execute("SELECT RoninAddress FROM scholarship_tracker")
@@ -146,6 +144,17 @@ def Yesterday_Average_Gain():
     
     average = sum(yesterdayGains) / len(yesterdayGains)
     return(average)
+
+def Week_Average():
+    scholars = db.engine.execute("SELECT daily_average FROM scholarship_tracker")
+    weeklyGains = []
+    for scholar in scholars:
+        weeklyGains.append(scholar[0])
+
+    average = sum(weeklyGains) / len(weeklyGains)
+    return(average)
+
+
 
 #gets the averages based on the two provided dates. Provide dates in the format "dd/mm/yyyy"
 def Average_Gained_On_Date(dateTwo):
