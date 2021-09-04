@@ -466,11 +466,13 @@ and (max-device-width: 1024px)  {
     td:nth-of-type(14):before { content: "Delet"; }
   } */
 
-  .empty-error {
-    border: 1px solid #e71054;
-  }
+.empty-error {
+  border: 1px solid #e71054;
+}
 
-  .sorting_asc_disabled:before, .sorting_desc_disabled:before, 
-  .sorting_asc_disabled:after, .sorting_desc_disabled:after {
-    display: none;
-  }
+.sorting_asc:after, .sorting_asc:before,
+.sorting_desc:after, .sorting_desc:before,
+.sorting_asc_disabled:before, .sorting_desc_disabled:before, 
+.sorting_asc_disabled:after, .sorting_desc_disabled:after {
+  content: none !important;
+}
