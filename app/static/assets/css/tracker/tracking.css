@@ -469,3 +469,8 @@ and (max-device-width: 1024px)  {
   .empty-error {
     border: 1px solid #e71054;
   }
+
+  .sorting_asc_disabled:before, .sorting_desc_disabled:before, 
+  .sorting_asc_disabled:after, .sorting_desc_disabled:after {
+    display: none;
+  }
