@@ -65,6 +65,7 @@ class Scholarship(db.Model):
     Draws                   = db.Column(db.Integer)
     Losses                  = db.Column(db.Integer)
     ScholarDataBasecol      = db.Column(db.String(45))
+    InvestorTrainerShare    = db.Column(db.Integer)
     daily_average           = db.Column(db.Integer)
 
     def __init__(self):

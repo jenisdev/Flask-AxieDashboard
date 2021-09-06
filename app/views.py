@@ -432,7 +432,9 @@ def data():
         Scholarship.ArenaRank.label('rank'),
         Scholarship.Matches.label('arena'),
         Scholarship.id,
-        Scholarship.TodaysGains.label('todaysgains')
+        Scholarship.TodaysGains.label('todaysgains'),
+        Scholarship.InvestorTrainerShare.label('investortrainershare'),
+        Scholarship.DiscordID.label('discordid')
     )\
     .all()
 
@@ -444,7 +446,7 @@ def data():
         yesterday_gain = db.session.query(ScholarshipDaily.Gained).filter(ScholarshipDaily.RoninAddress==roninAddress).order_by(desc(ScholarshipDaily.Date)).limit(1).first()
 
         plain_row = [roninAddress, row[1], row[14], yesterday_gain, row[2], row[3],\
-             row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13]]
+             row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], [row[13], row[15], row[16]]]
         res_list.append(plain_row)
     
     res = {"data": res_list}

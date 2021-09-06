@@ -395,6 +395,7 @@ $(document).ready(function () {
                 "targets": 15,
                 "orderable": false,
                 "render": function (data, type, row) {
+                    console.log(data)
                     return `<span class="edit-btn"><i class="bi bi-pencil-square btn-action bg-green-2" data-rowdata="${row}"></i></span>
                             <span class="del-btn"><i class="bi bi-trash btn-action bg-blue-2" data-rowdata="${data}"></i></span>`
                 }
@@ -409,6 +410,7 @@ $(document).ready(function () {
         $('#editaccount').modal('show');
 
         let rowdata         = $(target).data('rowdata');
+        console.log("Row DATA: ", rowdata)
         let columns_data    = rowdata.split(',');
         $("#editaccount #walletaddress").val(columns_data[0]);
         $("#editaccount #Scholar_Name").val(columns_data[1]);
