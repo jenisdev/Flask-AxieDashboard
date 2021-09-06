@@ -415,6 +415,12 @@ $(document).ready(function () {
         $("#editaccount #UnclaimedSLP").val(columns_data[5]);
         $("#editaccount #ClaimedSLP").val(columns_data[6]);
         $("#editaccount #TotalSLP").val(columns_data[7]);
+        $("#editaccount #ManagerShare").val(columns_data[10]);
+        $("#editaccount #ScholarShare").val(columns_data[11]);
+        $("#editaccount #InvestorTrainerShare").val();
+        $("#editaccount #PersonalRoninAddress").val();
+        $("#editaccount #RoninAddress").val(columns_data[0]);
+        $("#editaccount #DiscordID").val();
     } );
 
     $("#save_account").on("click", function() {
@@ -422,11 +428,17 @@ $(document).ready(function () {
             url: "/editScholar",
             method: "POST",
             data: {
-                walletaddress: $("#editaccount #walletaddress").val(),
+                walletaddress: $("#editaccount #e_walletaddress").val(),
                 Scholar_Name: $("#editaccount #Scholar_Name").val(),
                 UnclaimedSLP: $("#editaccount #UnclaimedSLP").val(),
                 ClaimedSLP: $("#editaccount #ClaimedSLP").val(),
-                TotalSLP: $("#editaccount #TotalSLP").val()
+                TotalSLP: $("#editaccount #TotalSLP").val(),
+                ScholarShare: $("#editaccount #ScholarShare").val(),
+                ManagerShare: $("#editaccount #ManagerShare").val(),
+                InvestorTrainerShare: $("#editaccount #InvestorTrainerShare").val(),
+                PersonalRoninAddress: $("#editaccount #PersonalRoninAddress").val(),
+                RoninAddress: $("#editaccount #RoninAddress").val(),
+                DiscordID: $("#editaccount #DiscordID").val()
             },
             success: function (response) {
                 console.log(response);
@@ -490,7 +502,7 @@ $(document).ready(function () {
     $('#sort-order').on( 'change', function (e) {
         var myAlert = document.getElementById('myAlert')
         var bsAlert = new bootstrap.Alert(myAlert);
-        
+
         var column = Number($('#sort-column option:selected').val())
         var order = 'asc';
         // Sort by column 1 and then re-draw
