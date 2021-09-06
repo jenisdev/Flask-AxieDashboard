@@ -488,6 +488,9 @@ $(document).ready(function () {
     } );
     
     $('#sort-order').on( 'change', function (e) {
+        var myAlert = document.getElementById('myAlert')
+        var bsAlert = new bootstrap.Alert(myAlert);
+        
         var column = Number($('#sort-column option:selected').val())
         var order = 'asc';
         // Sort by column 1 and then re-draw
