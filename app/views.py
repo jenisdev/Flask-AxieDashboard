@@ -483,12 +483,51 @@ def editScholar():
         TotalSLP = request.form.get("TotalSLP", type=str)
     except:
         TotalSLP = ""
+    try:
+        ScholarShare = request.form.get("ScholarShare", type=str)
+    except:
+        ScholarShare = ""
+    try:
+        ManagerShare = request.form.get("ManagerShare", type=str)
+    except:
+        ManagerShare = ""
+    try:
+        InvestorTrainerShare = request.form.get("InvestorTrainerShare", type=str)
+    except:
+        InvestorTrainerShare = ""
+    try:
+        PersonalRoninAddress = request.form.get("PersonalRoninAddress", type=str)
+    except:
+        PersonalRoninAddress = ""
+    try:
+        RoninAddress = request.form.get("RoninAddress", type=str)
+    except:
+        RoninAddress = ""
+    try:
+        DiscordID = request.form.get("DiscordID", type=str)
+    except:
+        DiscordID = ""
+
+
+    """ 
+    : $("#editaccount #ScholarShare").val(),
+                : $("#editaccount #ManagerShare").val(),
+                : $("#editaccount #InvestorTrainerShare").val(),
+                : $("#editaccount #PersonalRoninAddress").val(),
+                : $("#editaccount #RoninAddress").val(),
+                : $("#editaccount #DiscordID").val() """
 
     data = {
         "Name"                  : Scholar_Name,
         "ClaimedSLP"            : ClaimedSLP,
         "UnclaimedSLP"          : UnclaimedSLP,
-        "TotalSLP"              : TotalSLP
+        "TotalSLP"              : TotalSLP,
+        "ScholarShare"          : TotalSLP,
+        "ManagerShare"          : TotalSLP,
+        "InvestorTrainerShare"  : TotalSLP,
+        "PersonalRoninAddress"  : TotalSLP,
+        "RoninAddress"          : TotalSLP,
+        "DiscordID"             : TotalSLP,
     }
 
     # API Auth
