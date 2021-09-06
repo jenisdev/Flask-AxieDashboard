@@ -311,34 +311,62 @@
                     </div>
                     <div class="modal-body fs-5-b">
                         <form>
-                            <input type="hidden" id="walletaddress" value="">
+                            <input type="hidden" id="e_walletaddress" value="">
                             <div class="mb-3 mt-2">
                                 <label for="accountname" class="form-label fs-6 text-white mb-3">Scholar name or account
                                     name <span class="text-cyan">(descriptive)</span></label>
                                 <input type="text" class="form-control text-black fw-bold" id="Scholar_Name"
                                     placeholder="type your name">
                             </div>
+                            <div class="mb-3 mt-2">
+                                <label for="DiscordID" class="form-label fs-6 text-white mb-3">DiscordID
+                                    <span class="text-cyan">(descriptive)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="DiscordID"
+                                    placeholder="type your DiscordID">
+                            </div>
                             <div class="mb-3">
-                                <label for="walletaddress" class="form-label fs-6 text-white mb-3">UnclaimedSLP</label>
+                                <label for="RoninAddress" class="form-label fs-6 text-white mb-3">RoninAddress</label>
+                                <input type="text" class="form-control text-black fw-bold" id="RoninAddress"
+                                    placeholder="ronin: 07845R3448367E478932">
+                            </div>
+                            <div class="mb-3">
+                                <label for="PersonalRoninAddress" class="form-label fs-6 text-white mb-3">PersonalRoninAddress</label>
+                                <input type="text" class="form-control text-black fw-bold" id="PersonalRoninAddress"
+                                    placeholder="ronin: 07845R3448367E478932">
+                            </div>
+                            <div class="mb-3">
+                                <label for="UnclaimedSLP" class="form-label fs-6 text-white mb-3">UnclaimedSLP</label>
                                 <input type="text" class="form-control text-black fw-bold" id="UnclaimedSLP"
                                     placeholder="ronin: 07845R3448367E478932">
                             </div>
                             <div class="mb-3">
-                                <label for="manger" class="form-label fs-6 text-white mb-3">ClaimedSLP</label>
+                                <label for="ClaimedSLP" class="form-label fs-6 text-white mb-3">ClaimedSLP</label>
                                 <input type="text" class="form-control text-black fw-bold" id="ClaimedSLP" placeholder="50">
                             </div>
                             <div class="mb-3">
-                                <label for="walletaddresspayment" class="form-label fs-6 text-white mb-3">TotalSLP
+                                <label for="TotalSLP" class="form-label fs-6 text-white mb-3">TotalSLP
                                     <span class="text-cyan">(optional)</span></label>
                                 <input type="text" class="form-control text-black fw-bold" id="TotalSLP"
                                     placeholder="ronin: 07845R3448367E478932">
                             </div>
-                            <!-- <div class="mb-3">
-                                <label for="walletaddress" class="form-label fs-6 text-white mb-3">Investor / Trainer
+                            <div class="mb-3">
+                                <label for="ScholarShare" class="form-label fs-6 text-white mb-3">ScholarShare
                                     percentage <span class="text-cyan">(optional)</span></label>
-                                <input type="text" class="form-control text-black fw-bold" id="investor"
+                                <input type="text" class="form-control text-black fw-bold" id="ScholarShare"
                                     placeholder="0">
-                            </div> -->
+                            </div>
+                            <div class="mb-3">
+                                <label for="ManagerShare" class="form-label fs-6 text-white mb-3">ManagerShare
+                                    percentage <span class="text-cyan">(optional)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="ManagerShare"
+                                    placeholder="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="InvestorTrainerShare" class="form-label fs-6 text-white mb-3">Investor Trainer Share
+                                    percentage <span class="text-cyan">(optional)</span></label>
+                                <input type="text" class="form-control text-black fw-bold" id="InvestorTrainerShare"
+                                    placeholder="0">
+                            </div>
                             <button type="button" id="save_account" class="btn btn-account fs-main-semi mt-4"
                                 >Save Account</button>
                             <!-- <p class="text-cyan text-center mt-4 fs-small">Worried about security?</p> -->
