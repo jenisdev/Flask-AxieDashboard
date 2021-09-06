@@ -419,10 +419,10 @@ $(document).ready(function () {
         $("#editaccount #TotalSLP").val(columns_data[7]);
         $("#editaccount #ManagerShare").val(columns_data[10]);
         $("#editaccount #ScholarShare").val(columns_data[11]);
-        $("#editaccount #InvestorTrainerShare").val();
-        $("#editaccount #PersonalRoninAddress").val();
+        $("#editaccount #InvestorTrainerShare").val(columns_data[16]);
+        $("#editaccount #PersonalRoninAddress").val(columns_data[18]);
         $("#editaccount #RoninAddress").val(columns_data[0]);
-        $("#editaccount #DiscordID").val();
+        $("#editaccount #DiscordID").val(columns_data[17]);
     } );
 
     $("#save_account").on("click", function() {

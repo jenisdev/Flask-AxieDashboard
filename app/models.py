@@ -46,6 +46,7 @@ class Scholarship(db.Model):
     ScholarshipID           = db.Column(db.Integer)
     Name                    = db.Column(db.String(50),  unique = True)
     RoninAddress            = db.Column(db.String(255),  unique = True)
+    PersonalRoninAddress    = db.Column(db.String(255),  unique = True)
     DiscordID               = db.Column(db.String(18),  unique = True)
     TotalSLP                = db.Column(db.Integer)
     ClaimedSLP              = db.Column(db.Integer)
