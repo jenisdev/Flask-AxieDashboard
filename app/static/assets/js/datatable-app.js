@@ -315,15 +315,22 @@ $(document).ready(function () {
                     var timeInterval = timeConversion(milliseconds)
 
                     var color = "white";
-                    
-                    if (timeInterval.search("Days") != -1) {
-                        var value = Number(timeInterval.split(" ")[0]);
-                        if ( value >= 7 && value <= 13 ) color = "orange";
-                        else if( value < 7 ) color = "red";
-                        else color = "green"
+
+                    const day = 86400
+                    const now = Math.round(Date.now()/1000);
+
+                    console.log("now: "+now)
+                    console.log("data: "+data)
+
+
+                    if (data < now-(day*14)) {
+                        color = "green";
+                    } else if (data > now-(day*7)) {
+                        color = "red";
                     } else {
-                        color = "red"
+                        color = "orange";
                     }
+
 
                     var content = `<span class="full-date text-${color} text-subtext" style="display: none;" orignial="${data}">${humanDateFormat}</span>
                     <span class="interval-days text-${color}" style="display: block;">${timeInterval}</span>`
