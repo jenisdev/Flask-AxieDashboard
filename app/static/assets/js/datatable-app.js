@@ -412,7 +412,7 @@ $(document).ready(function () {
         let rowdata         = $(target).data('rowdata');
         console.log("Row DATA: ", rowdata)
         let columns_data    = rowdata.split(',');
-        $("#editaccount #walletaddress").val(columns_data[0]);
+        $("#editaccount #e_walletaddress").val(columns_data[0]);
         $("#editaccount #Scholar_Name").val(columns_data[1]);
         $("#editaccount #UnclaimedSLP").val(columns_data[5]);
         $("#editaccount #ClaimedSLP").val(columns_data[6]);

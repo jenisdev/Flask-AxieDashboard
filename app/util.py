@@ -240,6 +240,7 @@ def edit_scholar(wallet, auth, sholar_data):
     url = auth['url']
     usr = auth['user']
     passwd = auth['pswd']
+    print("URL: ===================================", url+param, param)
 
     response = requests.put(
 
@@ -249,6 +250,9 @@ def edit_scholar(wallet, auth, sholar_data):
         auth=requests.auth.HTTPBasicAuth(usr, passwd),
 
         #data we want to write to the scholar
-        data=sholar_data
+        data=sholar_data,
+        #disable the SSL verification.
+        verify=False
     )
+    print("response: ", response)
     return(response.json())

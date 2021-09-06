@@ -508,30 +508,22 @@ def editScholar():
     except:
         DiscordID = ""
 
-
-    """ 
-    : $("#editaccount #ScholarShare").val(),
-                : $("#editaccount #ManagerShare").val(),
-                : $("#editaccount #InvestorTrainerShare").val(),
-                : $("#editaccount #PersonalRoninAddress").val(),
-                : $("#editaccount #RoninAddress").val(),
-                : $("#editaccount #DiscordID").val() """
-
     data = {
         "Name"                  : Scholar_Name,
         "ClaimedSLP"            : ClaimedSLP,
         "UnclaimedSLP"          : UnclaimedSLP,
         "TotalSLP"              : TotalSLP,
-        "ScholarShare"          : TotalSLP,
-        "ManagerShare"          : TotalSLP,
-        "InvestorTrainerShare"  : TotalSLP,
-        "PersonalRoninAddress"  : TotalSLP,
-        "RoninAddress"          : TotalSLP,
-        "DiscordID"             : TotalSLP,
+        "ScholarShare"          : ScholarShare,
+        "ManagerShare"          : ManagerShare,
+        "InvestorTrainerShare"  : InvestorTrainerShare,
+        "PersonalRoninAddress"  : PersonalRoninAddress,
+        "RoninAddress"          : RoninAddress,
+        "DiscordID"             : DiscordID
     }
 
     # API Auth
     url = 'https://lfg-api.com/'
+    # url = 'http://localhost:3000/'
     usr = "LFGTeam"
     passwd = "3Mc(M~:LR+PY7csw"
 
@@ -540,6 +532,7 @@ def editScholar():
         "user"  : usr,
         "pswd"  : passwd
     }
+    print(walletaddress)
     res = edit_scholar(walletaddress, auth, data)
     return res
 
