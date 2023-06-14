@@ -8,7 +8,7 @@
 - Deployment scripts: Docker, Gunicorn / Nginx, Heroku
 - Support via **Github** (issues tracker) and [Discord](https://discord.gg/fZC6hup).
 
-##
+###
 <br />
 
 > Links
